@@ -4,8 +4,8 @@
 
 # # Members
 
- - Adrien Razurel
- - Romain Bigot
+ - Marvin Fouraties (Project leader)
+ - Corentin Bugnot  (System administrator)
  - Heloy Estevanin
- - <ADD YOUR NAME>
- - Corentin Bugnot
+ - Romain Bigot
+ - Adrien Razurel
