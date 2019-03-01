@@ -9,3 +9,4 @@
  - Heloy Estevanin
  - Romain Bigot
  - Adrien Razurel
+ - Raphaël Lutz
