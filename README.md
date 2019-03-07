@@ -4,7 +4,7 @@
 
 ## Members
 
- - Marvin Fouratié (Project leader)
+ - Marvin Fourastié (Project leader)
  - Corentin Bugnot  (System administrator)
  - Heloy Estevanin
  - Romain Bigot
