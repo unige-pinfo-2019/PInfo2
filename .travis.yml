@@ -3,5 +3,10 @@ language: java
 jdk:
   - oraclejdk11
 
+addons:
+ sonarcloud:
+    organization: unige-pinfo-2019
+
 script:
-  - mvn clean install
+  - mvn clean instal
+  - mvn sonar:sonar -Dsonar.projectKey=unige-pinfo-2019_PInfo2 -Dsonar.organization=unige-pinfo-2019 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=79393fcee2122be0f27482c2c02589289d1d1e80
