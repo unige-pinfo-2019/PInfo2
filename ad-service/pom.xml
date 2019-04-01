@@ -12,5 +12,14 @@
 	<artifactId>ad-service</artifactId>
 	<name>Ad Service</name>
     <packaging>war</packaging>
+    
+    <dependencies>
+    	<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.6</version>
+			<scope>provided</scope>
+		</dependency>
+    </dependencies>
 
 </project>
