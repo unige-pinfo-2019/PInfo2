@@ -8,7 +8,9 @@ jdk:
 addons:
  sonarcloud:
     organization: unige-pinfo-2019
+     token:
+      secure: "$SONAR_TOKEN" 
 
 script:
-  - mvn clean instal
+  - mvn clean install
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
