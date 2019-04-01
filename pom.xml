@@ -24,6 +24,7 @@
 		<module>chat-service</module>
 		<module>ad-service</module>
 		<module>category-service</module>
+    	<module>api-gateway</module>
     </modules>
 
     <dependencyManagement>
@@ -64,7 +65,6 @@
         <groupId>io.thorntail</groupId>
         <artifactId>thorntail-maven-plugin</artifactId>
         <version>${version.thorntail}</version>
-        
         <executions>
           <execution>
             <goals>
