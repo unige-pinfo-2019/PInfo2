@@ -8,9 +8,7 @@ jdk:
 addons:
  sonarcloud:
     organization: unige-pinfo-2019
-     token:
-      secure: "$SONAR_TOKEN" 
 
 script:
   - mvn clean install
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+  - mvn sonar:sonar -Dsonar.projectKey=unige-pinfo-2019_PInfo2 -Dsonar.organization=unige-pinfo-2019 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=85b6b47ed359fb35baabfb4bd697fda950e454eb
