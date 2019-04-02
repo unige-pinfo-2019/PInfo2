@@ -11,6 +11,10 @@
 
     <artifactId>api-gateway</artifactId>
     <name>API Gateway Service</name>
+    
+    <properties>
+		<skip-docker-build>false</skip-docker-build>
+	</properties>
 
     <build>
 		<plugins>

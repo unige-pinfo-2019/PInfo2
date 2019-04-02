@@ -13,6 +13,10 @@
 	<name>Ad Service</name>
     <packaging>war</packaging>
     
+    <properties>
+		<skip-docker-build>false</skip-docker-build>
+	</properties>
+    
     <dependencies>
     	<dependency>
 			<groupId>org.projectlombok</groupId>
