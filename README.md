@@ -12,3 +12,10 @@
  - Romain Bigot
  - Adrien Razurel
  - Raphaël Lutz
+ 
+```
+mvn clean install
+mvn install -Ppackage-docker-image
+cd docker-compose/
+docker-compose -f docker-compose-api-gw.yml up
+```
