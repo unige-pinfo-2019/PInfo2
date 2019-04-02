@@ -19,6 +19,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<skip-docker-build>true</skip-docker-build>
 		<skip-docker-compose>false</skip-docker-compose>
+		<dockerHost>tcp://localhost:2375</dockerHost>
     </properties>
 
     <modules>
