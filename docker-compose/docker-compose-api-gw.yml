@@ -132,5 +132,7 @@ networks:
   frontend-network:
      driver: bridge 
   gateway-network:
-     driver: bridge    
+     driver: bridge 
+  backend-network:
+    driver: bridge   
 
