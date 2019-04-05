@@ -1,0 +1,40 @@
+header {
+
+  background: #00AA00;
+
+  .logo {
+    font-weight: bold;
+    //padding-top: 0.5em;
+  }
+  img {
+    padding: 0; margin: 0;
+    float: left;
+    width: 2.5em;
+    height: 2.5em;
+    padding-right: 10px;
+  }
+
+  nav {
+    justify-self: right;
+
+    ul {
+      list-style-type: none;
+      margin: 0; padding: 0;
+
+      li {
+        padding-top: 0.5em;
+        float: left;
+
+        a {
+          padding: 1.5em;
+          text-transform: uppercase;
+          font-size: 0.8em;
+
+          &:hover {
+            background: #00BB00;
+          }
+        }
+      }
+    }
+  }
+}
