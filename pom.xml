@@ -19,7 +19,6 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<skip-docker-build>true</skip-docker-build>
 		<skip-docker-compose>false</skip-docker-compose>
-		<dockerHost>tcp://localhost:2375</dockerHost>
     </properties>
 
     <modules>
@@ -115,6 +114,28 @@
     </build>
     
     <profiles>
+    	<profile>
+			<id>activate_windows</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<properties>
+				<dockerHost>tcp://localhost:2375</dockerHost>
+			</properties>
+		</profile>
+		<profile>
+			<id>activation_unix</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<properties>
+				<dockerHost>unix:///var/run/docker.sock</dockerHost>
+			</properties>
+		</profile>
 		<profile>
 			<id>package-docker-image</id>
 			<activation>
