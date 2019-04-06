@@ -7,10 +7,10 @@ import domain.model.Ad;
 
 public interface AdService {
 
-	public Ad createAd(String title, String description, double price, Date date);
-	
-	public ArrayList<Ad> getAd(String title);
-	public ArrayList<Ad> getAd(Date date);
+	public ArrayList<Ad> get(String title);
+	public ArrayList<Ad> get(Date date);
 	public ArrayList<Ad> getAll();
+
+	public boolean createAd(Ad ad);
 	
 }

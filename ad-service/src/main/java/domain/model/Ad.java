@@ -40,4 +40,19 @@ public class Ad implements Serializable {
 	@ManyToOne
 	private Category category;
 	// private ArrayList<BufferedImage> photos
+	
+	public Ad(String title, String description, double price) {
+		this.title = title;
+		this.description = description;
+		this.price = price;
+	}
+	
+	@Override
+	public String toString() {
+		String str = "";
+		str += title;
+		str += " " + description;
+		str += " " + price;
+		return str;
+	}
 }
