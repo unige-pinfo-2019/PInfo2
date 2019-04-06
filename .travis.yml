@@ -1,7 +1,5 @@
 language: java
 
-dist: trusty
-
 jdk:
   - oraclejdk11
 
@@ -11,4 +9,4 @@ addons:
 
 script:
   - mvn clean install
-  - mvn sonar:sonar -Dsonar.projectKey=unige-pinfo-2019_PInfo2 -Dsonar.organization=unige-pinfo-2019 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=85b6b47ed359fb35baabfb4bd697fda950e454eb
+  - mvn install -Ppackage-docker-image
