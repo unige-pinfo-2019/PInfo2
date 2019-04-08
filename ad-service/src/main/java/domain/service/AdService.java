@@ -1,16 +1,18 @@
 package domain.service;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 import domain.model.Ad;
 
 public interface AdService {
 
-	public Ad createAd(String title, String description, double price, Date date);
+	public void create(Ad ad);
+
+	public void delete(Ad ad);
 	
-	public ArrayList<Ad> getAd(String title);
-	public ArrayList<Ad> getAd(Date date);
-	public ArrayList<Ad> getAll();
-	
+	public void update(Ad ad);
+
+	public List<Ad> getAll();
+
+	public Ad get(Long adId);
 }

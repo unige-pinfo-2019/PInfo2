@@ -27,6 +27,8 @@
 		<module>chat-service</module>
 		<module>ad-service</module>
 		<module>category-service</module>
+		<module>user-service</module>
+		<module>search-service</module>
     	<module>api-gateway</module>
     </modules>
 

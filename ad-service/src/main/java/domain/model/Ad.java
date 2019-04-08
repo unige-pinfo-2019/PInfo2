@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -23,9 +23,10 @@ public class Ad implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="AD_ID")
-	long id;
+	private Long id;
 	
 	@Column(name="TITLE")
+	@NotNull
 	private String title;
 	
 	@Column(name="DESCRIPTION")
@@ -35,9 +36,17 @@ public class Ad implements Serializable {
 	private double price;
 	
 	@Column(name="DATE")
+	@NotNull
 	private Date date;
 	
-	@ManyToOne
-	private Category category;
 	// private ArrayList<BufferedImage> photos
+	
+	@Override
+	public String toString() {
+		String str = "";
+		str += id;
+		str += ':' + title;
+		str += '\n' + description;
+		return str;
+	}
 }

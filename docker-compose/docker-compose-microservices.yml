@@ -42,7 +42,7 @@ services:
     depends_on:
       - zookeeper
 
-  #The counterparty service provides counterparty data, it is also the single version of truth for these data
+  #Ad service
   ad-service:
     container_name: ad-service    
     image: unige/ad-service:latest
