@@ -234,3 +234,9 @@ Thumbs.db
 
 # kafka
 zk-single-kafka-single/
+
+# Front-end exclusions ####################################
+
+# Angular modules
+/web-ui/node_modules
+/web-ui/.editorconfig

@@ -41,6 +41,7 @@ public class Ad implements Serializable {
 	
 	// private ArrayList<BufferedImage> photos
 	
+
 	@Override
 	public String toString() {
 		String str = "";
