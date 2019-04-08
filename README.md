@@ -17,5 +17,5 @@
 mvn clean install
 mvn install -Ppackage-docker-image
 cd docker-compose/
-docker-compose -f docker-compose-api-gw.yml up
+docker-compose -f docker-compose-micoservices.yml up
 ```
