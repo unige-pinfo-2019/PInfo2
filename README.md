@@ -19,3 +19,12 @@ mvn install -Ppackage-docker-image
 cd docker-compose/
 docker-compose -f docker-compose-micoservices.yml up
 ```
+
+To avoid docker images compilation time, each microservice can be run independently 
+
+```
+mvn clean install -T 4
+java -jar {serviceFolder}/target/{serviceName}-service-0.2.0-SNAPSHOT-thorntail.jar
+```
+
+If you have added or deleted a file put the `clean` keywoard after mvn otherwise simply run `mvn install -T 4`
