@@ -10,8 +10,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import domain.model.Ad;
@@ -44,7 +44,7 @@ public class AdRestService {
 	@GET
 	@Path("{id}")
 	@Produces("application/json")
-	public Ad get(@QueryParam("id") Long adId) {
+	public Ad get(@PathParam("id") Long adId) {
 		return adService.get(adId);
 	}
 	
@@ -57,7 +57,7 @@ public class AdRestService {
 	
 	@DELETE
 	@Path("{id}")
-	public Response delete(Long adId) {
+	public Response delete(@PathParam("id") Long adId) {
 		adService.delete(adService.get(adId));
 		return Response.ok().build();
 	}
