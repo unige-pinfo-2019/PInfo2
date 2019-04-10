@@ -1,0 +1,30 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Mes posts</h2>
+
+      <ul class="list-group">
+        <app-post *ngFor="let aPost of posts"
+                      [id]="aPost.id"
+                      [title]="aPost.title"
+                      [description]="aPost.description"
+                      [price]="aPost.price"
+                      [date]="aPost.date"
+
+
+        >
+      </app-post>
+
+      </ul>
+
+      <button class= "btn btn-primary"
+              (click)="addToServer()"> Enregistrer les posts </button>
+      <button class= "btn btn-success"
+              (click)="getFromServer()"> Récupérer les posts </button>
+      <button class= "btn btn-danger"
+              (click)="deleteFromServer()"> Delete tous les posts </button>
+    </div>
+  </div>
+</div>

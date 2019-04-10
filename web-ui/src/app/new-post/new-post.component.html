@@ -1,0 +1,32 @@
+<div class="col-sm-8 col-sm-offset-2">
+  <form [formGroup]="postForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+      <label for="title">Titre</label>
+      <input type="text" id="title" class="form-control" formControlName="title">
+    </div>
+    <div class="form-group">
+     <label for="description">description du post</label>
+     <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+   </div>
+   <div class="form-group">
+     <label for="price">Prix</label>
+     <input type="text" id="price" class="form-control" formControlName="price">
+   </div>
+    <div class="form-group">
+      <label for="category">Catégorie</label>
+      <select id="category" class="form-control" formControlName="category">
+        <option value="Livre">Livre</option>
+        <option value="notes">Notes de cours</option>
+      </select>
+    </div>
+    <div formArrayName="photos">
+      <h3>Photos</h3>
+      <div class="form-group" *ngFor="let photosControl of getPhotos().controls; let i = index">
+        <input type="text" class="form-control" [formControlName]="i">
+      </div>
+      <button type="button" class="btn btn-success" (click)="onAddPhoto()">Ajouter une photo</button>
+    </div>
+    <button type="submit" class="btn btn-primary"
+          >Soumettre</button>
+  </form>
+</div>

@@ -1,0 +1,17 @@
+<li [ngClass]="{'list-group-item': true
+
+ }">
+  <h2> Post :
+    {{ title }}</h2>
+    <h3>  Description : {{ description }}</h3>
+    <h2>Prix:{{ getPrice() }} </h2>
+  <a [routerLink]="[id]">Détail</a>
+
+  <div class="float-right">
+  
+    <button  class="btn btn-danger" align="right"
+             (click)="onDelete()"> Delete Post </button>
+
+  </div>
+  <input type="text" class="form-control" [(ngModel)]="title">
+</li>
