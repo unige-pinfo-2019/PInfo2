@@ -12,5 +12,18 @@
 	<artifactId>category-service</artifactId>
 	<name>Category Service</name>
     <packaging>war</packaging>
+      
+    <properties>
+		<skip-docker-build>false</skip-docker-build>
+	</properties>
+    
+    <dependencies>
+    	<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.6</version>
+			<scope>provided</scope>
+		</dependency>
+    </dependencies>
 
 </project>
