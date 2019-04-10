@@ -14,13 +14,14 @@ import lombok.Data;
 
 @Entity
 @Table(name="CATEGORIES")
+@Data
 public class Category implements Serializable{
 
 	private static final long serialVersionUID = -8677180318520117547L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="AD_ID")
+	@Column(name="CATEGORY_ID")
 	private Long id;
 	
 	@Column(name="NAME", unique = true)
@@ -29,25 +30,5 @@ public class Category implements Serializable{
 	
 	@Column(name="PARENT")
 	private Category parent;
-	
-	public Long getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Category getParent() {
-		return parent;
-	}
-
-	public void setParent(Category parent) {
-		this.parent = parent;
-	}
 	
 }

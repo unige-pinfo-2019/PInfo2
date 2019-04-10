@@ -45,7 +45,6 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public List<Category> getSubCategories(Category category) {
-		// SELECT CATEGORY FROM CATEGORIES WHERE PARENT = category.name
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Category> q = cb.createQuery(Category.class);
 		Root<Category> c = q.from(Category.class);
