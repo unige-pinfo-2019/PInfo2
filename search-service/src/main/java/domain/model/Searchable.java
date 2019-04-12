@@ -10,8 +10,6 @@ public abstract class Searchable {
 	
 	public abstract String toJson();
 	
-	public abstract void fromJson(String json);
-	
 	public String getClassName() {
 		return this.getClass().getSimpleName();
 	}
