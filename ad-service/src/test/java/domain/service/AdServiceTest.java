@@ -71,17 +71,18 @@ public class AdServiceTest {
 		assertTrue(i == null);
 	}
 	
-	//@Test
+	@Test
 	public void testUpdate() {
 		
 		Ad ad1 = getRandomAd();
+		adServiceImpl.create(ad1);
 		Ad ad2 = getRandomAd();
 		ad2.setId(ad1.getId());
 		
 		adServiceImpl.update(ad2);
-		/*
+		
 		Ad i = em.find(Ad.class, ad1.getId());
-		assertTrue(ad2.equals(i));*/
+		assertTrue(ad2.equals(i));
 	}
 	
 	private List<Ad> getAds() {
@@ -98,7 +99,7 @@ public class AdServiceTest {
 		int size = adServiceImpl.getAll().size();
 		List<Ad> ads = getAds();	
 		for (Ad ad : ads) {
-			em.persist(ad);
+			adServiceImpl.create(ad);
 		}
 		return size + ads.size();
 	}
