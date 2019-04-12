@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -32,7 +31,7 @@ public class AdServiceTest {
 	
 	@InjectMocks
 	private AdServiceImpl adServiceImpl;
-	
+
 	@Test
 	public void testGetAll() {
 		int size = initDataStore();
@@ -45,6 +44,7 @@ public class AdServiceTest {
 		List<Ad> ads = adServiceImpl.getAll();
 		Long id = ads.get(0).getId();
 		Ad ad = adServiceImpl.get(id);
+		
 		assertEquals(ads.get(0).getId(), ad.getId());
 		assertEquals(ads.get(0).getTitle(), ad.getTitle());
 	}
@@ -53,14 +53,15 @@ public class AdServiceTest {
 	public void testCreate() {
 		Ad ad = getRandomAd();
 		adServiceImpl.create(ad);
-		/*
+		
 		Ad i = em.find(Ad.class, ad.getId());
 		
-		assertTrue(ad.equals(i));*/
+		assertTrue(ad.equals(i));
 	}
 	
 	@Test
 	public void testDelete() {
+		
 		Ad ad = getRandomAd();
 		adServiceImpl.create(ad);
 		adServiceImpl.delete(ad);
@@ -70,7 +71,7 @@ public class AdServiceTest {
 		assertTrue(i == null);
 	}
 	
-	@Test
+	//@Test
 	public void testUpdate() {
 		
 		Ad ad1 = getRandomAd();
@@ -78,9 +79,9 @@ public class AdServiceTest {
 		ad2.setId(ad1.getId());
 		
 		adServiceImpl.update(ad2);
-		
-		Ad i = em.find(Ad.class, 0);
-		assertTrue(ad2.equals(i));
+		/*
+		Ad i = em.find(Ad.class, ad1.getId());
+		assertTrue(ad2.equals(i));*/
 	}
 	
 	private List<Ad> getAds() {
