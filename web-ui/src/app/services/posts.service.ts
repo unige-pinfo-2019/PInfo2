@@ -44,14 +44,14 @@ emitPostSubject(){
   this.postsSubject.next(this.posts.slice());
 }
 
-/*getPostById(id:number){
+getPostById(id:number){
   const post  = this.posts.find(
     (s)=>{
       return s.id===id;
     }
   );
   return post;
-}*/
+}
 
 
 /*Prints the array posts for debbugin purposes*/
