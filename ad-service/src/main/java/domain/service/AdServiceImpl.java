@@ -37,7 +37,7 @@ public class AdServiceImpl implements AdService {
 	public void update(Ad ad) {
 		Ad i = em.find(Ad.class, ad.getId());
 		if (i == null) {
-			throw new IllegalArgumentException("Ad does not exist : " + ad.getId());
+			throw new IllegalArgumentException("Ad does not exist : " + ad.getId().toString());
 		}
 		em.merge(ad);
 	}
