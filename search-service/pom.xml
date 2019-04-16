@@ -54,28 +54,13 @@
 			<version>5.0.10.Final</version>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>com.github.dadrus.jpa-unit</groupId>
-			<artifactId>jpa-unit5</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.github.dadrus.jpa-unit</groupId>
-			<artifactId>jpa-unit-rdbms</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<scope>test</scope>
-		</dependency>
+		
+	    <dependency>
+		    <groupId>org.elasticsearch.test</groupId>
+		    <artifactId>framework</artifactId>
+		    <version>6.7.1</version>
+		    <scope>test</scope>
+	    </dependency>
     </dependencies>
 
 </project>
