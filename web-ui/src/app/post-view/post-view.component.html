@@ -1,10 +1,10 @@
 
-
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h2>Mes posts</h2>
 
+
+      <app-category-menu></app-category-menu>
       <ul class="list-group">
         <app-post *ngFor="let aPost of posts"
                       [id]="aPost.id"
@@ -12,6 +12,7 @@
                       [description]="aPost.description"
                       [price]="aPost.price"
                       [date]="aPost.date"
+                      [category]="aPost.category"
 
 
         >
@@ -20,7 +21,7 @@
       </ul>
 
       <button class= "btn btn-primary"
-              (click)="addToServer()"> Enregistrer les posts </button>
+              (click)="addToServer()"> Add exemple </button>
       <button class= "btn btn-success"
               (click)="getFromServer()"> Récupérer les posts </button>
       <button class= "btn btn-danger"

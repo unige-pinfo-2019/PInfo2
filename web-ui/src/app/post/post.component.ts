@@ -12,6 +12,8 @@ export class PostComponent implements OnInit {
   @Input() description: string ;
   @Input() date: string ;
   @Input() price:number;
+  @Input() category:string;
+  @Input() image:string;
 
 
 
@@ -22,28 +24,15 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     //this.postService.getPosts();
+    console.log("cat: "+ this.category);
   }
-  getDescription(){
-    return this.description;
-  }
+
 
   getPrice(){
 
     return this.price;
   }
-  getLikes(){
 
-    //return this.postService.getPostById(this.id).likes;
-  }
-  onLiker(){
-
-//  this.postService.like(this.id);
-
-  }
-  onDisliker(){
-
-  // this.postService.dislike(this.id);
-  }
   onDelete(){
     this.postService.deletePosts(this.id);
   }

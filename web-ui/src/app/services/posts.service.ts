@@ -7,9 +7,11 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 export class PostsService{
 
  postsSubject = new Subject<any[]>();
+   lastUpdate = new Date().toLocaleString();
+
+
 private posts=[];
-/*[
-  {
+  /*{
     id:1,
     title:'Post50000',
     description: 'Ceci est le post1',
@@ -44,47 +46,47 @@ emitPostSubject(){
   this.postsSubject.next(this.posts.slice());
 }
 
-/*getPostById(id:number){
+getPostById(id:number){
   const post  = this.posts.find(
     (s)=>{
       return s.id===id;
     }
   );
   return post;
-}*/
+}
 
 
 /*Prints the array posts for debbugin purposes*/
 printPosts(){
   console.log('ArraytoString:');
-  console.log(this.posts.toString);
+
 for(let i=0;i<this.posts.length;i++){
 console.log('id= '+ this.posts[i].id);
 console.log('title= '+ this.posts[i].title);
 console.log('Description= '+ this.posts[i].description);
 console.log('price= '+ this.posts[i].price);
 console.log('date= '+ this.posts[i].date);
+console.log('Category= '+ this.posts[i].category);
 
 }
 
 }
 addPost(title:string, description:string,price:number){
   const postObject = {
-  //  id:0,
-    title: '',
-    description:'',
-    date:'2019-03-03',
-    price: 0,
+    id:0,
+    title: 'MonPost',
+    description:'blablablalbalbalba',
+    date:this.lastUpdate.toString(),
+    price: 50,
+    category:'Livre',
   };
   postObject.title= title;
   postObject.description=description;
-  postObject.price=price;
+  //postObject.price=price;
 
   this.posts.push(postObject);
+  this.printPosts();
   this.emitPostSubject();
-
-
-
 
 
   console.log('Enregistrement en cours... ');
@@ -120,6 +122,7 @@ addPost(title:string, description:string,price:number){
         console.log('Erreur!:'+ error);
       }
     )
+    this.printPosts();
   }
   deletePosts(id:number){
 
@@ -127,7 +130,7 @@ addPost(title:string, description:string,price:number){
     this.httpClient
     .delete('http://localhost:8080/ad/'+id,this.httpOptions)
     .subscribe(
-      (response) => {
+      () => {
         console.log('Tout a été supprimé')!
       },
       (error) => {
