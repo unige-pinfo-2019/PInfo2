@@ -1,4 +1,4 @@
-package api;
+package api.rest;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import api.msg.AdProducer;
 import domain.model.Ad;
 import domain.service.AdService;
 
@@ -23,6 +24,8 @@ public class AdRestService {
 	
 	@Inject
 	private AdService adService;
+	@Inject
+	private AdProducer adProducer;
 	
 	@POST
 	@Consumes("application/json")
@@ -32,6 +35,7 @@ public class AdRestService {
 		} catch(IllegalArgumentException i) {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
+		adProducer.send(ad, "adsCreate");
 		return Response.ok().build();
 	}
 	
@@ -52,6 +56,7 @@ public class AdRestService {
 	@Consumes("application/json")
 	public Response update(Ad ad) {
 		adService.update(ad);
+		adProducer.send(ad, "adsUpdate");
 		return Response.ok().build();
 	}
 	
@@ -59,6 +64,7 @@ public class AdRestService {
 	@Path("{id}")
 	public Response delete(@PathParam("id") Long adId) {
 		adService.delete(adService.get(adId));
+		adProducer.send(adId, "adsDelete");
 		return Response.ok().build();
 	}
 

@@ -1,4 +1,4 @@
-package api;
+package api.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -14,6 +14,8 @@ import javax.ws.rs.core.MultivaluedMap;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import api.rest.CORSFilter;
 
 @ExtendWith(MockitoExtension.class)
 class CORSFilterTest {
