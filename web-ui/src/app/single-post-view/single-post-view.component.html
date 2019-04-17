@@ -1,10 +1,20 @@
 
 <a routerLink="/posts"> retour</a>
-<div class="photosContainer">
-  <img src="assets/nopicture.png">
+<ul class="list-group">
+
+<div class="postContainer">
+<li class="list-group-item">
+<div  class="photosContainer">
+  <a><img class="smallImage" src="assets/nopicture.png"></a>
+  <a><img class="LargeImage" src="assets/nopicture.png"></a>
+  <a><img class="smallImage" src="assets/nopicture.png"></a>
+
+
 
 </div>
-<div id= "information">
+</li>
+<li class="list-group-item">
+<div class= "information">
   <div>
   <h3>Description: {{description}}</h3>
   </div>
@@ -13,3 +23,6 @@
   <button>Contacter</button>
   </div>
 </div>
+</li>
+</div>
+</ul>
