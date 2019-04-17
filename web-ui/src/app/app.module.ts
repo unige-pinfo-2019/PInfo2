@@ -19,15 +19,18 @@ import { NewPostComponent } from './new-post/new-post.component';
 import { MenuComponent } from './menu/menu.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { UserService } from './services/user.service';
+import { SinglePostViewComponent } from './single-post-view/single-post-view.component';
+import { CategoryMenuComponent } from './category-menu/category-menu.component';
+import { CategoryService } from './services/category.service';
 
 
 const appRoutes: Routes = [
 
   {path: 'posts', component: PostViewComponent},
-  /*{path: 'users', component: UserListComponent},*/
+  {path: 'posts/:id', component: SinglePostViewComponent},
   {path: 'new-post', component: NewPostComponent },
   {path: 'new-user', component: NewUserComponent },
-  {path: '', component: PostViewComponent},
+  {path: '', redirectTo: 'posts',pathMatch:'full'},
   {path: 'not-found', component:FourOhFourComponent},
   {path: '**', redirectTo: 'not-found'}
 ];
@@ -40,7 +43,9 @@ const appRoutes: Routes = [
     PostViewComponent,
     NewPostComponent,
     MenuComponent,
-    NewUserComponent
+    NewUserComponent,
+    SinglePostViewComponent,
+    CategoryMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,8 @@ const appRoutes: Routes = [
     AuthService,
     AuthGuard,
     PostsService,
-    UserService
+    UserService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })
