@@ -20,6 +20,8 @@ import { MenuComponent } from './menu/menu.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { UserService } from './services/user.service';
 import { SinglePostViewComponent } from './single-post-view/single-post-view.component';
+import { CategoryMenuComponent } from './category-menu/category-menu.component';
+import { CategoryService } from './services/category.service';
 
 
 const appRoutes: Routes = [
@@ -42,7 +44,8 @@ const appRoutes: Routes = [
     NewPostComponent,
     MenuComponent,
     NewUserComponent,
-    SinglePostViewComponent
+    SinglePostViewComponent,
+    CategoryMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ const appRoutes: Routes = [
     AuthService,
     AuthGuard,
     PostsService,
-    UserService
+    UserService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })

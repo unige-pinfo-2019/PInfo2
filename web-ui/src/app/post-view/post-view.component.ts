@@ -15,7 +15,13 @@ export class PostViewComponent implements OnInit {
   postSubscription: Subscription;
   //index:number;
 //  id: number;
+httpOptions = {
+  headers: new HttpHeaders({
+      'Content-Type': 'application/json',
 
+
+  }),
+};
 
 
 
@@ -27,8 +33,8 @@ export class PostViewComponent implements OnInit {
     }
 
     addToServer(){
+      this.postsService.addPost("Mon post","voici ma description",40);
 
-      //this.postsService.postService();
 
 
     }
@@ -49,6 +55,7 @@ export class PostViewComponent implements OnInit {
         }
       );
       this.postsService.emitPostSubject();
+      console.log(this.posts);
     }
 
   }

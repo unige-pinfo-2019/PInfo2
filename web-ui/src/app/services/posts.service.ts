@@ -8,8 +8,7 @@ export class PostsService{
 
  postsSubject = new Subject<any[]>();
 private posts=[];
-/*[
-  {
+  /*{
     id:1,
     title:'Post50000',
     description: 'Ceci est le post1',
@@ -57,7 +56,7 @@ getPostById(id:number){
 /*Prints the array posts for debbugin purposes*/
 printPosts(){
   console.log('ArraytoString:');
-  console.log(this.posts.toString);
+
 for(let i=0;i<this.posts.length;i++){
 console.log('id= '+ this.posts[i].id);
 console.log('title= '+ this.posts[i].title);
@@ -71,10 +70,10 @@ console.log('date= '+ this.posts[i].date);
 addPost(title:string, description:string,price:number){
   const postObject = {
   //  id:0,
-    title: '',
-    description:'',
+    title: 'MonPost',
+    description:'blablablalbalbalba',
     date:'2019-03-03',
-    price: 0,
+    price: 50,
   };
   postObject.title= title;
   postObject.description=description;
@@ -120,6 +119,7 @@ addPost(title:string, description:string,price:number){
         console.log('Erreur!:'+ error);
       }
     )
+    this.printPosts();
   }
   deletePosts(id:number){
 
@@ -127,7 +127,7 @@ addPost(title:string, description:string,price:number){
     this.httpClient
     .delete('http://localhost:8080/ad/'+id,this.httpOptions)
     .subscribe(
-      (response) => {
+      () => {
         console.log('Tout a été supprimé')!
       },
       (error) => {

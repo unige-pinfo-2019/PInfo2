@@ -6,7 +6,36 @@ a:hover{
   color: #31771d;
   text-shadow: #00AA00 1px 0 250px;
 }
-postLink{
+li{
 
-  background-color: yellow;
+}
+img{
+  max-width:100%;
+  max-height:100%;
+  margin:1%;
+  float:left;
+}
+
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+
+  //text-align: center;
+   /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.priceValue{
+  display:inline-block;
+  padding-right: 10px;
+  float:right;
+  padding-top: 30%;
+//  background-color: red;
 }

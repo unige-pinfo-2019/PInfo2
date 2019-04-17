@@ -12,6 +12,8 @@ export class PostComponent implements OnInit {
   @Input() description: string ;
   @Input() date: string ;
   @Input() price:number;
+  @Input() category:string;
+  @Input() image:string;
 
 
 
@@ -23,9 +25,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     //this.postService.getPosts();
   }
-  getDescription(){
-    return this.description;
-  }
+
 
   getPrice(){
 

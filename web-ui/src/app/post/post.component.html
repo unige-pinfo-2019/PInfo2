@@ -1,20 +1,29 @@
-<div id="postLink" ><a [routerLink]="[id]">
-  <li [ngClass]="{'list-group-item': true
-
- }">
-  <h2> Post :
-    {{ title }}</h2>
-    <h3>  Description : {{ description }}</h3>
-    <h2>Prix:{{ getPrice() }} </h2>
 
 
-  <div class="float-right">
 
-    <button  class="btn btn-danger" align="right"
-             (click)="onDelete()"> Delete Post </button>
 
-  </div>
 
-</li>
-</a>
-</div>
+
+
+<a [routerLink]="[id]">
+<li [ngClass]="{'list-group-item': true}">
+
+         <div class="row">
+           <div class="column" >
+
+             <img src="assets/nopicture.png">
+           </div>
+           <div class="column" >
+             <h3>{{ title }}</h3>
+            <h4>{{ description }}</h4>
+            <h5>{{category}}</h5>
+           </div>
+           <div class="column" >
+             <h2 class="priceValue">{{ price }}.- </h2>
+           </div>
+         </div>
+           </li>
+    </a>
+  <p>En ligne depuis: {{date}}</p>
+<!--  <button  class="btn btn-danger" align="right"
+           (click)="onDelete()"> Delete Post </button>-->
