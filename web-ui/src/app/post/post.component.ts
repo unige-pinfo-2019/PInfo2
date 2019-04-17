@@ -24,6 +24,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     //this.postService.getPosts();
+    console.log("cat: "+ this.category);
   }
 
 
@@ -31,19 +32,7 @@ export class PostComponent implements OnInit {
 
     return this.price;
   }
-  getLikes(){
 
-    //return this.postService.getPostById(this.id).likes;
-  }
-  onLiker(){
-
-//  this.postService.like(this.id);
-
-  }
-  onDisliker(){
-
-  // this.postService.dislike(this.id);
-  }
   onDelete(){
     this.postService.deletePosts(this.id);
   }

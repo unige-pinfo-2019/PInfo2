@@ -7,6 +7,9 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 export class PostsService{
 
  postsSubject = new Subject<any[]>();
+   lastUpdate = new Date().toLocaleString();
+
+
 private posts=[];
   /*{
     id:1,
@@ -63,27 +66,27 @@ console.log('title= '+ this.posts[i].title);
 console.log('Description= '+ this.posts[i].description);
 console.log('price= '+ this.posts[i].price);
 console.log('date= '+ this.posts[i].date);
+console.log('Category= '+ this.posts[i].category);
 
 }
 
 }
 addPost(title:string, description:string,price:number){
   const postObject = {
-  //  id:0,
+    id:0,
     title: 'MonPost',
     description:'blablablalbalbalba',
-    date:'2019-03-03',
+    date:this.lastUpdate.toString(),
     price: 50,
+    category:'Livre',
   };
   postObject.title= title;
   postObject.description=description;
-  postObject.price=price;
+  //postObject.price=price;
 
   this.posts.push(postObject);
+  this.printPosts();
   this.emitPostSubject();
-
-
-
 
 
   console.log('Enregistrement en cours... ');

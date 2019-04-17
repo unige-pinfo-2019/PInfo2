@@ -48,14 +48,15 @@ httpOptions = {
 
 
     ngOnInit() {
-      this.postsService.getPosts();
+      //this.postsService.getPosts();
       this.postSubscription= this.postsService.postsSubject.subscribe(
         (posts: any[]) => {
           this.posts= posts;
+          console.log(this.posts);
         }
       );
       this.postsService.emitPostSubject();
-      console.log(this.posts);
+
     }
 
   }
