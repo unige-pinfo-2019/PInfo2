@@ -32,7 +32,7 @@ class CORSFilterTest {
 		corsFilter.filter(requestContext, responseContext);
 
 		assertEquals("*", headers.get("Access-Control-Allow-Origin").get(0));
-		assertEquals("GET, POST, PUT, DELETE, OPTIONS", headers.get("Access-Control-Allow-Methods").get(0));
+		assertEquals("GET, POST, PUT, DELETE, OPTIONS, HEAD", headers.get("Access-Control-Allow-Methods").get(0));
 
 	}
 

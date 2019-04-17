@@ -5,10 +5,9 @@ import java.util.Date;
 import com.google.gson.Gson;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
-public class Ad extends Searchable{
+public class Ad extends Searchable {
 	
 	private Long id;
 	
