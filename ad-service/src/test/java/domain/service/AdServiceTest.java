@@ -42,6 +42,8 @@ public class AdServiceTest {
 	public void testGet() {
 		initDataStore();
 		List<Ad> ads = adServiceImpl.getAll();
+		if (ads.isEmpty())
+			initDataStore();
 		Long id = ads.get(0).getId();
 		Ad ad = adServiceImpl.get(id);
 		
@@ -88,7 +90,7 @@ public class AdServiceTest {
 	private List<Ad> getAds() {
 
 		List<Ad> ads = new ArrayList<>();
-		long numberOfAd = Math.round((Math.random() * 10));
+		long numberOfAd = Math.round((Math.random() * 10)) + 1;
 		for (int i = 0; i < numberOfAd; i++) {
 			ads.add(getRandomAd());
 		}
