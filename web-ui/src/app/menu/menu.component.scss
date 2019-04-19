@@ -36,14 +36,16 @@
         display:inline;
         
 
-        a {
+        .regularLink {
           color:white;
           padding: 1.0em;
-          text-transform: uppercase;
-          font-size: 0.8em;
+          font-size: 1em;
+          
 
           &:hover {
             background: #5D666F;
+            text-shadow: #00AA00 1px 0 250px;
+            border-radius: 10px;
           }
         }
       }
