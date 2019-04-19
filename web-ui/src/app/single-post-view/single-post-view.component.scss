@@ -14,5 +14,28 @@ text-align: center;
   height:100px
 }
 li{
-  margin: 50px;
+  margin: 20px;
+
 }
+#details.list-group-item {
+
+float:right;
+position: fixed;
+width: 200px;
+}
+#description.list-group-item{
+  width:600px;
+  height:400px;
+
+}
+button{
+
+}
+@media (min-width: 768px) {
+.carousel-multi-item-2 .col-md-3 {
+float: left;
+width: 25%;
+max-width: 100%; } }
+
+.carousel-multi-item-2 .card img {
+border-radius: 2px; }

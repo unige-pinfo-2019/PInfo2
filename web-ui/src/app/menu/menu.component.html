@@ -1,22 +1,26 @@
 <header>
 
-  <div class="container"  >
 
 
 
-    <nav>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
       <!--  <a routerLink="/" class="logo"> <img src="assets/logo2.png" alt="Agility logo"></a>-->
-      <ul>
-        <li routerLinkActive="active"><a routerLink="auth">Authentification</a></li>
-        <li routerLinkActive="active"><a routerLink="posts">Posts</a></li>
-        <li routerLinkActive="active"><a routerLink="new-post">Crééer un Post</a></li>
-        <li routerLinkActive="active"><a routerLink="new-user">Créer un compte</a></li>
+      <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+      <ul class="navbar-nav text-right">
+        <li class="nav-item active" routerLinkActive="active"><a routerLink="auth">Authentification</a></li>
+        <li class="nav-item active" routerLinkActive="active"><a routerLink="posts">Posts</a></li>
+        <li class="nav-item active" routerLinkActive="active"><a routerLink="new-post">Crééer un Post</a></li>
+        <li class="nav-item active" routerLinkActive="active"><a routerLink="new-user">Créer un compte</a></li>
       </ul>
+    </div>
     </nav>
-  </div>
+  
+
+
+
+
 
 </header>
-
 <!--
 <nav class="navbar navbar-default">
 <div class="container-fluid">

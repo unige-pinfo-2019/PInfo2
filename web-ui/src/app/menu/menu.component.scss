@@ -1,6 +1,13 @@
-header {
+.navbar-expand-sm{
 
-  background: #00AA00;
+  background-color: #00AA00;
+  padding: 2%;
+  
+  
+}
+.nav-item{
+ 
+}
 
   .logo {
     font-weight: bold;
@@ -19,23 +26,27 @@ header {
 
     ul {
       list-style-type: none;
-      margin: 0; padding: 0;
+      display:inline;
+       
+      
 
       li {
         padding-top: .5em;
-
-        float: left;
+        
+        display:inline;
+        
 
         a {
+          color:white;
           padding: 1.0em;
           text-transform: uppercase;
           font-size: 0.8em;
 
           &:hover {
-            background: #00BB00;
+            background: #5D666F;
           }
         }
       }
     }
   }
-}
+
