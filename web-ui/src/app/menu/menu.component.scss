@@ -1,24 +1,26 @@
 .navbar-expand-sm{
 
   background-color: #00AA00;
-  padding: 2%;
+  padding: 1%;
   
   
 }
-.nav-item{
- 
-}
+
 
   .logo {
     font-weight: bold;
+    margin-left:2%;
+    position:absolute;
+    left:0;
+    
     //padding-top: 0.5em;
   }
   img {
     padding: 0; margin: 0;
     float: left;
-    width: 2.5em;
-    height: 2.5em;
-    padding-right: 10px;
+    width: 1.5em;
+    height: 1.5em;
+    //padding-right: 10px;
   }
 
   nav {
@@ -31,7 +33,7 @@
       
 
       li {
-        padding-top: .5em;
+        
         
         display:inline;
         
