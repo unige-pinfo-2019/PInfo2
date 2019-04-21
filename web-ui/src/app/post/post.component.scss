@@ -11,8 +11,9 @@ a:hover{
 img{
   height: auto; 
     width: auto; 
-    max-width: 150px; 
-    max-height: 150px;
+    max-width: 100px; 
+    max-height: 100px;
+    margin-left:30px;
 }
 
 
@@ -34,9 +35,9 @@ img{
 }
 .priceValue{
   display:inline-block;
-  padding-right: 10px;
-  float:right;
-  padding-top: 30%;
+  //padding-right: 10px;
+  //float:right;
+  //padding-top: 30%;
 //  background-color: red;
 }
 #cat{
@@ -51,5 +52,8 @@ li{
   box-shadow: 2px 3px 3px #666666;
  border-radius: 2px; 
  margin:30px;
+ width:500px;
+ margin-left:50px;
+ max-height: 300px;
  
 }

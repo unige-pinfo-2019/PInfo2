@@ -1,6 +1,8 @@
-a{
+.goBack{
   
-
+  position:relative;
+  top:50px;
+  right:50px;
   z-index: 6;
 }
 
@@ -27,7 +29,7 @@ li{
 #details.list-group-item {
 
 display:block;
-float:right;
+//float:right;
 margin-right:8%;
 position: relative;
 width: 200px;
