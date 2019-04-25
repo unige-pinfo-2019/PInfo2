@@ -12,6 +12,9 @@
   max-height:auto;
   
 }
+li{
+  margin-top:5%;
+}
 img{
   max-height:300px;
   width: auto;
@@ -20,24 +23,37 @@ img{
   margin-right: auto;
   border:solid;
 }
-li{
+#information{
+  display:table;
+
   
-  margin-top: 30px;
+  //margin-top: 30px;
+  
 
 
 }
+
 #details.list-group-item {
 
-display:block;
+//display:inline-block;
 //float:right;
-margin-right:8%;
-position: relative;
+//margin:8%;
+//position: relative;
 width: 200px;
+
 }
 #description.list-group-item{
-  width:500px;
-  height:200px;
+  width:400px;
+  //height:200px;
 
+}
+#details{
+ margin-left:1%;
+}
+#description{
+ height:400px;
+
+  
 }
 
 .carousel {

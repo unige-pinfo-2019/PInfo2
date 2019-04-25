@@ -3,12 +3,13 @@ button{
   margin-left: 1em;
 }
 .connexion{
-  background: #00AA00;
+  background:rgb(64, 156, 64);
+  border-color:rgb(47, 114, 47);
   color:white;
   border-radius: 10px;
   padding:10%;
   &:hover {
-    background: rgb(12, 145, 19);
+    background:rgb(47, 114, 47);
     text-shadow: rgb(127, 141, 127) 1px 0 250px;
     border-radius: 10px;
   }

@@ -79,15 +79,16 @@
     </li>
     <li class="list-group-item">
       <div class="information">
-        <ul class="list-inline">
-          <li id="description" class="list-group-item">
+        <ul id="information"class="list-inline">
+          
+          <li id="description"  class="list-group-item">
 
             <h4>Description: </h4>
             <p>{{description}}</p>
           </li>
           <li id="details" class="list-group-item">
-
-            <h2> Prix: {{price}}.-</h2>
+            <h6>En ligne depuis: {{date|date:short}}</h6>
+            <h4> Prix: {{price}}.-</h4>
             <button class="btn btn-primary">Contacter</button>
           </li>
 
