@@ -35,11 +35,12 @@ public class AdServiceImpl implements AdService {
 	
 	@Override 
 	public void update(Ad ad) {
-		Ad i = em.find(Ad.class, ad.getId());
+		Ad i = get(ad.getId());
 		if (i == null) {
 			throw new IllegalArgumentException("Ad does not exist : " + ad.getId().toString());
+		} else {
+			em.merge(ad);
 		}
-		em.merge(ad);
 	}
 
 	@Override

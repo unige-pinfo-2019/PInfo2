@@ -1,7 +1,5 @@
-package api;
+package api.rest;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -11,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import domain.model.Ad;
 import domain.service.SearchService;
 
 @ApplicationScoped
@@ -22,15 +21,10 @@ public class SearchRestService {
 	@GET
 	@Path("ad")
 	@Produces("application/json")
-	public List<String> searchAd(@QueryParam("q") String query) throws IOException {
+	public List<Ad> searchAd(@QueryParam("q") String query) {
 		
-		List<String> titleHits = searchService.match("title", query);
-		List<String> descriptionHits = searchService.match("description", query);
-		
-		List<String> allHits = new ArrayList<String>(titleHits);
-		allHits.addAll(descriptionHits);
-		
-		return allHits;
+		List<Ad> hits = searchService.match(query, Ad.class);
+		return hits;
 	}
 
 }

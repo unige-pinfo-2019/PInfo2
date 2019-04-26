@@ -13,6 +13,10 @@
 	<name>Search Service</name>
     <packaging>war</packaging>
     
+    <properties>
+		<skip-docker-build>false</skip-docker-build>
+	</properties>
+    
     <dependencies>
 		<dependency>
 			<groupId>io.thorntail</groupId>
@@ -37,6 +41,10 @@
 		<dependency>
 			<groupId>io.thorntail</groupId>
 			<artifactId>logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aerogear.kafka</groupId>
+			<artifactId>kafka-cdi-extension</artifactId>
 		</dependency>
 		
 		<dependency>

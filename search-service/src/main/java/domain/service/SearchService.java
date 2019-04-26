@@ -1,18 +1,17 @@
 package domain.service;
 
-import java.io.IOException;
 import java.util.List;
 
 import domain.model.Searchable;
 
 public interface SearchService {
 	
-	public void createItem(Searchable item) throws IOException;
+	public void createItem(Searchable item);
 	
-	public void deleteItem(Searchable item) throws IOException;
+	public void deleteItem(Searchable item);
 	
-	public void updateItem(Searchable item) throws IOException;
+	public void updateItem(Searchable item);
 	
-	public List<String> match(String attribute, Object value) throws IOException;
+	public <T extends Searchable> List<T> match(String query, Class<T> type);
 	
 }

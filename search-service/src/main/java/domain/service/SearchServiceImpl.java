@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 
@@ -16,26 +17,29 @@ import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
+import com.google.gson.Gson;
+
 import domain.model.Searchable;
+import lombok.extern.java.Log;
 
 @ApplicationScoped
 @Default
+@Log
 public class SearchServiceImpl implements SearchService {
 
 	private RestHighLevelClient client = new RestHighLevelClient(
 	        RestClient.builder(
-	                new HttpHost("localhost", 9200, "http"),
-	                new HttpHost("localhost", 9201, "http")));
+	                new HttpHost("elasticsearch", 9200, "http")));
 	
 	@Override
-	public void createItem(Searchable item) throws IOException {
+	public void createItem(Searchable item) {
 		
 		IndexRequest request = new IndexRequest(
 		        item.getIndex(), 
@@ -44,23 +48,34 @@ public class SearchServiceImpl implements SearchService {
 		
 		request.source(item.toJson(), XContentType.JSON);
 		
-		client.index(request, RequestOptions.DEFAULT);
+		try {
+			client.index(request, RequestOptions.DEFAULT);
+		} catch (IOException e) {
+			log.throwing("SearchServiceImpl", "createItem", e);
+		}
+		
+		log.info("Item created : " + item);
 	}
 	
 	@Override
-	public void deleteItem(Searchable item) throws IOException {
+	public void deleteItem(Searchable item) {
 		
 		DeleteRequest deleteRequest = new DeleteRequest(
 		        item.getIndex(), 
 		        item.getType(),  
 		        item.getId().toString());	
 		
-		client.delete(deleteRequest, RequestOptions.DEFAULT);
+		try {
+			client.delete(deleteRequest, RequestOptions.DEFAULT);
+		} catch (IOException e) {
+			log.throwing("SearchServiceImpl", "deleteItem", e);
+		}
 		
+		log.info("Item deleted : " + item);
 	}
 	
 	@Override
-	public void updateItem(Searchable item) throws IOException {
+	public void updateItem(Searchable item) {
 		
 		UpdateRequest updateRequest = new UpdateRequest(
 		        item.getIndex(), 
@@ -69,29 +84,58 @@ public class SearchServiceImpl implements SearchService {
 		
 		updateRequest.doc(item.toJson(), XContentType.JSON);
 		
-		client.update(updateRequest, RequestOptions.DEFAULT);
+		try {
+			client.update(updateRequest, RequestOptions.DEFAULT);
+		} catch (IOException e) {
+			log.throwing("SearchServiceImpl", "updateItem", e);
+		}
 		
+		log.info("Item updated : " + item);
 	}
 	
 	@Override 
-	public List<String> match(String attribute, Object value) throws IOException {
+	public <T extends Searchable> List<T> match(String query, Class<T> type) {
 		SearchRequest searchRequest = new SearchRequest(); 
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		
-		QueryBuilder matchQueryBuilder = QueryBuilders.matchQuery(attribute, value)
-                									  .fuzziness(Fuzziness.AUTO);
+		QueryBuilder matchQueryBuilder = QueryBuilders.queryStringQuery("*" + query.toLowerCase() + "*");
+		
+		log.info("Query created : " + matchQueryBuilder.toString());
 		
 		searchSourceBuilder.query(matchQueryBuilder);
+		searchRequest.source(searchSourceBuilder);
 		
-		SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+		SearchResponse searchResponse = null;
 		
-		SearchHit[] hits = searchResponse.getHits().getHits();
-		List<String> matchedList = new ArrayList<>();
-		for (SearchHit hit : hits) {
-			matchedList.add(hit.getSourceAsString());
+		try {
+			searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+		} catch (IOException e) {
+			log.throwing("SearchServiceImpl", "match", e);
 		}
+
+		Gson gson = new Gson();
+		SearchHits hits = searchResponse.getHits();
+		SearchHit[] searchHits = hits.getHits();
+		List<T> matchedList = new ArrayList<>();
+		for (SearchHit hit : searchHits) {
+			T item = gson.fromJson(hit.getSourceAsString(), type);
+			matchedList.add(item);
+		}
+		
+		log.info("Matched " + matchedList.size() + " items with query \'" + query + "\'.");
 		
 		return matchedList;
 	}
+	
+	@PreDestroy
+    public void cleanup() {
+        try {
+            log.info("Closing the ES REST client");
+            this.client.close();
+        } catch (IOException e) {
+            log.throwing("SearchServiceImpl", "cleanup", e);
+        }
+    }
+	
 	
 }
