@@ -6,14 +6,14 @@ a:hover{
   color: #31771d;
   text-shadow: #00AA00 1px 0 250px;
 }
-li{
 
-}
+
 img{
-  max-width:100%;
-  max-height:100%;
-  margin:1%;
-  float:left;
+  height: auto; 
+    width: auto; 
+    max-width: 100px; 
+    max-height: 100px;
+    margin-left:30px;
 }
 
 
@@ -21,6 +21,7 @@ img{
 .column {
   float: left;
   width: 33.33%;
+  
 
   //text-align: center;
    /* Should be removed. Only for demonstration */
@@ -34,15 +35,25 @@ img{
 }
 .priceValue{
   display:inline-block;
-  padding-right: 10px;
-  float:right;
-  padding-top: 30%;
+  //padding-right: 10px;
+  //float:right;
+  //padding-top: 30%;
 //  background-color: red;
 }
 #cat{
-  float:left;
+  
   border-radius: 10px;
   padding: 5px;
+  margin-top:5%;
   margin-left: 10px;
   background: #69DB69;
+}
+li{
+  box-shadow: 2px 3px 3px #666666;
+ border-radius: 2px; 
+ margin:30px;
+ width:500px;
+ margin-left:50px;
+ max-height: 300px;
+ 
 }

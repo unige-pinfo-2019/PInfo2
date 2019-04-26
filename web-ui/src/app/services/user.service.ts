@@ -31,7 +31,7 @@ export class UserService {
     this.users.push(user);
     console.log(user.firstName);
     this.httpClient
-    .post('http://localhost/ad',
+    .post('http://localhost/user',
     this.users).subscribe(
       () => {
           console.log('User enregistré! '+this.users);

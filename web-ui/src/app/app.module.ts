@@ -22,6 +22,7 @@ import { UserService } from './services/user.service';
 import { SinglePostViewComponent } from './single-post-view/single-post-view.component';
 import { CategoryMenuComponent } from './category-menu/category-menu.component';
 import { CategoryService } from './services/category.service';
+import { ConnexionComponent } from './connexion/connexion.component';
 
 
 const appRoutes: Routes = [
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   {path: 'posts', component: PostViewComponent},
   {path: 'posts/:id', component: SinglePostViewComponent},
   {path: 'new-post', component: NewPostComponent },
+  {path: 'conexion', component: ConnexionComponent },
   {path: 'new-user', component: NewUserComponent },
   {path: '', redirectTo: 'posts',pathMatch:'full'},
   {path: 'not-found', component:FourOhFourComponent},
@@ -45,7 +47,8 @@ const appRoutes: Routes = [
     MenuComponent,
     NewUserComponent,
     SinglePostViewComponent,
-    CategoryMenuComponent
+    CategoryMenuComponent,
+    ConnexionComponent
   ],
   imports: [
     BrowserModule,

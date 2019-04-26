@@ -1,10 +1,18 @@
 app-category-menu{
 
-float:left;
+
    position:fixed;
 
    top: 200px;
    left:100px;
 
+
+}ul{
+position:absolute;
+width:60%;
+
+margin-right:5px;
+
+ border-radius: 2px; 
 
 }

@@ -56,6 +56,7 @@ httpOptions = {
         }
       );
       this.postsService.emitPostSubject();
+      this.addToServer();
 
     }
 

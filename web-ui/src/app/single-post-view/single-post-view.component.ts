@@ -11,6 +11,7 @@ export class SinglePostViewComponent implements OnInit {
   title: string = '';
   description: string = '';
   price:number;
+  date:Date;
 
   constructor(private postService:PostsService,
               private route: ActivatedRoute) { }
@@ -20,7 +21,8 @@ export class SinglePostViewComponent implements OnInit {
     this.title = this.postService.getPostById(+id).title
     this.description = this.postService.getPostById(+id).description;
     this.price = this.postService.getPostById(+id).price;
-
+    this.date= this.postService.getPostById(+id).date;
+    
   }
 
 }
