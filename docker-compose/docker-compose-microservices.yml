@@ -1,6 +1,33 @@
 version: "3.5"
 
 services:
+  #Elasticsearch service provides a distributed and scalable search service 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.7.1
+    container_name: elasticsearch
+    hostname: elasticsearch    
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    healthcheck:
+      test: ["CMD", "curl", "-X", "GET", "http://localhost:9200"]
+      interval: 30s
+      timeout: 15s
+      retries: 15        
+#    volumes:
+#      - esdata1:/usr/share/elasticsearch/data      
+    ports:
+      - 9200:9200
+      - 9300:9300      
+    networks:
+      - backend-network 
 
   #Zookeeper service provides distributed configuration management to Kafka
   zookeeper:
@@ -51,6 +78,31 @@ services:
       - backend-network    
     ports:
       - "10080:8080"
+    environment:
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
+    depends_on:
+      - kafka
+
+  #Search service
+  search-service:
+    container_name: search-service    
+    image: unige/search-service:latest
+    hostname: search-service
+    networks:
+      - backend-network    
+    ports:
+      - "11080:8080"
+    environment:
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"      
+    depends_on:
+       - kafka
+       - elasticsearch
+
+#volumes:
+#  esdata1:
+#    driver: local
 
 networks:
   backend-network:
