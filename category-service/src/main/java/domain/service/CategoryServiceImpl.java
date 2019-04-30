@@ -27,6 +27,9 @@ public class CategoryServiceImpl implements CategoryService {
 		if (em.contains(category)) {
 			throw new IllegalArgumentException("Category already exists");
 		}
+//		if ( (category.getParent() != null) && !(em.contains(category.getParent())) ) {
+//			throw new IllegalArgumentException("Need to create the parent category " + category.getParent() + " first");
+//		}
 		em.persist(category);
 	}
 	
