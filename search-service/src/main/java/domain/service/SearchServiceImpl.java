@@ -95,6 +95,11 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Override 
 	public <T extends Searchable> List<T> match(String query, Class<T> type) {
+		// Sanity check
+		if (query.isEmpty()) {
+			return new ArrayList<>();
+		}
+		
 		SearchRequest searchRequest = new SearchRequest(); 
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		
