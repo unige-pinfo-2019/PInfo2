@@ -21,11 +21,15 @@ public class AdServiceImpl implements AdService {
 	private EntityManager em;
 
 	@Override
-	public void create(Ad ad) {
+	public Long create(Ad ad) {
 		if (em.contains(ad)) {
 			throw new IllegalArgumentException("Ad already exists");
 		}
 		em.persist(ad);
+		// Sync the transaction to get the newly generated id
+		em.flush();
+		
+		return ad.getId();
 	}
 
 	@Override
