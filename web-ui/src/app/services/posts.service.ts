@@ -1,10 +1,11 @@
 import {Subject} from 'rxjs';
 import {Injectable} from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient ,HttpParams} from '@angular/common/http';
 
 /*Class regrouping all the services needed for posts*/
 @Injectable()
 export class PostsService{
+
 
  postsSubject = new Subject<any[]>();
    lastUpdate = new Date().toLocaleString();
@@ -73,16 +74,18 @@ console.log('Category= '+ this.posts[i].category);
 }
 addPost(title:string, description:string,price:number){
   const postObject = {
-    id:0,
+    //id:0,
     title: 'MonPost',
     description:'blablablalbalbalba',
-    date:this.lastUpdate.toString(),
+    
     price: 50,
-    category:'Livre',
+    date:Date
+   // category:'Livre',
   };
   postObject.title= title;
   postObject.description=description;
-  //postObject.price=price;
+  postObject.price=price;
+  postObject.date=new Date();
 
   this.posts.push(postObject);
   this.printPosts();
@@ -91,7 +94,7 @@ addPost(title:string, description:string,price:number){
 
   console.log('Enregistrement en cours... ');
   this.httpClient
-  .post('http://localhost:8080/ad/',
+  .post('http://localhost:10080/ad/',
   postObject,this.httpOptions).subscribe(
   ()=>{
     console.log('Enregistrement terminé ! ');
@@ -103,13 +106,11 @@ addPost(title:string, description:string,price:number){
 );
   }
 
-
-
   getPosts(){
     console.log('chargement en cours... ');
 
     this.httpClient
-    .get<any[]>('http://localhost:8080/ad')
+    .get<any[]>('http://localhost:10080/ad')
     .subscribe(
       (response) => {
         this.posts = response;
@@ -124,11 +125,26 @@ addPost(title:string, description:string,price:number){
     )
     this.printPosts();
   }
+  searchPost(searchTerm:string) {
+   // console.log("searching on server for : " +searchTerm);
+    this.httpClient.get('http://localhost:11080/search/ad?q='+searchTerm).
+    subscribe(
+      (response)=>{
+        //console.log("this is the response"+response);
+        this.posts = response;
+        this.emitPostSubject();
+      },
+      (error)=>{
+        console.log('Erreur!:'+ error);
+      }
+      
+    )
+  }
   deletePosts(id:number){
 
     console.log('deleting all post of id: '+ id);
     this.httpClient
-    .delete('http://localhost:8080/ad/'+id,this.httpOptions)
+    .delete('http://localhost:10080/ad/'+id,this.httpOptions)
     .subscribe(
       () => {
         console.log('Tout a été supprimé')!

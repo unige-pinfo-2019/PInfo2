@@ -1,4 +1,22 @@
 
+
+<div class="searchContainer">
+    <div class="col-md-3">
+      <form class="navbar-form" role="search" 
+      >
+        <div class="input-group add-on">
+          <input type="search" (onsearch)="onSearch()"
+           class="form-control" placeholder="Rechercher un article"
+            name="srch-term" id="srch-term" >
+          <div class="input-group-btn">
+            <button class="btn btn-default" (click)="onSearch()"><i class="glyphicon glyphicon-search"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+              
+
 <div class="container">
   <div class="row">
     <div class="col-xs-12">

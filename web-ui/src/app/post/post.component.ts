@@ -24,7 +24,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     //this.postService.getPosts();
-    console.log("cat: "+ this.category);
+    console.log("category: "+ this.category);
   }
 
 

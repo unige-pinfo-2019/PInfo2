@@ -35,10 +35,10 @@ public class AdProducer {
 	}
 
 	public void send(Long adId, String topic) {
-		log.info("Send the state of an ad to the topic " + topic + " with id " + adId);
 		Ad ad = adService.get(adId);
 		if (ad != null) {
 			this.send(ad, topic);
+			log.info("Send the state of an ad to the topic " + topic + " with id " + adId);
 		}
 	}
 

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 //import { Http } from '@angular/http';
 import { PostsService } from '../services/posts.service';
 import { Subscription } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 //import {Http} from '@angular/http';
 @Component({
 selector: 'app-post-view',
@@ -13,6 +14,8 @@ export class PostViewComponent implements OnInit {
 
   posts: any[];
   postSubscription: Subscription;
+  searchValue;
+
   //index:number;
 //  id: number;
 httpOptions = {
@@ -25,6 +28,8 @@ httpOptions = {
 
 
 
+
+
   constructor(private httpClient: HttpClient,
     private postsService: PostsService,
     ){
@@ -33,7 +38,7 @@ httpOptions = {
     }
 
     addToServer(){
-      this.postsService.addPost("Mon post","voici ma description",40);
+      this.postsService.addPost("Mon post","voici ma description de mon post",40);
 
 
 
@@ -44,6 +49,10 @@ httpOptions = {
     deleteFromServer(){
       //this.postsService.deletePosts();
     }
+    onSearch(){
+      this.searchValue= document.getElementById("srch-term");
+      this.postsService.searchPost( this.searchValue.value.toString());
+    }
 
 
 
@@ -52,11 +61,11 @@ httpOptions = {
       this.postSubscription= this.postsService.postsSubject.subscribe(
         (posts: any[]) => {
           this.posts= posts;
-          console.log(this.posts);
+          //console.log(this.posts);
         }
       );
       this.postsService.emitPostSubject();
-      this.addToServer();
+     // this.addToServer();
 
     }
 
