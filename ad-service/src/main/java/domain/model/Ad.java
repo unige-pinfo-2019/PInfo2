@@ -1,6 +1,8 @@
 package domain.model;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -37,16 +39,14 @@ public class Ad implements Serializable {
 	
 	@Column(name="DATE")
 	@NotNull
-	private Date date;
+	private String date;
 	
-	// private ArrayList<BufferedImage> photos
-
-	@Override
-	public String toString() {
-		String str = "";
-		str += id;
-		str += ':' + title;
-		str += '\n' + description;
-		return str;
+	// Specific setter for date to have a pretty JSON string date format
+	public void setDate(Date date) {
+		String pattern = "dd/MM/yyyy HH:mm";
+		DateFormat df = new SimpleDateFormat(pattern);
+		
+		this.date = df.format(date);
 	}
+
 }

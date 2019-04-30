@@ -1,5 +1,6 @@
 package domain.service;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -22,6 +23,9 @@ public class AdServiceImpl implements AdService {
 
 	@Override
 	public Long create(Ad ad) {
+		// Set today date
+		ad.setDate(Calendar.getInstance().getTime());
+		
 		if (em.contains(ad)) {
 			throw new IllegalArgumentException("Ad already exists");
 		}
