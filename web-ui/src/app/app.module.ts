@@ -33,7 +33,7 @@ const appRoutes: Routes = [
   {path: 'new-post', component: NewPostComponent },
   {path: 'conexion', component: ConnexionComponent },
   {path: 'new-user', component: NewUserComponent },
-  {path: 'user-profile', component: UserProfileComponent },
+  {path: 'user-profile',canActivate:[AuthGuard], component: UserProfileComponent },
   {path: '', redirectTo: 'posts',pathMatch:'full'},
   {path: 'not-found', component:FourOhFourComponent},
   {path: '**', redirectTo: 'not-found'}
