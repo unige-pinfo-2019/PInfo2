@@ -31,12 +31,12 @@ public class CategoryServiceTest {
 	@InjectMocks
 	private CategoryServiceImpl categoryServiceImpl;
 
-//	@Test
-//	public void testGetAll() {
-//		int size = initDataStore();
-//		assertEquals(size, categoryServiceImpl.getAll().size());
-//}
-//	
+	@Test
+	public void testGetAll() {
+		int size = initDataStore();
+		assertEquals(size, categoryServiceImpl.getAll().size());
+}
+	
 	@Test
 	public void testCreate() {
 		Category category = getRandomCategory();
@@ -58,6 +58,36 @@ public class CategoryServiceTest {
 		
 		assertTrue(i == null);
 }
+	
+	@Test
+	public void testGetSubGategories() {
+		
+		Category categoryParent = new Category();
+		categoryParent.setName("livres");
+		Category category1 = new Category();
+		Category category2 = new Category();
+		Category category3 = new Category();
+		category1.setName("histoire");
+		category2.setName("informatique");
+		category3.setName("chimie");
+		category1.setParent(categoryParent);
+		category2.setParent(categoryParent);
+		category3.setParent(categoryParent);
+		
+		List<Category> categories = getCategories();
+		categories.add(categoryParent);
+		categories.add(category1);
+		categories.add(category2);
+		categories.add(category3);
+		
+		for (Category category : categories) {
+			categoryServiceImpl.create(category);
+		}
+		
+		int size = categoryServiceImpl.getSubCategories(categoryParent).size();
+		
+		assertEquals(size, 3);
+	}
 	
 	
 	
