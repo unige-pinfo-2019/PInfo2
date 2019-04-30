@@ -1,0 +1,31 @@
+
+
+
+
+
+
+
+<a [routerLink]="[id]">
+<li [ngClass]="{'list-group-item': true}">
+
+         <div class="row">
+           <div class="column" >
+
+             <img src="assets/nopicture.png">
+           </div>
+           <div class="column" >
+             <h3>{{ title }}</h3>
+            <h4>{{ description }}</h4>
+            <h5>{{category}}</h5>
+           </div>
+           <div class="column" >
+             <h2 class="priceValue">{{ price }}.- </h2>
+           </div>
+         </div>
+         <div class="row" ><p id="cat">{{ category }}</p></div>
+         <p>En ligne depuis: {{date}}</p>
+           </li>
+    </a>
+ 
+<!--  <button  class="btn btn-danger" align="right"
+           (click)="onDelete()"> Delete Post </button>-->

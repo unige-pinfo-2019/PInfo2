@@ -40,7 +40,6 @@ public class Ad implements Serializable {
 	private Date date;
 	
 	// private ArrayList<BufferedImage> photos
-	
 
 	@Override
 	public String toString() {

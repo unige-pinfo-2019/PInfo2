@@ -1,0 +1,54 @@
+<div class="container">
+<ul class="list-group">
+  <li class="list-group-item">
+      <img src="assets/nopicture.png" alt="Profile Picture"
+       
+        align="left" >
+        <button class="btn btn-success">Changer photo</button>
+        <p>Nom:</p>
+        <p>Prénom:</p>
+        <p>Date de naissance:</p>
+        <p>Utilisateur depuis:</p>
+
+  </li>
+
+  <li class="list-group-item">
+    
+    <h3>Mes Postes</h3>
+    
+    <ul class="list-group">
+        <app-post *ngFor="let aPost of posts"
+                      [id]="aPost.id"
+                      [title]="aPost.title"
+                      [description]="aPost.description"
+                      [price]="aPost.price"
+                      [date]="aPost.date"
+                      [category]="aPost.category"
+
+
+        >
+      </app-post>
+    </ul>
+
+
+
+
+  </li>
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+</div>  

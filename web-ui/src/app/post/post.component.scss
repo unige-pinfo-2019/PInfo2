@@ -1,0 +1,59 @@
+a{
+  color:black;
+
+}
+a:hover{
+  color: #31771d;
+  text-shadow: #00AA00 1px 0 250px;
+}
+
+
+img{
+  height: auto; 
+    width: auto; 
+    max-width: 100px; 
+    max-height: 100px;
+    margin-left:30px;
+}
+
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  
+
+  //text-align: center;
+   /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.priceValue{
+  display:inline-block;
+  //padding-right: 10px;
+  //float:right;
+  //padding-top: 30%;
+//  background-color: red;
+}
+#cat{
+  
+  border-radius: 10px;
+  padding: 5px;
+  margin-top:5%;
+  margin-left: 10px;
+  background: #69DB69;
+}
+li{
+  box-shadow: 2px 3px 3px #666666;
+ border-radius: 2px; 
+ margin:30px;
+ width:500px;
+ margin-left:50px;
+ max-height: 300px;
+ 
+}

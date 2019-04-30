@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthGuard } from '../services/auth-guard.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 export class MenuComponent implements OnInit {
 
   appTitle: string = 'Agility';
-  constructor() { }
+  
+  constructor(private authService:AuthService) { }
 
   ngOnInit() {
+    if(this.authService.isAuth){
+      console.log("we're logged in!");
+      var connexionButton= document.getElementById("connexionButton");
+      connexionButton.style.color="black";
+    }
   }
 
 }

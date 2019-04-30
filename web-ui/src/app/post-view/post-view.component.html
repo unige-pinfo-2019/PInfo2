@@ -1,0 +1,50 @@
+
+
+<div class="searchContainer">
+    <div class="col-md-3">
+      <form class="navbar-form" role="search" 
+      >
+        <div class="input-group add-on">
+          <input type="search" (onsearch)="onSearch()"
+           class="form-control" placeholder="Rechercher un article"
+            name="srch-term" id="srch-term" >
+          <div class="input-group-btn">
+            <button class="btn btn-default" (click)="onSearch()"><i class="glyphicon glyphicon-search"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+</div>
+              
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+
+
+      <app-category-menu></app-category-menu>
+      <ul class="list-group">
+        <app-post *ngFor="let aPost of posts"
+                      [id]="aPost.id"
+                      [title]="aPost.title"
+                      [description]="aPost.description"
+                      [price]="aPost.price"
+                      [date]="aPost.date"
+                      [category]="aPost.category"
+
+
+        >
+      </app-post>
+
+      </ul>
+<!-- Button de tests
+      <button class= "btn btn-primary"
+              (click)="addToServer()"> Add exemple </button>
+      <button class= "btn btn-success"
+              (click)="getFromServer()"> Récupérer les posts </button>
+      <button class= "btn btn-danger"
+              (click)="deleteFromServer()"> Delete tous les posts </button>
+              -->
+    </div>
+  </div>
+</div>

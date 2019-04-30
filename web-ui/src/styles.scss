@@ -1,14 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
-body, html {
-  height: 100%;
-  margin: 0 auto;
-}
 
-body {
-  font-family: 'Montserrat';
-  font-size: 18px;
-}
 
 a {
   text-decoration: none;
@@ -20,10 +12,10 @@ a {
   padding: 0.5em;
   //padding: 1.3em;
   display: grid;
-  grid-template-columns: 30% auto;
+  grid-template-columns: 10% auto;
 
   a {
-    color: white;
+    color: rgb(156, 53, 53);
   }
 }
 

@@ -12,6 +12,7 @@
 
     <properties>
 	    <version.thorntail>2.4.0.Final</version.thorntail>
+	    <version.h2>1.4.197</version.h2>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -31,53 +32,100 @@
 		<module>search-service</module>
     	<module>api-gateway</module>
     </modules>
-
-    <dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>io.thorntail</groupId>
-            <artifactId>bom-all</artifactId>
-            <version>${version.thorntail}</version>
-            <scope>import</scope>
-            <type>pom</type>
-        </dependency>
-    </dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>io.thorntail</groupId>
-            <artifactId>jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.thorntail</groupId>
-            <artifactId>jaxrs</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.thorntail</groupId>
-            <artifactId>cdi</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.thorntail</groupId>
-            <artifactId>datasources</artifactId>
-        </dependency>
-        <dependency>
-      		<groupId>org.hibernate.javax.persistence</groupId>
-      		<artifactId>hibernate-jpa-2.1-api</artifactId>
-      		<version>1.0.0.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.spec.javax.ws.rs</groupId>
-			<artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
-			<version>1.0.1.Final</version>
-		</dependency>
-		<dependency>
-		    <groupId>com.h2database</groupId>
-		    <artifactId>h2</artifactId>
-		    <version>1.4.187</version>
-    	</dependency>
-    </dependencies>
     
+    <dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.thorntail</groupId>
+				<artifactId>bom</artifactId>
+				<version>${version.thorntail}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>com.github.dadrus.jpa-unit</groupId>
+				<artifactId>jpa-unit-bom</artifactId>
+				<version>0.5.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.4</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.enterprise</groupId>
+				<artifactId>cdi-api</artifactId>
+				<version>1.2</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.spec.javax.ws.rs</groupId>
+				<artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+				<version>1.0.0.Final</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${version.h2}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aerogear.kafka</groupId>
+				<artifactId>kafka-cdi-extension</artifactId>
+				<version>0.1.0</version>
+			</dependency>
+			<dependency>
+				<groupId>io.thorntail</groupId>
+				<artifactId>swagger</artifactId>
+				<version>2.2.1.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>5.3.2</version>
+				<scope>test</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>5.3.2</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>5.3.2</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-launcher</artifactId>
+				<version>1.3.2</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>2.23.4</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-junit-jupiter</artifactId>
+				<version>2.23.4</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>2.3.1</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
     
 	<build>
     <pluginManagement>
@@ -92,6 +140,11 @@
 							<target>${maven.compiler.target}</target>
 						</configuration>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.0.0-M3</version>
 				</plugin>
 				<plugin>
 					<groupId>io.thorntail</groupId>
