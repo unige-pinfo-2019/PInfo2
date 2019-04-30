@@ -1,5 +1,6 @@
 package api;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -12,6 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import domain.model.Category;
 import domain.service.CategoryService;
@@ -41,12 +43,14 @@ public class CategoryRestService {
 	@POST
 	@Consumes("application/json")
 	public Response create(Category category) {
+		Long newId = null;
 		try {
-			categoryService.create(category);
+			newId = categoryService.create(category);
 		} catch(IllegalArgumentException i) {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
-		return Response.ok().build();
+		
+		return Response.status(Status.CREATED).location(URI.create("/" + newId.toString())).build();
 	}
 	
 	

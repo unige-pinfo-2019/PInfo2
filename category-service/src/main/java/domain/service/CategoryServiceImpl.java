@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
@@ -23,14 +22,15 @@ public class CategoryServiceImpl implements CategoryService {
 	private EntityManager em;
 	
 	@Override
-	public void create(Category category) {
+	public Long create(Category category) {
 		if (em.contains(category)) {
 			throw new IllegalArgumentException("Category already exists");
 		}
-//		if ( (category.getParent() != null) && !(em.contains(category.getParent())) ) {
-//			throw new IllegalArgumentException("Need to create the parent category " + category.getParent() + " first");
-//		}
 		em.persist(category);
+		// Sync the transaction to get the newly generated id
+		em.flush();
+		
+		return category.getId();
 	}
 	
 	@Override

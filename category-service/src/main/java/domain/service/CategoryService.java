@@ -6,7 +6,7 @@ import domain.model.Category;
 
 public interface CategoryService {
 	
-	public void create(Category category);
+	public Long create(Category category);
 
 	public void delete(Category category);
 
