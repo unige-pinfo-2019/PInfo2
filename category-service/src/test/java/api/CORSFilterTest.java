@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import api.CORSFilter;
+import api.rest.CORSFilter;
 
 @ExtendWith(MockitoExtension.class)
 class CORSFilterTest {

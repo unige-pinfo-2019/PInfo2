@@ -1,6 +1,7 @@
 package domain.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,7 @@ import lombok.Data;
 @Entity
 @Table(name="CATEGORIES")
 @Data
-public class Category implements Serializable{
+public class Category implements Serializable {
 
 	private static final long serialVersionUID = -8677180318520117547L;
 

@@ -41,6 +41,10 @@ public class Ad implements Serializable {
 	@NotNull
 	private String date;
 	
+	@Column(name="CATEGORY_ID")
+	@NotNull
+	private Long categoryId;
+	
 	// Specific setter for date to have a pretty JSON string date format
 	public void setDate(Date date) {
 		String pattern = "dd/MM/yyyy HH:mm";

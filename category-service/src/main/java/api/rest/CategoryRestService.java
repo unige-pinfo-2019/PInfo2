@@ -1,4 +1,4 @@
-package api;
+package api.rest;
 
 import java.net.URI;
 import java.util.List;

@@ -15,9 +15,11 @@ public class Ad extends Searchable {
 	
 	private String description;
 	
+	private double price;
+	
 	private String date;
 	
-	private double price;
+	private Long categoryId;
 	
 	private String index = "ads";
 	
