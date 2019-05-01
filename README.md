@@ -17,7 +17,7 @@
 mvn clean install
 mvn install -Ppackage-docker-image
 cd docker-compose/
-docker-compose -f docker-compose-micoservices.yml up
+docker-compose -f docker-compose-microservices.yml up
 ```
 
 To avoid docker images compilation time, each microservice can be run independently 
