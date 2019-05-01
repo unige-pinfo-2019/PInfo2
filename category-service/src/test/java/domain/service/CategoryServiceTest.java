@@ -1,11 +1,10 @@
 package domain.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
@@ -16,9 +15,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import eu.drus.jpa.unit.api.JpaUnit;
 
 import domain.model.Category;
+import eu.drus.jpa.unit.api.JpaUnit;
 
 @ExtendWith(JpaUnit.class)
 @ExtendWith(MockitoExtension.class)
@@ -70,9 +69,9 @@ public class CategoryServiceTest {
 		category1.setName("histoire");
 		category2.setName("informatique");
 		category3.setName("chimie");
-		category1.setParent(categoryParent);
-		category2.setParent(categoryParent);
-		category3.setParent(categoryParent);
+		category1.setParentId(categoryParent.getId());
+		category2.setParentId(categoryParent.getId());
+		category3.setParentId(categoryParent.getId());
 		
 		List<Category> categories = getCategories();
 		categories.add(categoryParent);

@@ -1,7 +1,6 @@
 package domain.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +29,6 @@ public class Category implements Serializable {
 	private String name;
 	
 	@Column(name="PARENT")
-	private Category parent;
+	private Long parentId;
 	
 }

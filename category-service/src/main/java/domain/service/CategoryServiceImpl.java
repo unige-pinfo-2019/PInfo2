@@ -25,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public Long create(Category category) {
 		if (em.contains(category)) {
 			throw new IllegalArgumentException("Category already exists");
-		}
+		} 
 		em.persist(category);
 		// Sync the transaction to get the newly generated id
 		em.flush();
@@ -51,7 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Category> q = cb.createQuery(Category.class);
 		Root<Category> c = q.from(Category.class);
-		return em.createQuery(q.select(c).where(cb.equal(c.get("parent"), category))).getResultList();
+		return em.createQuery(q.select(c).where(cb.equal(c.get("parentId"), category.getId()))).getResultList();
 	}
 	
 	@Override
