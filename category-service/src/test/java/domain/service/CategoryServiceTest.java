@@ -69,12 +69,13 @@ public class CategoryServiceTest {
 		category1.setName("histoire");
 		category2.setName("informatique");
 		category3.setName("chimie");
-		category1.setParentId(categoryParent.getId());
-		category2.setParentId(categoryParent.getId());
-		category3.setParentId(categoryParent.getId());
+		
+		Long parentId = categoryServiceImpl.create(categoryParent);
+		category1.setParentId(parentId);
+		category2.setParentId(parentId);
+		category3.setParentId(parentId);
 		
 		List<Category> categories = getCategories();
-		categories.add(categoryParent);
 		categories.add(category1);
 		categories.add(category2);
 		categories.add(category3);
@@ -85,7 +86,7 @@ public class CategoryServiceTest {
 		
 		int size = categoryServiceImpl.getSubCategories(categoryParent).size();
 		
-		assertEquals(size, 3);
+		assertEquals(3, size);
 	}
 	
 	
