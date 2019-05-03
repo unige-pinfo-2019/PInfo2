@@ -14,6 +14,6 @@ public interface UserService {
 	
 	public User get(Long userId);
 	
-	//public List<Ad>	getAd();
+	public List<User> getAll();
 	
 }

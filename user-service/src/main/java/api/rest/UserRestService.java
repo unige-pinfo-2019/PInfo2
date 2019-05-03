@@ -1,5 +1,7 @@
 package api.rest;
 
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -33,7 +35,7 @@ public class UserRestService {
 		} catch (IllegalArgumentException e) {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
-		userProducer.send(user, "userCreate");
+		userProducer.send(user, "usersCreate");
 		return Response.ok().build();
 	}
 	
@@ -58,6 +60,12 @@ public class UserRestService {
 	@Produces("application/json")
 	public User get(@PathParam("id") Long userId) {
 		return userService.get(userId);
+	}
+	
+	@GET
+	@Produces("application/json")
+	public List<User> getAll(){
+		return userService.getAll();
 	}
 	
 	

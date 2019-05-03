@@ -41,16 +41,7 @@ public class User implements Serializable {
 	@Max(5)
 	private int rating;
 	
-	@Override
-	public String toString() {
-		String str = "";
-		str += id;
-		str += ':' + username;
-		str += '\n' + description;
-		return str;
-	}
-	
-	//TODO:link ads and user
+
 	
 	
 	
