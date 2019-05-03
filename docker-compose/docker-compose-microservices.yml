@@ -115,6 +115,21 @@ services:
     depends_on:
        - kafka
 
+  #Image service
+  image-service:
+    container_name: image-service    
+    image: unige/image-service:latest
+    hostname: image-service
+    networks:
+      - backend-network    
+    ports:
+      - "13080:8080"
+    environment:
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"      
+    depends_on:
+       - kafka
+
 #volumes:
 #  esdata1:
 #    driver: local
