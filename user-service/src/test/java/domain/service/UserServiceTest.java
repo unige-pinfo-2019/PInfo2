@@ -27,7 +27,7 @@ public class UserServiceTest {
 	@Spy
 	@PersistenceContext(unitName = "UserPUTest")
 	EntityManager em;
-	
+
 	@InjectMocks
 	private UserServiceImpl userServiceImpl;
 
@@ -36,7 +36,7 @@ public class UserServiceTest {
 		int size = initDataStore();
 		assertEquals(size, userServiceImpl.getAll().size());
 	}
-	
+
 	@Test
 	public void testGet() {
 		initDataStore();
@@ -45,18 +45,18 @@ public class UserServiceTest {
 			initDataStore();
 		Long id = users.get(0).getId();
 		User user = userServiceImpl.get(id);
-		
+
 		assertEquals(users.get(0).getId(), user.getId());
 		assertEquals(users.get(0).getUsername(), user.getUsername());
 	}
-	
+
 	@Test
 	public void testCreate() {
 		User user = getRandomUser();
 		userServiceImpl.create(user);
-		
+
 		User i = em.find(User.class, user.getId());
-		
+
 		assertTrue(user.equals(i));
 		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
 				() -> userServiceImpl.create(user),
@@ -64,43 +64,34 @@ public class UserServiceTest {
 
 		    assertTrue(thrown.getMessage().contains("user already exists"));
 	}
-	
+
 	@Test
 	public void testDelete() {
-		
+
 		User user = getRandomUser();
 		userServiceImpl.create(user);
 		userServiceImpl.delete(user);
-		
+
 		User i = em.find(User.class, user.getId());
-		
+
 		assertTrue(i == null);
 	}
-	
+
 	@Test
 	public void testUpdate() {
-		
+
 		User user1 = getRandomUser();
 		userServiceImpl.create(user1);
 		User user2 = getRandomUser();
 		user2.setId(user1.getId());
-		
-		//User userNull = null;
-		//User u = em.find(User.class, userNull.getId());
-		
+
 		userServiceImpl.update(user2);
-		
+
 		User i = em.find(User.class, user1.getId());
 		assertTrue(user2.equals(i));
-		
-//		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
-//				() -> userServiceImpl.update(userNull),
-//				"User does not exist : ");
-//
-//		    assertTrue(thrown.getMessage().contains("User does not exist : "));
 	}
-	
-	
+
+
 	private List<User> getUsers() {
 
 		List<User> users = new ArrayList<>();
@@ -110,21 +101,21 @@ public class UserServiceTest {
 		}
 		return users;
 	}
-	
+
 	private int initDataStore() {
 		int size = userServiceImpl.getAll().size();
-		List<User> users = getUsers();	
+		List<User> users = getUsers();
 		for (User user : users) {
 			userServiceImpl.create(user);
 		}
 		return size + users.size();
 	}
-	
+
 	private User getRandomUser() {
 		User user = new User();
 		user.setUsername(UUID.randomUUID().toString());
 		user.setDescription(UUID.randomUUID().toString());
-		
+
 		Random r = new Random();
 		user.setRating(r.nextInt(6));
 
