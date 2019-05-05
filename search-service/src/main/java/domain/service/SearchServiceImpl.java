@@ -55,7 +55,7 @@ public class SearchServiceImpl implements SearchService {
 		try {
 			client.index(request, RequestOptions.DEFAULT);
 		} catch (IOException e) {
-			log.throwing("SearchServiceImpl", "createItem", e);
+			log.throwing(this.getClass().getName(), "createItem", e);
 		}
 		
 		log.info("Item created : " + item);
@@ -72,7 +72,7 @@ public class SearchServiceImpl implements SearchService {
 		try {
 			client.delete(deleteRequest, RequestOptions.DEFAULT);
 		} catch (IOException e) {
-			log.throwing("SearchServiceImpl", "deleteItem", e);
+			log.throwing(this.getClass().getName(), "deleteItem", e);
 		}
 		
 		log.info("Item deleted : " + item);
@@ -91,7 +91,7 @@ public class SearchServiceImpl implements SearchService {
 		try {
 			client.update(updateRequest, RequestOptions.DEFAULT);
 		} catch (IOException e) {
-			log.throwing("SearchServiceImpl", "updateItem", e);
+			log.throwing(this.getClass().getName(), "updateItem", e);
 		}
 		
 		log.info("Item updated : " + item);
@@ -123,7 +123,7 @@ public class SearchServiceImpl implements SearchService {
 			SearchHits hits = searchResponse.getHits();
 			searchHits = hits.getHits();
 		} catch (IOException e) {
-			log.throwing("SearchServiceImpl", "match", e);
+			log.throwing(this.getClass().getName(), "match", e);
 		}
 
 		Gson gson = new Gson();
@@ -171,7 +171,7 @@ public class SearchServiceImpl implements SearchService {
             log.info("Closing the ES REST client");
             this.client.close();
         } catch (IOException e) {
-            log.throwing("SearchServiceImpl", "cleanup", e);
+            log.throwing(this.getClass().getName(), "cleanup", e);
         }
     }
 	
