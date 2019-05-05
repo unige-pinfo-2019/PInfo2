@@ -22,10 +22,12 @@ matrix:
         - docker login -u "$DOCKER_ID_USER" -p "$DOCKER_PASSWORD"
         - docker tag unige/ad-service $DOCKER_ID_USER/ad-service
         - docker tag unige/search-service $DOCKER_ID_USER/search-service
-        - docker tag unige/search-service $DOCKER_ID_USER/category-service
+        - docker tag unige/category-service $DOCKER_ID_USER/category-service
+	- docker tag unige/user-service $DOCKER_ID_USER/user-service
         - docker push $DOCKER_ID_USER/ad-service
         - docker push $DOCKER_ID_USER/search-service
         - docker push $DOCKER_ID_USER/category-service
+	- docker push $DOCKER_ID_USER/user-service
 
 
 
