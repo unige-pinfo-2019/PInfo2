@@ -23,9 +23,13 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.ScoreSortBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 
 import com.google.gson.Gson;
 
+import domain.model.Ad;
 import domain.model.Searchable;
 import lombok.extern.java.Log;
 
@@ -100,27 +104,29 @@ public class SearchServiceImpl implements SearchService {
 			return new ArrayList<>();
 		}
 		
-		SearchRequest searchRequest = new SearchRequest(); 
+		SearchRequest searchRequest = new SearchRequest();
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		
-		QueryBuilder matchQueryBuilder = QueryBuilders.queryStringQuery("*" + query.toLowerCase() + "*");
+		if (type.isInstance(new Ad())) {
+			searchSourceBuilder = adQueryBuilder(query);
+		} else {
+			searchSourceBuilder = defaultQueryBuilder(query);
+		}
 		
-		log.info("Query created : " + matchQueryBuilder.toString());
-		
-		searchSourceBuilder.query(matchQueryBuilder);
+		log.info("Query created : " + searchSourceBuilder.toString());
 		searchRequest.source(searchSourceBuilder);
 		
-		SearchResponse searchResponse = null;
+		SearchHit[] searchHits = {};
 		
 		try {
-			searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+			SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+			SearchHits hits = searchResponse.getHits();
+			searchHits = hits.getHits();
 		} catch (IOException e) {
 			log.throwing("SearchServiceImpl", "match", e);
 		}
 
 		Gson gson = new Gson();
-		SearchHits hits = searchResponse.getHits();
-		SearchHit[] searchHits = hits.getHits();
 		List<T> matchedList = new ArrayList<>();
 		for (SearchHit hit : searchHits) {
 			T item = gson.fromJson(hit.getSourceAsString(), type);
@@ -130,6 +136,33 @@ public class SearchServiceImpl implements SearchService {
 		log.info("Matched " + matchedList.size() + " items with query \'" + query + "\'.");
 		
 		return matchedList;
+	}
+	
+	public SearchSourceBuilder adQueryBuilder(String query) {
+		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+		
+		String wildcardsQuery = "*" + query.toLowerCase() + "*";
+		QueryBuilder matchQueryBuilder = QueryBuilders.boolQuery()
+										    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
+										    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+		
+		searchSourceBuilder.query(matchQueryBuilder);
+		searchSourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC)); 
+		searchSourceBuilder.sort(new FieldSortBuilder("_id").order(SortOrder.DESC));
+		
+		return searchSourceBuilder;	
+	}
+	
+	// Default query matches on all fields without an ordering policy
+	public SearchSourceBuilder defaultQueryBuilder(String query) {
+		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+		
+		String wildcardsQuery = "*" + query.toLowerCase() + "*";
+		QueryBuilder matchQueryBuilder = QueryBuilders.queryStringQuery(wildcardsQuery);
+		
+		searchSourceBuilder.query(matchQueryBuilder);
+
+		return searchSourceBuilder;		
 	}
 	
 	@PreDestroy
