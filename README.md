@@ -13,6 +13,9 @@
  - Adrien Razurel
  - Raphaël Lutz
  
+ ## Instructions
+ To run the microservices using Docker execute:
+ 
 ```
 mvn clean install
 mvn install -Ppackage-docker-image
