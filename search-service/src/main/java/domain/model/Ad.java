@@ -1,12 +1,12 @@
 package domain.model;
 
-import java.util.Date;
-
 import com.google.gson.Gson;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class Ad extends Searchable {
 	
 	private Long id;
@@ -15,9 +15,11 @@ public class Ad extends Searchable {
 	
 	private String description;
 	
-	private Date date;
-	
 	private double price;
+	
+	private String date;
+	
+	private Long categoryId;
 	
 	private String index = "ads";
 	

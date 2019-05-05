@@ -8,7 +8,7 @@ export class PostsService{
 
 
  postsSubject = new Subject<any[]>();
-   lastUpdate = new Date().toLocaleString();
+   //lastUpdate = new Date().toLocaleString();
 
 
 private posts=[];
@@ -77,15 +77,15 @@ addPost(title:string, description:string,price:number){
     //id:0,
     title: 'MonPost',
     description:'blablablalbalbalba',
-    
     price: 50,
-    date:Date
-   // category:'Livre',
-  };
+    categoryId:0,
+   // caegory:'Livre',
+  }
   postObject.title= title;
   postObject.description=description;
   postObject.price=price;
-  postObject.date=new Date();
+  //postObject.date=this.lastUpdate;
+  
 
   this.posts.push(postObject);
   this.printPosts();
@@ -93,6 +93,7 @@ addPost(title:string, description:string,price:number){
 
 
   console.log('Enregistrement en cours... ');
+  console.log(postObject);
   this.httpClient
   .post('http://localhost:10080/ad/',
   postObject,this.httpOptions).subscribe(
@@ -127,7 +128,7 @@ addPost(title:string, description:string,price:number){
   }
   searchPost(searchTerm:string) {
    // console.log("searching on server for : " +searchTerm);
-    this.httpClient.get('http://localhost:11080/search/ad?q='+searchTerm).
+    this.httpClient.get<any[]>('http://localhost:11080/search/ad?q='+searchTerm).
     subscribe(
       (response)=>{
         //console.log("this is the response"+response);

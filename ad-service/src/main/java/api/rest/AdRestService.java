@@ -1,5 +1,6 @@
 package api.rest;
 
+import java.net.URI;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -13,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import api.msg.AdProducer;
 import domain.model.Ad;
@@ -30,13 +32,15 @@ public class AdRestService {
 	@POST
 	@Consumes("application/json")
 	public Response create(Ad ad) {
+		Long newId = null;
 		try {
-			adService.create(ad);
+			newId = adService.create(ad);
 		} catch(IllegalArgumentException i) {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		}
 		adProducer.send(ad, "adsCreate");
-		return Response.ok().build();
+		
+		return Response.status(Status.CREATED).location(URI.create("/" + newId.toString())).build();
 	}
 	
 	@GET

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/unige-pinfo-2019/PInfo2.svg?branch=master)](https://travis-ci.org/unige-pinfo-2019/PInfo2)
+[![Build Status](https://travis-ci.org/unige-pinfo-2019/PInfo2.svg?branch=master)](https://travis-ci.org/unige-pinfo-2019/PInfo2) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=unige-pinfo-2019_PInfo2&metric=coverage)](https://sonarcloud.io/dashboard?id=unige-pinfo-2019_PInfo2) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=unige-pinfo-2019_PInfo2&metric=alert_status)](https://sonarcloud.io/dashboard?id=unige-pinfo-2019_PInfo2)
 
 # Agility team
 
@@ -17,7 +17,7 @@
 mvn clean install
 mvn install -Ppackage-docker-image
 cd docker-compose/
-docker-compose -f docker-compose-micoservices.yml up
+docker-compose -f docker-compose-microservices.yml up
 ```
 
 To avoid docker images compilation time, each microservice can be run independently 

@@ -25,6 +25,7 @@ import { CategoryService } from './services/category.service';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+import * as $ from "jquery";
 
 const appRoutes: Routes = [
 
@@ -33,7 +34,7 @@ const appRoutes: Routes = [
   {path: 'new-post', component: NewPostComponent },
   {path: 'conexion', component: ConnexionComponent },
   {path: 'new-user', component: NewUserComponent },
-  {path: 'user-profile', component: UserProfileComponent },
+  {path: 'user-profile',canActivate:[AuthGuard], component: UserProfileComponent },
   {path: '', redirectTo: 'posts',pathMatch:'full'},
   {path: 'not-found', component:FourOhFourComponent},
   {path: '**', redirectTo: 'not-found'}

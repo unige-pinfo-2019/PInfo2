@@ -1,5 +1,6 @@
 package domain.service;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -21,11 +22,18 @@ public class AdServiceImpl implements AdService {
 	private EntityManager em;
 
 	@Override
-	public void create(Ad ad) {
+	public Long create(Ad ad) {
+		// Set today date
+		ad.setDate(Calendar.getInstance().getTime());
+		
 		if (em.contains(ad)) {
 			throw new IllegalArgumentException("Ad already exists");
 		}
 		em.persist(ad);
+		// Sync the transaction to get the newly generated id
+		em.flush();
+		
+		return ad.getId();
 	}
 
 	@Override

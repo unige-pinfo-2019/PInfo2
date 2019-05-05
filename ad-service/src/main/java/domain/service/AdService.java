@@ -6,7 +6,7 @@ import domain.model.Ad;
 
 public interface AdService {
 
-	public void create(Ad ad);
+	public Long create(Ad ad);
 
 	public void delete(Ad ad);
 	

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-//import { Http } from '@angular/http';
+//require('/post-view.component.js');
+import {synapseThrow } from 'src/assets/post-view.component.js';
 import { PostsService } from '../services/posts.service';
 import { Subscription } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+
 //import {Http} from '@angular/http';
 @Component({
 selector: 'app-post-view',
@@ -16,24 +16,9 @@ export class PostViewComponent implements OnInit {
   postSubscription: Subscription;
   searchValue;
 
-  //index:number;
-//  id: number;
-httpOptions = {
-  headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-
-
-  }),
-};
-
-
-
-
-
-  constructor(private httpClient: HttpClient,
+  constructor(
     private postsService: PostsService,
     ){
-
 
     }
 
@@ -57,6 +42,7 @@ httpOptions = {
 
 
     ngOnInit() {
+      synapseThrow();
       //this.postsService.getPosts();
       this.postSubscription= this.postsService.postsSubject.subscribe(
         (posts: any[]) => {
@@ -70,3 +56,5 @@ httpOptions = {
     }
 
   }
+
+
