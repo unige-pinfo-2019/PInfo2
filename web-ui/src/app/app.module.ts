@@ -25,6 +25,7 @@ import { CategoryService } from './services/category.service';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+import * as $ from "jquery";
 
 const appRoutes: Routes = [
 
