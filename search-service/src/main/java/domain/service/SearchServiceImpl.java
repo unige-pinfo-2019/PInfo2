@@ -3,6 +3,7 @@ package domain.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
@@ -45,6 +46,7 @@ public class SearchServiceImpl implements SearchService {
 							 String searchHostname,
 							 @ConfigProperty(name = "ELASTICSEARCH_SERVICE_PORT", defaultValue = "9200")
 							 int searchPort) {
+		
 		this.client = new RestHighLevelClient(RestClient.builder(
 		        					new HttpHost(searchHostname, searchPort, "http")));
 	}
@@ -106,21 +108,15 @@ public class SearchServiceImpl implements SearchService {
 		log.info("Item updated : " + item);
 	}
 	
-	@Override 
-	public <T extends Searchable> List<T> match(String query, Class<T> type) {
-		// Sanity check
-		if (query.isEmpty()) {
-			return new ArrayList<>();
-		}
+	@Override
+	public List<Ad> matchAd(String query, Optional<Long> categoryId, Optional<Long> userId) {
+		return match(adQueryBuilder(query, categoryId, userId), Ad.class);
+	}
+	
+	
+	public <T extends Searchable> List<T> match(SearchSourceBuilder searchSourceBuilder, Class<T> type) {
 		
 		SearchRequest searchRequest = new SearchRequest();
-		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-		
-		if (type.isInstance(new Ad())) {
-			searchSourceBuilder = adQueryBuilder(query);
-		} else {
-			searchSourceBuilder = defaultQueryBuilder(query);
-		}
 		
 		log.info("Query created : " + searchSourceBuilder.toString());
 		searchRequest.source(searchSourceBuilder);
@@ -142,12 +138,10 @@ public class SearchServiceImpl implements SearchService {
 			matchedList.add(item);
 		}
 		
-		log.info("Matched " + matchedList.size() + " items with query \'" + query + "\'.");
-		
 		return matchedList;
 	}
 	
-	public SearchSourceBuilder adQueryBuilder(String query) {
+	public SearchSourceBuilder adQueryBuilder(String query, Optional<Long> categoryId, Optional<Long> userId) {
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		
 		String wildcardsQuery = "*" + query.toLowerCase() + "*";
@@ -155,23 +149,30 @@ public class SearchServiceImpl implements SearchService {
 										    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
 										    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
 		
+		// TODO : find a way to remove those ugly if blocks
+		if (categoryId.isPresent() && userId.isPresent()) {
+			matchQueryBuilder = QueryBuilders.boolQuery()
+			.must(QueryBuilders.termQuery("categoryId", categoryId.get()))
+			.must(QueryBuilders.termQuery("userId", userId.get()))
+		    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
+		    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+		} else if (categoryId.isPresent()) {
+			matchQueryBuilder = QueryBuilders.boolQuery()
+			.must(QueryBuilders.termQuery("categoryId", categoryId.get()))
+		    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
+		    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+		} else if (userId.isPresent()) {
+			matchQueryBuilder = QueryBuilders.boolQuery()
+			.must(QueryBuilders.termQuery("userId", userId.get()))
+		    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
+		    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+		}
+		
 		searchSourceBuilder.query(matchQueryBuilder);
 		searchSourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC)); 
 		searchSourceBuilder.sort(new FieldSortBuilder("_id").order(SortOrder.DESC));
 		
 		return searchSourceBuilder;	
-	}
-	
-	// Default query matches on all fields without an ordering policy
-	public SearchSourceBuilder defaultQueryBuilder(String query) {
-		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-		
-		String wildcardsQuery = "*" + query.toLowerCase() + "*";
-		QueryBuilder matchQueryBuilder = QueryBuilders.queryStringQuery(wildcardsQuery);
-		
-		searchSourceBuilder.query(matchQueryBuilder);
-
-		return searchSourceBuilder;		
 	}
 	
 	@PreDestroy

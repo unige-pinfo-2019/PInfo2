@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 
@@ -117,7 +118,7 @@ public class SearchServiceTest {
 		
 		try {
 			searchServiceImpl.createItem(ad);
-			searchServiceImpl.match(ad.getTitle(), Ad.class);
+			searchServiceImpl.matchAd(ad.getTitle(), Optional.of((long)1), Optional.of((long)1));
 		} catch(Exception e) {
 			fail("Should not have thrown any exception " + e);
 		}
