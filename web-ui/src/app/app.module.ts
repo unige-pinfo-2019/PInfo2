@@ -31,7 +31,7 @@ const appRoutes: Routes = [
   {path: 'posts', component: PostViewComponent},
   {path: 'posts/:id', component: SinglePostViewComponent},
   {path: 'new-post', component: NewPostComponent },
-  {path: 'conexion', component: ConnexionComponent },
+  {path: 'connexion', component: ConnexionComponent },
   {path: 'new-user', component: NewUserComponent },
   {path: 'user-profile',canActivate:[AuthGuard], component: UserProfileComponent },
   {path: '', redirectTo: 'posts',pathMatch:'full'},

@@ -1,77 +1,24 @@
-button{
-  margin:-1em;
-  margin-left: 1em;
+header {
+  background: #00BB00; // background color
+  margin: 0; padding: 0; // fills whole space, no margins
+  border-bottom: 0.3em solid #009900; // add border at bottom of header
 }
-.connexion{
-  background:rgb(64, 156, 64);
-  border-color:rgb(47, 114, 47);
-  color:white;
-  border-radius: 10px;
-  padding:10%;
-  &:hover {
-    background:rgb(47, 114, 47);
-    text-shadow: rgb(127, 141, 127) 1px 0 250px;
-    border-radius: 10px;
-  }
-}
-.navbar-expand-sm{
-  font-size: 14px;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-
-  padding: 1%;
-  
-  
-}
-
-
-  .logo {
-    font-weight: bold;
-    margin-left:2%;
-    position:absolute;
-    left:0;
-    
-    //padding-top: 0.5em;
-  }
+.navbar {
+  padding: 0;
+  margin: 0 auto;
   img {
-    padding: 0; margin: 0;
-    float: left;
-    width: 1.5em;
-    height: 1.5em;
-    //padding-right: 10px;
+    height: 1.5em; // default size of images in navigation bar
   }
+}
 
-  nav {
-    justify-self: right;
-
-    ul {
-      list-style-type: none;
-      display:inline;
-       
-      
-
-      li {
-        
-        
-        display:inline;
-        
-        
-         
-        .regularLink {
-          color:white;
-          padding: 1.0em;
-          margin:.5em;
-          
-          
-          font-size: 1em;
-          
-
-          &:hover {
-            background: #5D666F;
-            text-shadow: #00AA00 1px 0 250px;
-            border-radius: 10px;
-          }
-        }
-      }
-    }
+.navLogo { // logo of Agility in navigation bar
+  margin-right: 6em; // offset to center middle part of navigation bar
+}
+.nav-link { // links in the navigation bar
+  color: white;
+  text-transform: uppercase;
+  &:hover {
+    background: #00AA00;
+    color: #DDDDDD;
   }
-
+}

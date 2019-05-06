@@ -1,50 +1,58 @@
+<!-- Top part : Highlights -->
+<div class="border rounded p-2 mb-3">
+  <div class="row py-4">
 
+    <!-- Title -->
+    <div class="col-3">
+      <p class="h4">Highlights</p>
+    </div>
 
-<div class="searchContainer">
-    <div class="col-md-3">
-      <form class="navbar-form" role="search" 
-      >
+    <!-- Empty space -->
+    <div class="col-9">
+    </div>
+  </div>
+</div>
+
+<!-- Middle part : search body -->
+<div class="border rounded p-2 mb-3">
+
+  <!-- First row : title and bar -->
+  <div class="row py-4">
+
+    <!-- Title -->
+    <div class="col-3">
+      <p class="h4">Search</p>
+    </div>
+
+    <!-- Search bar -->
+    <div class="col-9 searchContainer">
+      <form class="navbar-form" role="search">
         <div class="input-group add-on">
-          <input type="search" (onsearch)="onSearch()"
-           class="form-control" placeholder="Rechercher un article"
-            name="srch-term" id="srch-term" >
-          <div class="input-group-btn">
-            <button class="btn btn-default" (click)="onSearch()"><i class="glyphicon glyphicon-search"></i></button>
+          <!-- Input -->
+          <input type="search" (onsearch)="onSearch()" class="form-control" placeholder="Search an article" name="srch-term" id="srch-term">
+          <!-- Search logo -->
+          <div class="input-group-append">
+            <button class="btn" (click)="onSearch()"><img src="assets/search.png" alt="Search icon"></button>
           </div>
         </div>
       </form>
     </div>
-</div>
-              
+  </div>
 
-<div class="container">
+  <!-- 2nd row : categories and search results -->
   <div class="row">
-    <div class="col-xs-12">
 
-
+    <!-- Categories -->
+    <div class="col-3">
       <app-category-menu></app-category-menu>
       <ul class="list-group">
-        <app-post *ngFor="let aPost of posts"
-                      [id]="aPost.id"
-                      [title]="aPost.title"
-                      [description]="aPost.description"
-                      [price]="aPost.price"
-                      [date]="aPost.date"
-                      [category]="aPost.category"
-
-
-        >
-      </app-post>
-
+        <app-post *ngFor="let aPost of posts" [id]="aPost.id" [title]="aPost.title" [description]="aPost.description" [price]="aPost.price" [date]="aPost.date" [category]="aPost.category"></app-post>
       </ul>
-<!-- Button de tests
-      <button class= "btn btn-primary"
-              (click)="addToServer()"> Add exemple </button>
-      <button class= "btn btn-success"
-              (click)="getFromServer()"> Récupérer les posts </button>
-      <button class= "btn btn-danger"
-              (click)="deleteFromServer()"> Delete tous les posts </button>
-              -->
+    </div>
+
+    <!-- Search results -->
+    <div class="col-9">
+
     </div>
   </div>
 </div>
