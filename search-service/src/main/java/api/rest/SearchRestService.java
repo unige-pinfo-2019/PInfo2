@@ -15,6 +15,7 @@ import domain.service.SearchService;
 @ApplicationScoped
 @Path("/search")
 public class SearchRestService {
+	
 	@Inject
 	private SearchService searchService;
 	

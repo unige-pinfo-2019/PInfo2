@@ -46,7 +46,10 @@
 			<groupId>org.aerogear.kafka</groupId>
 			<artifactId>kafka-cdi-extension</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>io.thorntail</groupId>
+			<artifactId>microprofile-config</artifactId>
+		</dependency>
 		<dependency>
     		<groupId>org.elasticsearch.client</groupId>
     		<artifactId>elasticsearch-rest-high-level-client</artifactId>
@@ -84,6 +87,12 @@
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>com.github.smitajit</groupId>
+		    <artifactId>es-rest-mock</artifactId>
+		    <version>1.0.0</version>
+		    <scope>test</scope>
 		</dependency>
     </dependencies>
 

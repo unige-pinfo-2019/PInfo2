@@ -7,8 +7,10 @@ import java.util.List;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 
 import org.apache.http.HttpHost;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchRequest;
@@ -37,10 +39,17 @@ import lombok.extern.java.Log;
 @Default
 @Log
 public class SearchServiceImpl implements SearchService {
+	
+	@Inject
+	public SearchServiceImpl(@ConfigProperty(name = "ELASTICSEARCH_HOST", defaultValue = "localhost")
+							 String searchHostname,
+							 @ConfigProperty(name = "ELASTICSEARCH_SERVICE_PORT", defaultValue = "9200")
+							 int searchPort) {
+		this.client = new RestHighLevelClient(RestClient.builder(
+		        					new HttpHost(searchHostname, searchPort, "http")));
+	}
 
-	private RestHighLevelClient client = new RestHighLevelClient(
-	        RestClient.builder(
-	                new HttpHost("elasticsearch", 9200, "http")));
+	private RestHighLevelClient client;
 	
 	@Override
 	public void createItem(Searchable item) {
