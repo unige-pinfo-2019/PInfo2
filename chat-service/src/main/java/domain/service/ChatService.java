@@ -10,10 +10,8 @@ public interface ChatService {
 	
 	public void deleteMessage(Chat chat);
 	
-	public void updateChat(Chat chat);
+	public List<String> updateChat(Chat chat);
 	
-	public void updateAllChat(Chat chat);
+	//public void updateAllChat(Chat chat);
 	
-	
-
 }
