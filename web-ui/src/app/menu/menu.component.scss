@@ -12,7 +12,10 @@ header {
 }
 
 .navLogo { // logo of Agility in navigation bar
-  margin-right: 6em; // offset to center middle part of navigation bar
+  //margin-right: 1em; // offset to center middle part of navigation bar
+  img {
+    padding-right: 0.5em;
+  }
 }
 .nav-link { // links in the navigation bar
   color: white;
