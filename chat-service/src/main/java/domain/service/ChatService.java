@@ -6,13 +6,14 @@ import domain.model.Chat;
 
 public interface ChatService {
 
-	public Long create(Ad ad);
-
-	public void delete(Ad ad);
+	public void sendMessage(Chat chat);
 	
-	public void update(Ad ad);
+	public void deleteMessage(Chat chat);
+	
+	public void updateChat(Chat chat);
+	
+	public void updateAllChat(Chat chat);
+	
+	
 
-	public List<Ad> getAll();
-
-	public Ad get(Long adId);
 }

@@ -15,25 +15,41 @@ import lombok.Data;
 @Entity
 @Table(name="CHAT")
 @Data
-// A chat has a sender, a receiver and a message. Each sender and receiver are users represented by a unique id.
+// ! The Chat database contains ALL messages exchanged between users !
+
+// A chat has a sender, a receiver and a message. Each message has a unique ID. e.g :
+
+// senderId | receiverId | message      | messageId
+//----------------------------------------------
+//    1		|	   2	 |	Hello		|    1
+// ----------------------------------------------
+//    2		|	   1	 |	Hi		    |    2
+// ----------------------------------------------
+//    1		|	   3	 |	Baguette    |    3
+// ----------------------------------------------
+//    1		|	   2	 |	whatsup?    |    4
+
+// If we want to retrieve a whole Chat between to users, we need to order each message by its ID (which is intrinsically its timestamp)
+// containing the couple (senderId = user1Id, receiverId = user2Id)
+// To display a chat between 2 users, the frontend needs the order of the couple (user1Id, user2Id) to know who is the sender and who is the receiver.
+
 public class Chat implements Serializable {
 
 	private static final long serialVersionUID = 5220808821158624742L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+		
 	@Column(name="SENDER")
 	private Long senderId;
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="RECEIVER")
 	private Long receiverId;
 	
 	@Column(name="MESSAGE")
 	@NotNull
-	private String name;
+	private String message;
 	
-	
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="ID")
+	private Long messageId;
+
 }
