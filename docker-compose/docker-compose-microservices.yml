@@ -138,12 +138,7 @@ services:
     networks:
       - backend-network    
     ports:
-      - "13080:8080"
-    environment:
-      THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
-      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"      
-    depends_on:
-       - kafka
+      - "14080:8080"
 
 #volumes:
 #  esdata1:
