@@ -24,6 +24,7 @@
     </properties>
 
     <modules>
+    	<module>image-service</module>
 		<module>stats-service</module>
 		<module>chat-service</module>
 		<module>ad-service</module>

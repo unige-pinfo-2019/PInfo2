@@ -130,6 +130,16 @@ services:
     depends_on:
       - kafka
 
+  #Image service
+  image-service:
+    container_name: image-service    
+    image: unige/image-service:latest
+    hostname: image-service
+    networks:
+      - backend-network    
+    ports:
+      - "14080:8080"
+
 #volumes:
 #  esdata1:
 #    driver: local

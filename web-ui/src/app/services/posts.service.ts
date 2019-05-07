@@ -12,15 +12,33 @@ export class PostsService{
 
 
 private posts=[];
-  /*{
+/*  {
     id:1,
-    title:'Post50000',
-    description: 'Ceci est le post1',
+    title:'Test post 1',
+    description: 'Ceci est le post 1, avec une quantité non-négligeable de texte afin de décrire au mieux ce magnifique article',
+    category: 'livres',
     price:500,
     date:'2019-03-03',
-
-
-  },
+  },{
+    id:2,
+    title:'Test post 2',
+    description: 'Ceci est le post 2',
+    category: 'sport',
+    price:10,
+    date:'2019-03-03',
+  },{
+    id:3,
+    title:'Test post 3',
+    description: 'Ceci est le post 3',
+    price:1000,
+    date:'2019-03-03',
+  },{
+    id:4,
+    title:'Test post 4',
+    description: 'Ceci est le post 4',
+    price:1,
+    date:'2019-03-03',
+  }
 ];*/
 httpOptions = {
   headers: new HttpHeaders({
@@ -85,7 +103,7 @@ addPost(title:string, description:string,price:number){
   postObject.description=description;
   postObject.price=price;
   //postObject.date=this.lastUpdate;
-  
+
 
   this.posts.push(postObject);
   this.printPosts();
@@ -138,7 +156,7 @@ addPost(title:string, description:string,price:number){
       (error)=>{
         console.log('Erreur!:'+ error);
       }
-      
+
     )
   }
   deletePosts(id:number){
