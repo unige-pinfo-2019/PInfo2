@@ -1,7 +1,9 @@
 package domain.service;
 
 import java.util.List;
+import java.util.Optional;
 
+import domain.model.Ad;
 import domain.model.Searchable;
 
 public interface SearchService {
@@ -12,6 +14,6 @@ public interface SearchService {
 	
 	public void updateItem(Searchable item);
 	
-	public <T extends Searchable> List<T> match(String query, Class<T> type);
+	public List<Ad> matchAd(String query, Optional<Long> categoryId, Optional<Long> userId);
 	
 }

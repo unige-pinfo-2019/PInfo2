@@ -1,15 +1,33 @@
-language: java
+sudo: required
 
-jdk:
-  - oraclejdk11
+matrix:
+  include:
+    - language: java
+      jdk: openjdk11
+      addons:
+        sonarcloud:
+          organization: "unige-pinfo-2019" 
+      script:
+        - mvn clean package
+        - mvn sonar:sonar -Dsonar.projectKey=unige-pinfo-2019_PInfo2 -Dsonar.organization=unige-pinfo-2019 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6a52b61ec8bac75693325785b5dd8214362acae7
 
-addons:
- sonarcloud:
-    organization: unige-pinfo-2019
+    - language: java
+      jdk: openjdk11
+      services:
+        - docker
+      script:
+        - mvn clean package
+        - mvn install -Ppackage-docker-image 
+      after_success:
+        - docker login -u "$DOCKER_ID_USER" -p "$DOCKER_PASSWORD"
+        - docker tag unige/ad-service $DOCKER_ID_USER/ad-service
+        - docker tag unige/search-service $DOCKER_ID_USER/search-service
+        - docker tag unige/category-service $DOCKER_ID_USER/category-service
+        - docker tag unige/user-service $DOCKER_ID_USER/user-service
+        - docker push $DOCKER_ID_USER/ad-service
+        - docker push $DOCKER_ID_USER/search-service
+        - docker push $DOCKER_ID_USER/category-service
+        - docker push $DOCKER_ID_USER/user-service
 
-script:
-  - git fetch --unshallow
-  - mvn clean install
-  - mvn install -Ppackage-docker-image
-  - mvn sonar:sonar -Dsonar.projectKey=unige-pinfo-2019_PInfo2 -Dsonar.organization=unige-pinfo-2019 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6a52b61ec8bac75693325785b5dd8214362acae7
+
 

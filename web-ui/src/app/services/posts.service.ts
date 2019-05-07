@@ -8,7 +8,7 @@ export class PostsService{
 
 
  postsSubject = new Subject<any[]>();
-   lastUpdate = new Date().toLocaleString();
+   //lastUpdate = new Date().toLocaleString();
 
 
 private posts=[];
@@ -78,7 +78,7 @@ addPost(title:string, description:string,price:number){
     title: 'MonPost',
     description:'blablablalbalbalba',
     price: 50,
-    date: '2019-03-03'
+    categoryId:0,
    // caegory:'Livre',
   }
   postObject.title= title;
