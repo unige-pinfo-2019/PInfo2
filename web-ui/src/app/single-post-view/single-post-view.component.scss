@@ -1,16 +1,26 @@
-.goBack{
-  
+img {
+  margin: 0 auto;
+  height: 300px;
+  width: auto;
+}
+
+.carousel-control-next {
+  background: #888888;
+}
+.carousel-control-prev {
+  background: #888888;
+}
+
+/*.goBack{
+
   position:relative;
   top:50px;
   right:50px;
   z-index: 6;
-}
+}*/
 
-.item{
-  
-  
+/*.item{
   max-height:auto;
-  
 }
 li{
   margin-top:5%;
@@ -25,12 +35,7 @@ img{
 }
 #information{
   display:table;
-
-  
   //margin-top: 30px;
-  
-
-
 }
 
 #details.list-group-item {
@@ -40,7 +45,6 @@ img{
 //margin:8%;
 //position: relative;
 width: 200px;
-
 }
 #description.list-group-item{
   width:400px;
@@ -52,26 +56,12 @@ width: 200px;
 }
 #description{
  height:400px;
-
-  
 }
 
 .carousel {
-  
   z-index: 2;
-
-  
-  
-  
-
 }
 .carousel-inner{
   position:relative;
   display:block;
-  
-  
-}
-
-  
-
-
+}*/
