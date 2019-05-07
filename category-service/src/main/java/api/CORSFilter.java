@@ -1,4 +1,4 @@
-package api.rest;
+package api;
 
 import java.io.IOException;
 

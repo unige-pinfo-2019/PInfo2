@@ -1,26 +1,32 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
-
-
-a {
-  text-decoration: none;
+body, html {
+  height: 100%;
+  margin: 0 auto;
 }
 
-.container {
-  width: 80%;
-  margin: 0 auto;
-  padding: 0.5em;
-  //padding: 1.3em;
-  display: grid;
-  grid-template-columns: 10% auto;
+body {
+  font-family: 'Montserrat';
+  font-size: 18px;
+}
 
-  a {
-    //color: rgb(156, 53, 53);
+.navbar { // global settings of navigation bar
+  width: 75%;
+}
+
+section { // global settings of sections (body of the page)
+  width: 75%;
+  margin: 0 auto;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.btn { // global settings of buttons
+  color: white;
+  background: #00BB00;
+  border-color: #00AA00;
+  &:hover {
+    color: #DDDDDD;
+    background: #009900;
   }
-}
-
-section {
-  width: 80%;
-  margin: 0 auto;
-  padding: 2em;
 }

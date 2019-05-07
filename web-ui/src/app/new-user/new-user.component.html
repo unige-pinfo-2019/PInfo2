@@ -1,20 +1,30 @@
- <div class="col-sm-8 col-sm-offset-2">
-  <form [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
-    <div class="form-group">
-      <label for="firstName">Prénom</label>
-      <input type="text" id="firstName" class="form-control" formControlName="firstName">
-    </div>
-    <div class="form-group">
-      <label for="lastName">Nom</label>
-      <input type="text" id="lastName" class="form-control" formControlName="lastName">
-    </div>
-    <div class="form-group">
-      <label for="email">Adresse e-mail</label>
-      <input type="text" id="email" class="form-control" formControlName="email">
-    </div>
+<form class="border rounded p-5" [formGroup]="userForm" (ngSubmit)="onSubmitForm()">
 
-    
-    <button type="submit" class="btn btn-primary"
-            [disabled]="userForm.invalid">Soumettre</button>
-  </form>
-</div>
+  <!-- Page title -->
+  <div class="text-center">
+    <p class="h4 mb-5">Register</p>
+  </div>
+
+  <!-- First name -->
+  <div class="form-group">
+    <label for="firstName">First name</label>
+    <input type="text" id="firstName" class="form-control" formControlName="firstName">
+  </div>
+
+  <!-- Last name -->
+  <div class="form-group">
+    <label for="lastName">Last name</label>
+    <input type="text" id="lastName" class="form-control" formControlName="lastName">
+  </div>
+
+  <!-- E-mail -->
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input type="text" id="email" class="form-control" formControlName="email">
+  </div>
+
+  <!-- Submit registration -->
+  <!--<button type="submit" class="btn btn-block my-5" [disabled]="userForm.invalid">Soumettre</button>-->
+  <button class="btn btn-block my-5" [disabled]="userForm.invalid">Soumettre</button>
+
+</form>

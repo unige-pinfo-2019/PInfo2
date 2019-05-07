@@ -2,7 +2,6 @@ package domain.service;
 
 import static org.junit.Assert.fail;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -56,7 +56,7 @@ public class CategoryServiceTest {
 		Category i = em.find(Category.class, category.getId());
 		
 		assertTrue(i == null);
-}
+	}
 	
 	@Test
 	public void testGetSubGategories() {
@@ -87,6 +87,17 @@ public class CategoryServiceTest {
 		int size = categoryServiceImpl.getSubCategories(categoryParent).size();
 		
 		assertEquals(3, size);
+	}
+	
+	@Test
+	public void getCategory() {
+		Category category = getRandomCategory();
+		Long id = categoryServiceImpl.create(category);
+		
+		Category requestedCateg = categoryServiceImpl.get(id);
+		
+		assertEquals(category.getName(), requestedCateg.getName());
+		assertEquals(category.getParentId(), requestedCateg.getParentId());
 	}
 	
 	

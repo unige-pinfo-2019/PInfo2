@@ -1,15 +1,9 @@
-<div class="list-group">
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor=" let cat of category" >
-      <button   type="button"
-                class="list-group-item list-group-item-action "
-                (click)="onSelectCategory(cat.name)">
+<!--<ul class="list-group">
+  <li class="list-group-item p-0" *ngFor=" let cat of category" >
+    <button type="button" (click)="onSelectCategory(cat.name)">{{cat.name}}</button>
+  </li>
+</ul>-->
 
-                {{cat.name}}</button>
-    </li>
-  </ul>
-
-
-
-
+<div class="list-group" *ngFor="let cat of category">
+  <button type="button" class="list-group-item list-group-item-action rounded-0" (click)="onSelectCategory(cat.name)">{{cat.name}}</button>
 </div>
