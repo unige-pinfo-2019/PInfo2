@@ -1,4 +1,4 @@
-package api;
+package api.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -15,14 +15,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import api.CORSFilter;
-
 @ExtendWith(MockitoExtension.class)
-class CORSFilterTest {
-
+public class CORSFilterTest {
 	@Test
 	void testFilter() throws IOException {
 
+		// create the objects to be mocked
 		ContainerRequestContext requestContext = mock(ContainerRequestContext.class);
 		ContainerResponseContext responseContext = mock(ContainerResponseContext.class);
 
@@ -36,5 +34,4 @@ class CORSFilterTest {
 		assertEquals("GET, POST, PUT, DELETE, OPTIONS", headers.get("Access-Control-Allow-Methods").get(0));
 
 	}
-
 }

@@ -1,5 +1,7 @@
 package domain.model;
 
+import java.util.List;
+
 import com.google.gson.Gson;
 
 import lombok.Data;
@@ -20,6 +22,10 @@ public class Ad extends Searchable {
 	private String date;
 	
 	private Long categoryId;
+	
+	private Long userId;
+	
+	private List<Long> imageIds;
 	
 	private String index = "ads";
 	

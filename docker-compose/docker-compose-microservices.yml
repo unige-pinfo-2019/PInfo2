@@ -111,9 +111,24 @@ services:
       - "12080:8080"
     environment:
       THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
-      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"      
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
     depends_on:
-       - kafka
+      - kafka
+      
+  #User service
+  user-service:
+    container_name: user-service    
+    image: unige/user-service:latest
+    hostname: user-service
+    networks:
+      - backend-network    
+    ports:
+      - "13080:8080"
+    environment:
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
+      THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
+    depends_on:
+      - kafka
 
 #volumes:
 #  esdata1:

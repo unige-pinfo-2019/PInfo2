@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -44,6 +46,13 @@ public class Ad implements Serializable {
 	@Column(name="CATEGORY_ID")
 	@NotNull
 	private Long categoryId;
+	
+	@Column(name="USER_ID")
+	@NotNull
+	private Long userId;
+	
+	@ElementCollection
+	private List<Long> imageIds;
 	
 	// Specific setter for date to have a pretty JSON string date format
 	public void setDate(Date date) {

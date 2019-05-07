@@ -3,12 +3,15 @@ package domain.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 
 import org.apache.http.HttpHost;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchRequest;
@@ -23,9 +26,13 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.ScoreSortBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 
 import com.google.gson.Gson;
 
+import domain.model.Ad;
 import domain.model.Searchable;
 import lombok.extern.java.Log;
 
@@ -33,10 +40,18 @@ import lombok.extern.java.Log;
 @Default
 @Log
 public class SearchServiceImpl implements SearchService {
+	
+	@Inject
+	public SearchServiceImpl(@ConfigProperty(name = "ELASTICSEARCH_HOST", defaultValue = "localhost")
+							 String searchHostname,
+							 @ConfigProperty(name = "ELASTICSEARCH_SERVICE_PORT", defaultValue = "9200")
+							 int searchPort) {
+		
+		this.client = new RestHighLevelClient(RestClient.builder(
+		        					new HttpHost(searchHostname, searchPort, "http")));
+	}
 
-	private RestHighLevelClient client = new RestHighLevelClient(
-	        RestClient.builder(
-	                new HttpHost("elasticsearch", 9200, "http")));
+	private RestHighLevelClient client;
 	
 	@Override
 	public void createItem(Searchable item) {
@@ -51,7 +66,7 @@ public class SearchServiceImpl implements SearchService {
 		try {
 			client.index(request, RequestOptions.DEFAULT);
 		} catch (IOException e) {
-			log.throwing("SearchServiceImpl", "createItem", e);
+			log.throwing(this.getClass().getName(), "createItem", e);
 		}
 		
 		log.info("Item created : " + item);
@@ -68,7 +83,7 @@ public class SearchServiceImpl implements SearchService {
 		try {
 			client.delete(deleteRequest, RequestOptions.DEFAULT);
 		} catch (IOException e) {
-			log.throwing("SearchServiceImpl", "deleteItem", e);
+			log.throwing(this.getClass().getName(), "deleteItem", e);
 		}
 		
 		log.info("Item deleted : " + item);
@@ -87,49 +102,77 @@ public class SearchServiceImpl implements SearchService {
 		try {
 			client.update(updateRequest, RequestOptions.DEFAULT);
 		} catch (IOException e) {
-			log.throwing("SearchServiceImpl", "updateItem", e);
+			log.throwing(this.getClass().getName(), "updateItem", e);
 		}
 		
 		log.info("Item updated : " + item);
 	}
 	
-	@Override 
-	public <T extends Searchable> List<T> match(String query, Class<T> type) {
-		// Sanity check
-		if (query.isEmpty()) {
-			return new ArrayList<>();
-		}
+	@Override
+	public List<Ad> matchAd(String query, Optional<Long> categoryId, Optional<Long> userId) {
+		return match(adQueryBuilder(query, categoryId, userId), Ad.class);
+	}
+	
+	
+	public <T extends Searchable> List<T> match(SearchSourceBuilder searchSourceBuilder, Class<T> type) {
 		
-		SearchRequest searchRequest = new SearchRequest(); 
-		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+		SearchRequest searchRequest = new SearchRequest();
 		
-		QueryBuilder matchQueryBuilder = QueryBuilders.queryStringQuery("*" + query.toLowerCase() + "*");
-		
-		log.info("Query created : " + matchQueryBuilder.toString());
-		
-		searchSourceBuilder.query(matchQueryBuilder);
+		log.info("Query created : " + searchSourceBuilder.toString());
 		searchRequest.source(searchSourceBuilder);
 		
-		SearchResponse searchResponse = null;
+		SearchHit[] searchHits = {};
 		
 		try {
-			searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+			SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+			SearchHits hits = searchResponse.getHits();
+			searchHits = hits.getHits();
 		} catch (IOException e) {
-			log.throwing("SearchServiceImpl", "match", e);
+			log.throwing(this.getClass().getName(), "match", e);
 		}
 
 		Gson gson = new Gson();
-		SearchHits hits = searchResponse.getHits();
-		SearchHit[] searchHits = hits.getHits();
 		List<T> matchedList = new ArrayList<>();
 		for (SearchHit hit : searchHits) {
 			T item = gson.fromJson(hit.getSourceAsString(), type);
 			matchedList.add(item);
 		}
 		
-		log.info("Matched " + matchedList.size() + " items with query \'" + query + "\'.");
-		
 		return matchedList;
+	}
+	
+	public SearchSourceBuilder adQueryBuilder(String query, Optional<Long> categoryId, Optional<Long> userId) {
+		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+		
+		String wildcardsQuery = "*" + query.toLowerCase() + "*";
+		QueryBuilder matchQueryBuilder = QueryBuilders.boolQuery()
+										    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
+										    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+		
+		// TODO : find a way to remove those ugly if blocks
+		if (categoryId.isPresent() && userId.isPresent()) {
+			matchQueryBuilder = QueryBuilders.boolQuery()
+			.must(QueryBuilders.termQuery("categoryId", categoryId.get()))
+			.must(QueryBuilders.termQuery("userId", userId.get()))
+		    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
+		    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+		} else if (categoryId.isPresent()) {
+			matchQueryBuilder = QueryBuilders.boolQuery()
+			.must(QueryBuilders.termQuery("categoryId", categoryId.get()))
+		    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
+		    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+		} else if (userId.isPresent()) {
+			matchQueryBuilder = QueryBuilders.boolQuery()
+			.must(QueryBuilders.termQuery("userId", userId.get()))
+		    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
+		    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+		}
+		
+		searchSourceBuilder.query(matchQueryBuilder);
+		searchSourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC)); 
+		searchSourceBuilder.sort(new FieldSortBuilder("_id").order(SortOrder.DESC));
+		
+		return searchSourceBuilder;	
 	}
 	
 	@PreDestroy
@@ -138,7 +181,7 @@ public class SearchServiceImpl implements SearchService {
             log.info("Closing the ES REST client");
             this.client.close();
         } catch (IOException e) {
-            log.throwing("SearchServiceImpl", "cleanup", e);
+            log.throwing(this.getClass().getName(), "cleanup", e);
         }
     }
 	
