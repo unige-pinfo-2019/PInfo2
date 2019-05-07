@@ -48,7 +48,7 @@ public class ImageRestService {
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 		
-        return Response.status(Status.CREATED).location(URI.create("/" + imageId.toString())).build();
+        return Response.status(Status.CREATED).location(URI.create("/image/" + imageId.toString())).build();
 	}
 	
     @GET

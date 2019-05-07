@@ -34,7 +34,7 @@ public class CategoryServiceTest {
 	public void testGetAll() {
 		int size = initDataStore();
 		assertEquals(size, categoryServiceImpl.getAll().size());
-}
+	}
 	
 	@Test
 	public void testCreate() {
