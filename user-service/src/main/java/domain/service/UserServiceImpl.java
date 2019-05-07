@@ -22,11 +22,14 @@ public class UserServiceImpl implements UserService {
 	private EntityManager em;	
 
 	@Override
-	public void create(User user) {
+	public long create(User user) {
 		if (em.contains(user)) {
 			throw new IllegalArgumentException("user already exists");
 		}
 		em.persist(user);
+		em.flush();
+		
+		return user.getId();
 	}
 	
 	@Override
@@ -36,9 +39,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void update(User user) {
-		User i = em.find(User.class, user.getId());
-		if (i == null) {
-			throw new IllegalArgumentException("User does not exist : " /*+ user.getId().toString()*/);
+		if (user == null) {
+			throw new IllegalArgumentException("User does not exist");
 		}
 		em.merge(user);
 	}

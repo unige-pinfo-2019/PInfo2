@@ -89,6 +89,14 @@ public class UserServiceTest {
 
 		User i = em.find(User.class, user1.getId());
 		assertTrue(user2.equals(i));
+		
+		User userNull = null;
+		
+		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class,
+				() -> userServiceImpl.update(userNull),
+				"User does not exist");
+
+		    assertTrue(thrown.getMessage().contains("User does not exist"));
 	}
 
 
