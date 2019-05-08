@@ -53,17 +53,24 @@ public class CategoryRestService {
 		try {
 			newId = categoryService.create(category);
 		} catch(IllegalArgumentException i) {
-			return Response.status(Response.Status.BAD_REQUEST).build();
+			return Response.status(Status.BAD_REQUEST).build();
+		} catch(Exception e) {
+			return Response.status(Status.BAD_GATEWAY).build();
 		}
 		
-		return Response.status(Status.CREATED).location(URI.create("/" + newId.toString())).build();
+		return Response.status(Status.CREATED).location(URI.create("/category/" + newId.toString())).build();
 	}
 	
 	
 	@DELETE
 	@Path("{name}")
 	public Response delete(@PathParam("name") Long id) {
-		categoryService.delete(categoryService.get(id));
+		try {
+			categoryService.delete(categoryService.get(id));
+		} catch(Exception e) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		
 		return Response.ok().build();
 	}
 
