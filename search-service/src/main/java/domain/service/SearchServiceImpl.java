@@ -144,28 +144,31 @@ public class SearchServiceImpl implements SearchService {
 	public SearchSourceBuilder adQueryBuilder(String query, Optional<Long> categoryId, Optional<Long> userId) {
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		
+		String descriptionField = "description";
+		String titleField = "title";
+		
 		String wildcardsQuery = "*" + query.toLowerCase() + "*";
 		QueryBuilder matchQueryBuilder = QueryBuilders.boolQuery()
-										    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
-										    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+										    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery))
+										    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery));
 		
 		// TODO : find a way to remove those ugly if blocks
 		if (categoryId.isPresent() && userId.isPresent()) {
 			matchQueryBuilder = QueryBuilders.boolQuery()
 			.must(QueryBuilders.termQuery("categoryId", categoryId.get()))
 			.must(QueryBuilders.termQuery("userId", userId.get()))
-		    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
-		    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+		    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery))
+		    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery));
 		} else if (categoryId.isPresent()) {
 			matchQueryBuilder = QueryBuilders.boolQuery()
 			.must(QueryBuilders.termQuery("categoryId", categoryId.get()))
-		    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
-		    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+		    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery))
+		    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery));
 		} else if (userId.isPresent()) {
 			matchQueryBuilder = QueryBuilders.boolQuery()
 			.must(QueryBuilders.termQuery("userId", userId.get()))
-		    .should(QueryBuilders.matchQuery("title", wildcardsQuery))
-		    .should(QueryBuilders.matchQuery("description", wildcardsQuery));
+		    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery))
+		    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery));
 		}
 		
 		searchSourceBuilder.query(matchQueryBuilder);

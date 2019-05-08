@@ -28,7 +28,7 @@ public class ImageRestService {
 	@Inject
 	private ImageService imageService;
 	
-	private final int MAX_FILE_SIZE_MB = 10;
+	private final static int MAX_FILE_SIZE_MB = 10;
 	
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
