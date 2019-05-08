@@ -2,16 +2,20 @@ package domain.service;
 
 import java.util.List;
 
-import domain.model.Chat;
+import domain.model.Message;
 
 public interface ChatService {
 
-	public void sendMessage(Chat chat);
+	// Add a new message (row) to the database
+	public void sendMessage(Message message);
 	
-	public void deleteMessage(Chat chat);
+	// Delete a message (row) using the unique Id each message has
+	public void deleteMessage(int messageId);
 	
-	public List<String> updateChat(Chat chat);
+	// Return an ordered list of messages between 2 users using their Id
+	public List<Message> updateChat(int user1Id, int user2Id);
 	
-	//public void updateAllChat(Chat chat);
+	// Return a list of chat, a chat being a list of messages
+	public List<List<Message>> updateAllChat(int userId);
 	
 }

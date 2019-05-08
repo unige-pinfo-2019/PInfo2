@@ -13,11 +13,11 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
-@Table(name="CHAT")
+@Table(name="MESSAGES")
 @Data
-// ! The Chat database contains ALL messages exchanged between users !
+// ! The Messages database contains ALL messages exchanged between users !
 
-// A chat has a sender, a receiver and a message. Each message has a unique ID. e.g :
+// A message has a sender, a receiver and a message. Each message has a unique ID. e.g :
 
 // senderId | receiverId | message      | messageId
 //----------------------------------------------
@@ -33,7 +33,7 @@ import lombok.Data;
 // containing the couple (senderId = user1Id, receiverId = user2Id)
 // To display a chat between 2 users, the frontend needs the order of the couple (user1Id, user2Id) to know who is the sender and who is the receiver.
 
-public class Chat implements Serializable {
+public class Message implements Serializable {
 
 	private static final long serialVersionUID = 5220808821158624742L;
 		
@@ -43,9 +43,9 @@ public class Chat implements Serializable {
 	@Column(name="RECEIVER")
 	private Long receiverId;
 	
-	@Column(name="MESSAGE")
+	@Column(name="RECIPIENT")
 	@NotNull
-	private String message;
+	private String recipient;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

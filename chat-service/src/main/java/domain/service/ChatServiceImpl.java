@@ -1,23 +1,31 @@
 package domain.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import domain.model.Chat;
+import domain.model.Message;
 
 public class ChatServiceImpl implements ChatService {
 
-	public void sendMessage(Chat chat) {};
-	
-	public void deleteMessage(Chat chat) {};
-	
-	public List<String> updateChat(Chat chat) {
-		List <String> emptyTestList = new ArrayList<String>();
-		emptyTestList.add("test");
+	// Add a new message (row) to the database
+	public void sendMessage(Message message) {
 		
-		return emptyTestList;
 	};
 	
-	//public void updateAllChat(Chat chat);
+	// Delete a message (row) using the unique Id each message has
+	public void deleteMessage(int messageId) {
+		
+	};
+	
+	// Return an ordered list of messages between 2 users using their Id
+	public List<Message> updateChat(int user1Id, int user2Id){
+		return null;
+		
+	};
+	
+	// Return a list of chat, a chat being a list of messages
+	public List<List<Message>> updateAllChat(int userId){
+		return null;
+		
+	};
 	
 }
