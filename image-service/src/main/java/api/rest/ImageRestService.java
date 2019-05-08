@@ -46,7 +46,7 @@ public class ImageRestService {
 		try {
 			imageId = imageService.create(image);
 		} catch(Exception e) {
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			return Response.status(Status.BAD_GATEWAY).build();
 		}
 		
         return Response.status(Status.CREATED).location(URI.create("/image/" + imageId.toString())).build();
@@ -61,9 +61,11 @@ public class ImageRestService {
     		byte[] imageData = image.getData();
     		
             return Response.ok(new ByteArrayInputStream(imageData)).build();
+    	} catch(IllegalArgumentException e) {
+    		return Response.status(Status.NOT_FOUND).build();
     	} catch(Exception e) {
     		return Response.status(Status.INTERNAL_SERVER_ERROR).build();
-    	}     
+    	}
     }
     
     @DELETE
