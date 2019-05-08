@@ -1,20 +1,13 @@
 package domain.service;
 
 import java.util.List;
-
-import javax.persistence.Column;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
-import domain.model.Category;
 import domain.model.Message;
 
-public class ChatServiceImpl implements ChatService {
+public class MessageServiceImpl implements MessageService {
 
 	@PersistenceContext(unitName = "InmemoryPU")
 	private EntityManager em;
@@ -39,7 +32,7 @@ public class ChatServiceImpl implements ChatService {
 	};
 	
 	// Return a list of chat, a chat being a list of messages
-	public List<List<Message>> updateAllChat(int userId){
+	public List<List<Message>> updateAllChat(int userId) {
 		return null;
 	};
 	
