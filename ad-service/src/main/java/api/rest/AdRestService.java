@@ -36,11 +36,13 @@ public class AdRestService {
 		try {
 			newId = adService.create(ad);
 		} catch(IllegalArgumentException i) {
-			return Response.status(Response.Status.BAD_REQUEST).build();
+			return Response.status(Status.BAD_REQUEST).build();
+		} catch(Exception e) {
+			return Response.status(Status.BAD_GATEWAY).build();
 		}
-		adProducer.send(ad, "adsCreate");
 		
-		return Response.status(Status.CREATED).location(URI.create("/" + newId.toString())).build();
+		adProducer.send(ad, "adsCreate");	
+		return Response.status(Status.CREATED).location(URI.create("/ad/" + newId.toString())).build();
 	}
 	
 	@GET
@@ -59,16 +61,26 @@ public class AdRestService {
 	@PUT
 	@Consumes("application/json")
 	public Response update(Ad ad) {
-		adService.update(ad);
-		adProducer.send(ad, "adsUpdate");
+		try {
+			adService.update(ad);
+			adProducer.send(ad, "adsUpdate");
+		} catch(Exception e) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		
 		return Response.ok().build();
 	}
 	
 	@DELETE
 	@Path("{id}")
 	public Response delete(@PathParam("id") Long adId) {
-		adService.delete(adService.get(adId));
-		adProducer.send(adId, "adsDelete");
+		try {
+			adService.delete(adService.get(adId));
+			adProducer.send(adId, "adsDelete");
+		} catch(Exception e) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		
 		return Response.ok().build();
 	}
 
