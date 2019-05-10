@@ -3,12 +3,14 @@ package domain.model;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,8 +53,9 @@ public class Ad implements Serializable {
 	@NotNull
 	private Long userId;
 	
-	@ElementCollection
-	private List<Long> imageIds;
+	@Column(name="IMAGE_IDS")
+	@ElementCollection(fetch=FetchType.EAGER)
+	private List<Long> imageIds = new ArrayList<Long>();
 	
 	// Specific setter for date to have a pretty JSON string date format
 	public void setDate(Date date) {
