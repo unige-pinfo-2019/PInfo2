@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
+:root {
+  --color-primary-light: #00BB00;
+  --color-primary-middle: #00AA00;
+  --color-primary-dark: #009900;
+  --color-text-focus: #DDDDDD;
+}
 body, html {
   height: 100%;
   margin: 0 auto;
@@ -23,10 +29,10 @@ section { // global settings of sections (body of the page)
 
 .btn { // global settings of buttons
   color: white;
-  background: #00BB00;
-  border-color: #00AA00;
+  background: var(--color-primary-light);
+  border-color: var(--color-primary-middle);
   &:hover {
-    color: #DDDDDD;
-    background: #009900;
+    color: var(--color-text-focus);
+    background: var(--color-primary-dark);
   }
 }
