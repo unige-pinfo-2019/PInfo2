@@ -1,7 +1,12 @@
+p {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 a {
   color:black;
   &:hover{
-    color: #31771d;
+    color: var(--color-primary-dark);
     text-shadow: var(--color-primary-middle) 1px 0 250px;
     text-decoration: none;
   }
@@ -40,12 +45,17 @@ img {
 }
 #cat{
   border-radius: 10px;
+  color: white;
   //width: 100%;
   padding: 0.5em;
   margin-bottom: 0;
   //margin-top:5%;
   //padding-left: 0.5em;
   background: var(--color-primary-middle);
+
+  &:hover {
+    color: white;
+  }
 }
 li{
   box-shadow: 2px 3px 3px #666666;
