@@ -1,7 +1,7 @@
 header {
-  background: #00BB00; // background color
+  background: var(--color-primary-light); // background color
   margin: 0; padding: 0; // fills whole space, no margins
-  border-bottom: 0.3em solid #009900; // add border at bottom of header
+  border-bottom: 0.3em solid var(--color-primary-dark); // add border at bottom of header
 }
 .navbar {
   padding: 0;
@@ -21,7 +21,7 @@ header {
   color: white;
   text-transform: uppercase;
   &:hover {
-    background: #00AA00;
-    color: #DDDDDD;
+    background: var(--color-primary-middle);
+    color: var(--color-text-focus);
   }
 }
