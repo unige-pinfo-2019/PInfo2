@@ -18,7 +18,7 @@ import domain.model.User;
 @Default
 public class UserServiceImpl implements UserService {
 	
-	@PersistenceContext(unitName = "InmemoryPU")
+	@PersistenceContext(unitName = "UserPU")
 	private EntityManager em;	
 
 	@Override
