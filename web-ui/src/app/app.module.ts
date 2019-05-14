@@ -1,18 +1,19 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { KeycloakService } from './services/keycloak/keycloak.service';
+import { KeycloakInterceptorService } from './services/keycloak/keycloak.interceptor.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostComponent } from './post/post.component';
-import {Routes} from '@angular/router';
-import {RouterModule} from '@angular/router';
-import { AuthGuard} from './services/auth-guard.service';
+import { Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { AuthGuard } from './services/auth-guard.service';
 
-
-import {AuthService} from './services/auth.service';
-import{PostsService} from './services/posts.service';
+import { AuthService } from './services/auth.service';
+import { PostsService } from './services/posts.service';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { PostViewComponent } from './post-view/post-view.component';
 import { NewPostComponent } from './new-post/new-post.component';
@@ -68,7 +69,8 @@ const appRoutes: Routes = [
     AuthGuard,
     PostsService,
     UserService,
-    CategoryService
+    CategoryService,
+    KeycloakService,
   ],
   bootstrap: [AppComponent]
 })
