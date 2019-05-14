@@ -19,20 +19,20 @@ public class MessageServiceImpl implements MessageService {
 	};
 	
 	// Delete a message (row)
-	public void deleteMessage(Message message) {
-		em.remove(em.contains(message) ? message : em.merge(message));
-	};
+	//public void deleteMessage(Message message) {
+	//	em.remove(em.contains(message) ? message : em.merge(message));
+	//};
 	
 	// Return an ordered list of messages between 2 users using their Id : This creates a chat
 	// SELECT * WHERE (senderId = user1Id AND receiverId = user2Id) OR (senderId = user2Id AND receiverId = user1Id) ORDER BY messageId;
-	public List<Message> updateChat(int user1Id, int user2Id) {
-		TypedQuery<Message> query = em.createQuery("SELECT * WHERE (senderId = user1Id AND receiverId = user2Id) OR (senderId = user2Id AND receiverId = user1Id) ORDER BY messageId", Message.class);	
+	public List<Message> updateChat(Long user1Id, Long user2Id) {
+		TypedQuery<Message> query = em.createQuery("SELECT RECIPIENT WHERE (senderId = user1Id AND receiverId = user2Id) OR (senderId = user2Id AND receiverId = user1Id) ORDER BY messageId", Message.class);	
 		List<Message> chat = query.getResultList();
 		return chat;
 	};
 	
 	// Return a list of chat, a chat being a list of messages
-	public List<List<Message>> updateAllChat(int userId) {
+	public List<List<Message>> updateAllChat(Long userId) {
 		return null;
 	};
 	

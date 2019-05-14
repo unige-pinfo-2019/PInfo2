@@ -25,12 +25,29 @@ public class MessageRestService {
 	@Inject
 	private MessageService messageService;
 	
-	// !!! Comment passer en parametres les IDs des users pour update le chat ? //
-	@GET
-	@Produces("application/json")
-	public List<Message> getChat() {
-		return messageService.updateChat();
+	// Send un message | public void sendMessage(Message message);
+	@POST
+	@Consumes("application/json")
+	public void sendMessage(Message message) {
+		messageService.sendMessage(message);
 	}
+	
+	// Delete un message
+	//@POST
+	//@Consumes("application/json")
+	//public void deleteMessage(Message message) {
+	//	messageService.sendMessage(message);
+	//}
+	
+	// !!! Comment passer en parametres les IDs des users pour update le chat ? //
+	@POST
+	//@Produces("application/json")
+	@Consumes("application/json")
+	public List<Message> getChat(Long user1Id, Long user2Id) {
+		return messageService.updateChat(user1Id, user2Id);
+	}
+	
+	// Update tous les chats
 	
 
 
