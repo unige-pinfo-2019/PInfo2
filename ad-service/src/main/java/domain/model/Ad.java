@@ -55,7 +55,7 @@ public class Ad implements Serializable {
 	
 	@Column(name="IMAGE_IDS")
 	@ElementCollection(fetch=FetchType.EAGER)
-	private List<Long> imageIds = new ArrayList<Long>();
+	private List<Long> imageIds = new ArrayList<>();
 	
 	// Specific setter for date to have a pretty JSON string date format
 	public void setDate(Date date) {
