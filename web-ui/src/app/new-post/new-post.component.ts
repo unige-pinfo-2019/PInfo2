@@ -10,6 +10,7 @@ import { PostComponent } from '../post/post.component';
 })
 export class NewPostComponent implements OnInit {
   postForm : FormGroup;
+  selecetdFile : File;
 
   constructor(private formBuilder: FormBuilder,
               private postsService:PostsService,
@@ -53,6 +54,12 @@ export class NewPostComponent implements OnInit {
     onAddHobby() {
         const newHobbyControl = this.formBuilder.control(null, Validators.required);
         this.getPhotos().push(newHobbyControl);
+    }
+    onUploadFiles(event){
+      console.log("onUploadFiles");
+      this.selecetdFile = event.target.files[0];
+      this.postsService.fileToServer(this.selecetdFile);
+
     }
 
 }
