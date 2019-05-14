@@ -1,10 +1,12 @@
 import {Subject} from 'rxjs';
 import {Injectable} from '@angular/core';
-import { HttpHeaders, HttpClient ,HttpParams} from '@angular/common/http';
+import { HttpHeaders, HttpClient ,HttpEventType} from '@angular/common/http';
+import { text } from '@angular/core/src/render3';
 
 /*Class regrouping all the services needed for posts*/
 @Injectable()
 export class PostsService{
+  
 
 
  postsSubject = new Subject<any[]>();
@@ -12,33 +14,15 @@ export class PostsService{
 
 
 private posts=[];
-/*  {
+  /*{
     id:1,
-    title:'Test post 1',
-    description: 'Ceci est le post 1, avec une quantité non-négligeable de texte afin de décrire au mieux ce magnifique article qui, malgré son apparence encore très primaire et sous ses aires de simple block blanc, recèle pourtant de moultes qualités ineffables.',
-    category: 'livres',
+    title:'Post50000',
+    description: 'Ceci est le post1',
     price:500,
     date:'2019-03-03',
-  },{
-    id:2,
-    title:'Test post 2',
-    description: 'Ceci est le post 2',
-    category: 'sport',
-    price:10,
-    date:'2019-03-03',
-  },{
-    id:3,
-    title:'Test post 3',
-    description: 'Ceci est le post 3',
-    price:1000,
-    date:'2019-03-03',
-  },{
-    id:4,
-    title:'Test post 4',
-    description: 'Ceci est le post 4',
-    price:1,
-    date:'2019-03-03',
-  }
+
+
+  },
 ];*/
 httpOptions = {
   headers: new HttpHeaders({
@@ -46,6 +30,13 @@ httpOptions = {
 
 
   }),
+};
+httpOptionsImage={
+  headers: new HttpHeaders(
+    {
+      'Content-Type': 'multipart/form-data',
+    }
+  ),
 };
 /*like(id:number){
   this.getPostById(id).likes+=1;
@@ -103,10 +94,10 @@ addPost(title:string, description:string,price:number){
   postObject.description=description;
   postObject.price=price;
   //postObject.date=this.lastUpdate;
-
+  
 
   this.posts.push(postObject);
-  this.printPosts();
+  //this.printPosts();
   this.emitPostSubject();
 
 
@@ -123,6 +114,45 @@ addPost(title:string, description:string,price:number){
   }
 
 );
+  }
+
+  fileToServer(selecetdFile: File) {
+    
+/*curl -i -X POST -H 'Content-Type:multipart/form-data' -F 'file=@image.png' -F 'size=1' localhost:8080/image*/ 
+    const uploadFormData = new FormData();
+    const size = selecetdFile.size/(1024*1024);
+  
+    uploadFormData.append('file', selecetdFile);
+    uploadFormData.append('size', '1'); 
+    
+
+    //print form Data
+    
+
+
+    this.httpClient
+    .post('http://localhost:14080/image'
+     ,uploadFormData,{ 
+        responseType:'text',       
+        reportProgress:true,   
+        observe: 'events', 
+      })
+    .subscribe(
+      (event)=>{
+        if(event.type === HttpEventType.UploadProgress){
+          console.log('Upload Progress: '+ Math.round(event.loaded/event.total*100)+ '%');
+        }else if (event.type === HttpEventType.Response){
+          console.log('Headers:'+ event.headers);
+        }
+        //const resp:any= response.toString();
+        
+        console.log(event);
+        console.log('Image envoyé  ! ');
+    },(error) => {
+      console.log('Erreur  ! : '+ error);
+  
+    }
+  );
   }
 
   getPosts(){
@@ -142,7 +172,7 @@ addPost(title:string, description:string,price:number){
         console.log('Erreur!:'+ error);
       }
     )
-    this.printPosts();
+    //this.printPosts();
   }
   searchPost(searchTerm:string) {
    // console.log("searching on server for : " +searchTerm);
@@ -156,7 +186,7 @@ addPost(title:string, description:string,price:number){
       (error)=>{
         console.log('Erreur!:'+ error);
       }
-
+      
     )
   }
   deletePosts(id:number){

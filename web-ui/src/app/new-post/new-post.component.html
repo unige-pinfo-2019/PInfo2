@@ -38,6 +38,7 @@
   </div>
 
   <!-- Ad pictures -->
+<!--
   <div formArrayName="photos">
     <p class="h5">Pictures</p>
     <div class="form-group" *ngFor="let photosControl of getPhotos().controls; let i = index">
@@ -45,10 +46,25 @@
     </div>
     <button type="button" class="btn" (click)="onAddPhoto()">Add new picture</button>
   </div>
+-->
+<form class="md-form" action="#">
+  <h3>Pictures</h3>
+  <div class="file-field">
+    <div class="btn btn-primary btn-sm float-left">
+      <span>Choose files</span>
+      <input type="file" multiple (change)="onUploadFiles($event)">
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text" placeholder="Upload one or more pictures" >
+    </div>
+  </div>
+</form>
+
+
 
   <!-- Submit the ad -->
   <div class="d-flex flex-row-reverse">
-    <button type="submit" class="btn">Submit</button>
+    <button type="submit" (change)="onUploadFiles($event)" class="btn">Submit</button>
   </div>
 
 </form>
