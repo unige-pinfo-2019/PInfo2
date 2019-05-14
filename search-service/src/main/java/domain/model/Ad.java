@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Ad extends Searchable {
+public class Ad implements Searchable {
 	
 	private Long id;
 	
