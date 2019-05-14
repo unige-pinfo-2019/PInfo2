@@ -14,6 +14,7 @@
     
     <properties>
 		<skip-docker-build>false</skip-docker-build>
+		<jacoco.skip>true</jacoco.skip>
 	</properties>
 
     <build>
@@ -37,7 +38,7 @@
 				<plugins>
 					<plugin>
 						<groupId>io.fabric8</groupId>
-						<artifactId>fabric8-maven-plugin</artifactId>
+						<artifactId>docker-maven-plugin</artifactId>
 
 						<configuration>
 							<useColor>true</useColor>

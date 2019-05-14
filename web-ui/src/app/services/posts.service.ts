@@ -15,7 +15,7 @@ private posts=[];
 /*  {
     id:1,
     title:'Test post 1',
-    description: 'Ceci est le post 1, avec une quantité non-négligeable de texte afin de décrire au mieux ce magnifique article',
+    description: 'Ceci est le post 1, avec une quantité non-négligeable de texte afin de décrire au mieux ce magnifique article qui, malgré son apparence encore très primaire et sous ses aires de simple block blanc, recèle pourtant de moultes qualités ineffables.',
     category: 'livres',
     price:500,
     date:'2019-03-03',

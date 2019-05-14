@@ -41,6 +41,7 @@ services:
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-database
+      KONG_LOG_LEVEL: debug      
       KONG_PROXY_ACCESS_LOG: "/dev/stdout"
       KONG_ADMIN_ACCESS_LOG: "/dev/stdout"
       KONG_PROXY_ERROR_LOG: "/dev/stderr"
@@ -50,10 +51,10 @@ services:
       KONG_PG_PASSWORD: kong
       KONG_PG_USER: kong
       KONG_PG_DATABASE: kongdb
-      KONG_PLUGINS: "bundled,oidc"
+      KONG_PLUGINS: "bundled,jwt"
     volumes:      
       - ../web-ui/dist:/www/data:ro
-   ##Assuming we want to put our own certificates, we should put them in /usr/local/kong/ssl/certs
+#    Assuming we want to put our own certificates, we should put them in /usr/local/kong/ssl/certs
       - ./certs:/usr/local/kong/ssl/certs      
     ports:
      - 80:80
@@ -109,6 +110,8 @@ services:
      restart: on-failure
      ports:
        - 8080:8080
+     volumes:      
+       - ./iam-config/:/tmp/iam-config
      environment:
        - KEYCLOAK_USER=admin
        - KEYCLOAK_PASSWORD=password
@@ -119,7 +122,7 @@ services:
        - DB_PORT=5432
        - DB_DATABASE=keycloakdb
        - PROXY_ADDRESS_FORWARDING=true
-       - KEYCLOAK_IMPORT=/tmp/iam-config/master.realm.json
+       - KEYCLOAK_IMPORT=/tmp/iam-config/realms.json
      depends_on:
         iam-db :
           condition: service_healthy
@@ -132,7 +135,9 @@ networks:
   frontend-network:
      driver: bridge 
   gateway-network:
-     driver: bridge 
+     driver: bridge     
   backend-network:
-    driver: bridge   
+    external:
+       name: microservices_backend-network
+
 

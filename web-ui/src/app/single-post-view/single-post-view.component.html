@@ -46,12 +46,21 @@
 </div>
 
 <!-- Ad informations -->
-<div class="border rounded p-3">
-  <h4>Title :</h4>
-  <p>{{title}}</p>
-  <h4>Description :</h4>
-  <p>{{description}}</p>
-  <h4>Price: {{price}}.-</h4>
-  <h6>Publication date : {{date}}</h6>
-  <button class="btn">Contact publisher</button>
+<div class="post-description row border rounded p-3 mx-0">
+  <div class="col-8 p-0 pr-3">
+    <div class="post-description-text border rounded p-3">
+      <h3>{{title}}</h3>
+      <p>{{description}}</p>
+    </div>
+  </div>
+  <div class="col-4 border rounded p-3">
+    <div class="text-center my-5">
+      <h1>{{price}}.-</h1>
+    </div>
+    <div class="d-inline-flex">
+      <p>Category <span id="cat" class="border rounded px-auto py-0 my-3">something</span></p>
+    </div>
+    <h6>Publication date {{date}}</h6>
+    <button class="btn">Contact publisher</button>
+  </div>
 </div>

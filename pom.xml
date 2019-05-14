@@ -160,7 +160,12 @@
 				<plugin>
 					<groupId>io.fabric8</groupId>
 					<artifactId>fabric8-maven-plugin</artifactId>
-					<version>4.0.0-M2</version>
+					<version>4.1.0</version>
+				</plugin>
+				<plugin>
+					 <groupId>io.fabric8</groupId>
+    					 <artifactId>docker-maven-plugin</artifactId>
+    					 <version>0.30.0</version>
 				</plugin>
 			</plugins>
 	</pluginManagement>
@@ -232,7 +237,7 @@
 				<plugins>
 					<plugin>
 						<groupId>io.fabric8</groupId>
-						<artifactId>fabric8-maven-plugin</artifactId>
+						<artifactId>docker-maven-plugin</artifactId>
 						<configuration>
 							<skip>${skip-docker-build}</skip>
 							<useColor>true</useColor>

@@ -17,7 +17,7 @@
 <div class="border rounded p-2 mb-3">
 
   <!-- First row : title and bar -->
-  <div class="row py-4">
+  <div class="row py-3">
 
     <!-- Title -->
     <div class="col-3">
@@ -25,7 +25,7 @@
     </div>
 
     <!-- Search bar -->
-    <div class="col-9 searchContainer">
+    <div class="col-9 searchContainer pr-3 pl-0">
       <form class="navbar-form" role="search">
         <div class="input-group add-on">
           <!-- Input -->
@@ -48,7 +48,7 @@
     </div>
 
     <!-- Search results -->
-    <div class="col-9">
+    <div class="col-9 pr-3 pl-0">
       <ul class="list-group">
         <app-post *ngFor="let aPost of posts" [id]="aPost.id" [title]="aPost.title" [description]="aPost.description" [price]="aPost.price" [date]="aPost.date" [category]="aPost.category"></app-post>
       </ul>
