@@ -25,7 +25,7 @@ public class UserProducer {
 	public void sendAllUsers(String topic) {
 		log.info("Send the current state of ALL users to the topic " + topic);
 		for (User user : userService.getAll()) {
-			producer.send(topic, user);	
+			producer.send(topic, user);
 		}
 	}
 

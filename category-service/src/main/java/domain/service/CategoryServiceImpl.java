@@ -18,7 +18,7 @@ import domain.model.Category;
 @Default
 public class CategoryServiceImpl implements CategoryService {
 	
-	@PersistenceContext(unitName = "InmemoryPU")
+	@PersistenceContext(unitName = "CategoryPU")
 	private EntityManager em;
 	
 	@Override
