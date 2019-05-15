@@ -2,7 +2,7 @@ sudo: required
 
 jobs:
   include:
-    - stage: Root build and sonar 
+    - stage: build
       language: java
       jdk: openjdk11
       addons:
@@ -26,7 +26,7 @@ jobs:
         - docker login -u "$DOCKER_ID_USER" -p "$DOCKER_PASSWORD"
         - docker tag unige/ad-service $DOCKER_ID_USER/ad-service
 
-    - stage: Search Service 
+    - stage: build 
       language: java
       jdk: openjdk11
       services:
@@ -41,7 +41,7 @@ jobs:
         - docker tag unige/search-service $DOCKER_ID_USER/search-service
         - docker push $DOCKER_ID_USER/search-service
 
-    - stage: Category Service 
+    - stage: build
       language: java
       jdk: openjdk11
       services:
@@ -56,7 +56,7 @@ jobs:
         - docker tag unige/category-service $DOCKER_ID_USER/category-service
         - docker push $DOCKER_ID_USER/category-service
 
-    - stage: User Service 
+    - stage: build
       language: java
       jdk: openjdk11
       services:
@@ -71,7 +71,7 @@ jobs:
         - docker tag unige/user-service $DOCKER_ID_USER/user-service
         - docker push $DOCKER_ID_USER/user-service
 
-    - stage: Image Service 
+    - stage: build
       language: java
       jdk: openjdk11
       services:
@@ -86,7 +86,7 @@ jobs:
         - docker tag unige/image-service $DOCKER_ID_USER/image-service
         - docker push $DOCKER_ID_USER/image-service
 
-    - stage: Api Gateway 
+    - stage: build 
       language: minimal
       services:
         - docker
