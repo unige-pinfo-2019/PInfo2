@@ -27,8 +27,7 @@ public class SearchRestService {
 							 @QueryParam("categoryId") Long categoryId, 
 							 @QueryParam("userId") Long userId) {
 		
-		List<Ad> hits = searchService.matchAd(query, Optional.ofNullable(categoryId), Optional.ofNullable(userId));
-		return hits;
+		return searchService.matchAd(query, Optional.ofNullable(categoryId), Optional.ofNullable(userId));
 	}
 
 }

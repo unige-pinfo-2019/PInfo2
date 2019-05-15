@@ -13,6 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import api.msg.UserProducer;
 import domain.model.User;
@@ -32,9 +33,12 @@ public class UserRestService {
 	public Response create(User user) {
 		try {
 			userService.create(user);
-		} catch (IllegalArgumentException e) {
-			return Response.status(Response.Status.BAD_REQUEST).build();
+		} catch(IllegalArgumentException i) {
+			return Response.status(Status.BAD_REQUEST).build();
+		} catch(Exception e) {
+			return Response.status(Status.BAD_GATEWAY).build();
 		}
+		
 		userProducer.send(user, "usersCreate");
 		return Response.ok().build();
 	}
@@ -42,16 +46,26 @@ public class UserRestService {
 	@DELETE
 	@Path("{id}")
 	public Response delete(@PathParam("id") Long userId) {
-		userService.delete(userService.get(userId));
-		userProducer.send(userId, "userDeleted");
+		try {
+			userService.delete(userService.get(userId));
+			userProducer.send(userId, "userDeleted");
+		} catch(Exception e) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		
 		return Response.ok().build();
 	}
 	
 	@PUT
 	@Consumes("application/json")
 	public Response update(User user) {
-		userService.update(user);
-		userProducer.send(user, "userUpdate");
+		try {
+			userService.update(user);
+			userProducer.send(user, "userUpdate");
+		} catch(Exception e) {
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		}
+		
 		return Response.ok().build();
 	}
 	

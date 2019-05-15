@@ -1,6 +1,6 @@
 package domain.model;
 
-public abstract class Searchable {
+public interface Searchable {
 	
 	public abstract Long getId();
 	
@@ -10,7 +10,7 @@ public abstract class Searchable {
 	
 	public abstract String toJson();
 	
-	public String getClassName() {
+	public default String getClassName() {
 		return this.getClass().getSimpleName();
 	}
 
