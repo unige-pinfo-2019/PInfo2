@@ -23,7 +23,7 @@ export class PostViewComponent implements OnInit {
     }
 
     addToServer(){
-      this.postsService.addPost("Mon post","voici ma description de mon post",40);
+     // this.postsService.addPost("Mon post","voici ma description de mon post",40);
 
 
 
@@ -43,7 +43,7 @@ export class PostViewComponent implements OnInit {
 
     ngOnInit() {
       synapseThrow();
-      //this.postsService.getPosts();
+      this.postsService.getPosts();
       this.postSubscription= this.postsService.postsSubject.subscribe(
         (posts: any[]) => {
           this.posts= posts;

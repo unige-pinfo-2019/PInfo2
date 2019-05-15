@@ -2,7 +2,7 @@
   <li class="mb-3" [ngClass]="{'list-group-item': true}">
     <div class="row">
       <div class="col-3 my-auto">
-        <img src="assets/nopicture.png">
+        <img [src]="thumbnailUrl" alt="Image not found" onerror="this.src='assets/nopicture.png';">
       </div>
       <div class="col-6 my-auto">
         <h4>{{ title }}</h4>

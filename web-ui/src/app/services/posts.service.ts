@@ -11,30 +11,18 @@ export class PostsService{
   
  postsSubject = new Subject<any[]>();
  //this array contains the posts availible on the ui
-private posts=[];
-
+public posts=[];
+public singlePost={  
+  };
 private localUrl= 'http://localhost:';
 private serverUrl = 'http://pinfo2.unige.ch:';
 
-<<<<<<< HEAD
+
 private imagePort='14080/image';
 private adPort='15080/ad';
 
 public imageId : number;
-  
-=======
-private posts=[];
-  /*{
-    id:1,
-    title:'Post50000',
-    description: 'Ceci est le post1',
-    price:500,
-    date:'2019-03-03',
 
-
-  },
-];*/
->>>>>>> 3183744bceb4908af4d4d0d5b18d3a607f54bcae
 httpOptions = {
   headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -60,12 +48,39 @@ emitPostSubject(){
 }
 
 getPostById(id:number){
+  console.log('chargement postById... ');
+
+  this.httpClient
+  .get<any[]>('http://pinfo2.unige.ch:15080/ad/'+id)
+  .subscribe(
+    (response) => {
+     
+
+      this.singlePost = response;
+      
+      //console.log("getpostByid epost");
+      //console.log(this.posts);
+      this.emitPostSubject();
+      //this.emitPostSubject();
+      
+    //this.printPosts();
+    console.log('chargement réussi');
+    
+
+    },
+    (error)=>{
+      console.log('Erreur!:'+ error);
+    }
+  )
+
+
+  /*
   const post  = this.posts.find(
     (s)=>{
       return s.id===id;
     }
   );
-  return post;
+  return post;*/
 }
 
 
@@ -79,7 +94,7 @@ for(let i=0;i<this.posts.length;i++){
   console.log('Description= '+ this.posts[i].description);
   console.log('price= '+ this.posts[i].price);
   console.log('date= '+ this.posts[i].date);
-  console.log('Category= '+ this.posts[i].category);
+  console.log('Category= '+ this.posts[i].categoryId);
 
 }
 
@@ -112,7 +127,7 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
   console.log('Enregistrement en cours... ');
   console.log(postObject);
   this.httpClient
-  .post(this.localUrl+this.adPort,
+  .post(this.serverUrl+this.adPort,
   postObject,this.httpOptions).subscribe(
   ()=>{
     console.log('Enregistrement terminé ! ');
@@ -136,7 +151,7 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
     
 
     await this.httpClient 
-    .post(this.localUrl+this.imagePort
+    .post(this.serverUrl+this.imagePort
      ,uploadFormData,{ 
         responseType:'text',       
         reportProgress:true,   
@@ -146,15 +161,12 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
       (event)=>{
         var imageId2;
         if(event.type === HttpEventType.UploadProgress){
-          //console.log('Upload Progress: '+ Math.round(event.loaded/event.total*100)+ '%');
+          console.log('Upload Progress: '+ Math.round(event.loaded/event.total*100)+ '%');
           
         }else if (event.type === HttpEventType.Response){
-          const imageUrl = event.headers.get('location');
-          
-          imageId2 =  parseInt(imageUrl.substr(0,imageUrl.length-1));
-          console.log('imageUrl: '+ imageId2);
+          const imageUrl = event.headers.get('location'); //gets the url returned by the POST
+          imageId2 =  parseInt(imageUrl.substring(imageUrl.lastIndexOf('/')+1,imageUrl.length)); //extract Id from the url
           this.imageId = imageId2;
-          console.log('return: '+ this.imageId);
           this.emitPostSubject();
         }
        
@@ -185,6 +197,12 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
       }
     )
     //this.printPosts();
+  }
+  getImage(imageId:number){
+    console.log('loading image from server..');
+    /*this.httpClient
+    .get<any[]>(this.serverUrl+this.imagePort)*/
+
   }
   searchPost(searchTerm:string) {
    // console.log("searching on server for : " +searchTerm);

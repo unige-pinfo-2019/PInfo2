@@ -33,7 +33,9 @@ export class NewPostComponent implements OnInit {
     }
     onSubmitForm() {
         const formValue = this.postForm.value;
+        this.imageId= this.postsService.imageId;
         console.log('onSumit imageid'+ this.imageId);
+        console.log('onSumit imageid on postService '+ this.postsService.imageId);
 
         this.postsService.addPost(formValue['title'],
                                   formValue['description'],
@@ -54,7 +56,7 @@ export class NewPostComponent implements OnInit {
       this.selecetdFile = event.target.files[0];
       await this.postsService.fileToServer(this.selecetdFile);
       console.log('postsService imagaeId '+ this.postsService.imageId);
-      this.imageId= this.postsService.imageId;
+      
     
 
     }

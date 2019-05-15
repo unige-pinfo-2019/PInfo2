@@ -12,16 +12,37 @@ export class SinglePostViewComponent implements OnInit {
   description: string = '';
   price:number;
   date:Date;
+  categoryId=0;
+  imageIds=0;
+  imageUrl='';
 
   constructor(private postService:PostsService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
-    this.title = this.postService.getPostById(+id).title
-    this.description = this.postService.getPostById(+id).description;
-    this.price = this.postService.getPostById(+id).price;
-    this.date= this.postService.getPostById(+id).date;
+    this.postService.getPostById(+id);
+    console.log('onInit singlePost is : ' + this.postService.singlePost);
+    console.log(this.postService.posts);
+    let post = this.postService.posts;
+    //console.log("postTitle: "+ post);
+    //console.log(post[id].title);
+    //console.log('id: '+ id);
+    
+    this.title = post[id].title;
+    this.description = post[id].description;
+    this.price = post[id].price;
+    this.date= post[id].date;
+    
+    //for(let i=0;i<post[id].imageIds-1;i++){
+      
+      this.imageIds= post[id].imageIds[0];
+      this.imageUrl='http://pinfo2.unige.ch:14080/image/'+this.imageIds.toString();
+      console.log("src= "+ this.imageUrl );
+     // console.log("imagesIDs: "+ this.imageIds);
+      //console.log("imageid[i]"+ this.imageIds[i] );
+    //}
+    //console.log('imageIds: '+ this.imageIds);
     
   }
 
