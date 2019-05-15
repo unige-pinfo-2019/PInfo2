@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'URL_DE_API',
+  keycloak: {
+    url: 'https://localhost/auth',
+    realm: 'apigw',
+    clientId: 'web-sso',
+    checkLoginIframe: true,
+    onLoad: 'login-required',
+    responseMode: 'fragment',
+  },
 };
 
 /*

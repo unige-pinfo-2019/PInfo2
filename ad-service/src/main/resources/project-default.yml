@@ -1,11 +1,11 @@
 thorntail:
   datasources:
     data-sources:
-      categoryds:
+      adds:
         driver-name: myh2
-        connection-url: jdbc:h2:mem:CategoryDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-        user-name: sa
-        password: sa 
+        connection-url: jdbc:h2:mem:adDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        user-name: ad
+        password: ad 
     jdbc-drivers:
       myh2:
         driver-class-name: org.h2.Driver

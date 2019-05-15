@@ -18,7 +18,7 @@ import domain.model.Ad;
 @Default
 public class AdServiceImpl implements AdService {
 	
-	@PersistenceContext(unitName = "InmemoryPU")
+	@PersistenceContext(unitName = "AdPU")
 	private EntityManager em;
 
 	@Override

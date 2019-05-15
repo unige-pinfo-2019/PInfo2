@@ -16,11 +16,25 @@ private posts=[];
 private localUrl= 'http://localhost:';
 private serverUrl = 'http://pinfo2.unige.ch:';
 
+<<<<<<< HEAD
 private imagePort='14080/image';
 private adPort='15080/ad';
 
 public imageId : number;
   
+=======
+private posts=[];
+  /*{
+    id:1,
+    title:'Post50000',
+    description: 'Ceci est le post1',
+    price:500,
+    date:'2019-03-03',
+
+
+  },
+];*/
+>>>>>>> 3183744bceb4908af4d4d0d5b18d3a607f54bcae
 httpOptions = {
   headers: new HttpHeaders({
       'Content-Type': 'application/json',
