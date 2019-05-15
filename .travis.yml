@@ -89,7 +89,7 @@ jobs:
         - docker push $DOCKER_ID_USER/image-service
 
     - stage: build 
-      language: minimal
+      language: java
       services:
         - docker
       before_script:
