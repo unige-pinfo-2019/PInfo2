@@ -12,7 +12,7 @@ jobs:
         - mvn clean package
         - mvn sonar:sonar -Dsonar.projectKey=unige-pinfo-2019_PInfo2 -Dsonar.organization=unige-pinfo-2019 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6a52b61ec8bac75693325785b5dd8214362acae7
 
-    - stage: Ad Service
+    - stage: build
       language: java
       jdk: openjdk11
       services:
