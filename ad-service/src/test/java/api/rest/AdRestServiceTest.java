@@ -25,7 +25,7 @@ public class AdRestServiceTest {
 	public void getAdTest() {
 		Ad ad = adRestService.get((long) 1);
 		assertNotNull(ad);
-		assertEquals(ad.getId(), (long) 1);
+		assertEquals((double) ad.getId(),(double) (long) 1);
 	}
 	
 	
