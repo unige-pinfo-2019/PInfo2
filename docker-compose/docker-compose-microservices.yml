@@ -161,7 +161,7 @@ services:
     networks:
       - backend-network    
     ports:
-      - "10080:8080"
+      - "15080:8080"
     environment:
       THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
       THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
@@ -252,9 +252,9 @@ volumes:
     pgdata-usr:
     pgdata-img:
     
-#volumes:
-#  esdata1:
-#    driver: local
+volumes:
+  esdata1:
+    driver: local
 
 networks:
   backend-network:
