@@ -55,7 +55,13 @@ public class AdRestService {
 	@Path("{id}")
 	@Produces("application/json")
 	public Ad get(@PathParam("id") Long adId) {
-		return adService.get(adId);
+		try {
+			return adService.get(adId);
+		}
+		catch(NullPointerException e) {
+			return null;
+		}
+		
 	}
 	
 	@PUT
