@@ -10,6 +10,8 @@ import { PostComponent } from '../post/post.component';
 })
 export class NewPostComponent implements OnInit {
   postForm : FormGroup;
+  selecetdFile : File;
+  imageId=[];
 
   constructor(private formBuilder: FormBuilder,
               private postsService:PostsService,
@@ -31,28 +33,35 @@ export class NewPostComponent implements OnInit {
     }
     onSubmitForm() {
         const formValue = this.postForm.value;
+        this.imageId= this.postsService.imageId;
 
 
         this.postsService.addPost(formValue['title'],
                                   formValue['description'],
-                                  formValue['price']);
-        //console.log('description: '+ formValue['description']);
-        /*const newUser = new PostComponent(
-          formValue['firstName'],
-          formValue['lastName'],
-          formValue['drinkPreference'],
-          formValue['photos'] ? formValue['photos'] : []
-        );*/
-        //this.postsService.addPost(newUser);
+                                  formValue['price'],
+                                  0,
+                                  this.imageId,0
+                                  );
+   
 
         this.router.navigate(['/posts']);
     }
     getPhotos(): FormArray {
         return this.postForm.get('photos') as FormArray;
     }
-    onAddHobby() {
-        const newHobbyControl = this.formBuilder.control(null, Validators.required);
-        this.getPhotos().push(newHobbyControl);
+
+    async onUploadFiles(event){
+      console.log("onUploadFiles");
+      for(let i=0;i<event.target.files.length;i++){
+        console.log("number of files recieved:"+ i)
+        this.selecetdFile = event.target.files[i];
+        await this.postsService.fileToServer(this.selecetdFile);
+      }
+      
+      console.log('postsService imagaeId '+ this.postsService.imageId);
+      
+    
+
     }
 
 }

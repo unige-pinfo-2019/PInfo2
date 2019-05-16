@@ -19,5 +19,5 @@
 			
 			<property name="javax.persistence.sql-load-script-source" value="META-INF/load.sql"/>
 		</properties>
-</persistence-unit>
+	</persistence-unit>
 </persistence>

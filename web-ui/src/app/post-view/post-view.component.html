@@ -50,7 +50,7 @@
     <!-- Search results -->
     <div class="col-9 pr-3 pl-0">
       <ul class="list-group">
-        <app-post *ngFor="let aPost of posts" [id]="aPost.id" [title]="aPost.title" [description]="aPost.description" [price]="aPost.price" [date]="aPost.date" [category]="aPost.category"></app-post>
+        <app-post *ngFor="let aPost of posts" [id]="aPost.id" [title]="aPost.title" [description]="aPost.description" [price]="aPost.price" [date]="aPost.date" [categoryId]="aPost.categoryId" [imageIds]="aPost.imageIds"></app-post>
       </ul>
     </div>
   </div>

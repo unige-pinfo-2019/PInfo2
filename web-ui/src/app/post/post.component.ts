@@ -12,8 +12,9 @@ export class PostComponent implements OnInit {
   @Input() description: string ;
   @Input() date: string ;
   @Input() price:number;
-  @Input() category:string;
-  @Input() image:string;
+  @Input() categoryId:number;
+  @Input() imageIds=[];
+  @Input() thumbnailUrl:string;
 
 
 
@@ -24,7 +25,9 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     //this.postService.getPosts();
-    console.log("category: "+ this.category);
+    this.thumbnailUrl='http://pinfo2.unige.ch:14080/image/'+this.imageIds[0];
+    //console.log("category: "+ this.categoryId);
+    //console.log('imageId:'+ this.thumbnailUrl);
   }
 
 
@@ -36,19 +39,6 @@ export class PostComponent implements OnInit {
   onDelete(){
     this.postService.deletePosts(this.id);
   }
-/*  getColor(){
-    if(this.appareilStatus=='allumé'){
-      return 'green';
-    }else if(this.appareilStatus=='éteint'){
-      return 'red';
-    }else if (this.appareilStatus=='brillantes'){
-      return 'yellow';
-    }
-  }*/
-/*  onAllumerOne(id:number){
-    this.appareilService.switchOnOne(id-1);
-  }
-  onEteindreOne(id:number){
-    this.appareilService.switchOffOne(id-1);
-  }*/
+
+
 }

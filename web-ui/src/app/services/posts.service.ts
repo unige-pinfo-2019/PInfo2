@@ -1,45 +1,28 @@
 import {Subject} from 'rxjs';
 import {Injectable} from '@angular/core';
-import { HttpHeaders, HttpClient ,HttpParams} from '@angular/common/http';
+import { HttpHeaders, HttpClient ,HttpEventType} from '@angular/common/http';
+import { text } from '@angular/core/src/render3';
+import { UserService } from './user.service';
+
 
 /*Class regrouping all the services needed for posts*/
 @Injectable()
 export class PostsService{
-
-
+  
  postsSubject = new Subject<any[]>();
-   //lastUpdate = new Date().toLocaleString();
+ //this array contains the posts availible on the ui
+public posts=[];
+public singlePost={  
+  };
+private localUrl= 'http://localhost:';
+private serverUrl = 'http://pinfo2.unige.ch:';
 
 
-private posts=[];
-/*  {
-    id:1,
-    title:'Test post 1',
-    description: 'Ceci est le post 1, avec une quantité non-négligeable de texte afin de décrire au mieux ce magnifique article qui, malgré son apparence encore très primaire et sous ses aires de simple block blanc, recèle pourtant de moultes qualités ineffables.',
-    category: 'livres',
-    price:500,
-    date:'2019-03-03',
-  },{
-    id:2,
-    title:'Test post 2',
-    description: 'Ceci est le post 2',
-    category: 'sport',
-    price:10,
-    date:'2019-03-03',
-  },{
-    id:3,
-    title:'Test post 3',
-    description: 'Ceci est le post 3',
-    price:1000,
-    date:'2019-03-03',
-  },{
-    id:4,
-    title:'Test post 4',
-    description: 'Ceci est le post 4',
-    price:1,
-    date:'2019-03-03',
-  }
-];*/
+private imagePort='14080/image';
+private adPort='15080/ad';
+
+public imageId =[];
+
 httpOptions = {
   headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -47,17 +30,16 @@ httpOptions = {
 
   }),
 };
-/*like(id:number){
-  this.getPostById(id).likes+=1;
+httpOptionsImage={
+  headers: new HttpHeaders(
+    {
+      'Content-Type': 'multipart/form-data',
+    }
+  ),
+};
 
-
-}
-dislike(id:number){
-  this.getPostById(id).likes-=1;
-
-
-}*/
-constructor(private httpClient: HttpClient){
+constructor(private httpClient: HttpClient,
+            private userService:UserService){
 
 
 }
@@ -66,6 +48,33 @@ emitPostSubject(){
 }
 
 getPostById(id:number){
+  console.log('chargement postById... ');
+  /*
+  this.httpClient
+  .get<any[]>('http://pinfo2.unige.ch:15080/ad/'+id)
+  .subscribe(
+    (response) => {
+     
+
+      this.singlePost = response;
+      
+      //console.log("getpostByid epost");
+      //console.log(this.posts);
+      this.emitPostSubject();
+      //this.emitPostSubject();
+      
+    //this.printPosts();
+    console.log('chargement réussi');
+    
+
+    },
+    (error)=>{
+      console.log('Erreur!:'+ error);
+    }
+  )*/
+
+
+  
   const post  = this.posts.find(
     (s)=>{
       return s.id===id;
@@ -80,40 +89,45 @@ printPosts(){
   console.log('ArraytoString:');
 
 for(let i=0;i<this.posts.length;i++){
-console.log('id= '+ this.posts[i].id);
-console.log('title= '+ this.posts[i].title);
-console.log('Description= '+ this.posts[i].description);
-console.log('price= '+ this.posts[i].price);
-console.log('date= '+ this.posts[i].date);
-console.log('Category= '+ this.posts[i].category);
+  console.log('id= '+ this.posts[i].id);
+  console.log('title= '+ this.posts[i].title);
+  console.log('Description= '+ this.posts[i].description);
+  console.log('price= '+ this.posts[i].price);
+  console.log('date= '+ this.posts[i].date);
+  console.log('Category= '+ this.posts[i].categoryId);
 
 }
 
 }
-addPost(title:string, description:string,price:number){
-  const postObject = {
-    //id:0,
-    title: 'MonPost',
-    description:'blablablalbalbalba',
-    price: 50,
+addPost(title:string, description:string,price:number,categoryId:number,imageIds:number[],userId:number){
+
+        const postObject = {
+    //id:0 The backend decides of the postId,but the field does exists
+    title: '',
+    description:'',
+    price: 0,
     categoryId:0,
-   // caegory:'Livre',
+    userId:0,
+    imageIds:[],
   }
   postObject.title= title;
   postObject.description=description;
   postObject.price=price;
-  //postObject.date=this.lastUpdate;
+  postObject.categoryId=categoryId;
+  postObject.imageIds=imageIds;
+  postObject.userId=userId;
+  //console.log('imagesIds: '+ imageIds);
 
 
   this.posts.push(postObject);
-  this.printPosts();
+
   this.emitPostSubject();
 
 
   console.log('Enregistrement en cours... ');
   console.log(postObject);
   this.httpClient
-  .post('http://localhost:10080/ad/',
+  .post(this.serverUrl+this.adPort,
   postObject,this.httpOptions).subscribe(
   ()=>{
     console.log('Enregistrement terminé ! ');
@@ -125,11 +139,52 @@ addPost(title:string, description:string,price:number){
 );
   }
 
+   async fileToServer(selecetdFile: File) {
+  
+
+    const uploadFormData = new FormData();
+    const size = selecetdFile.size/(1024*1024);
+    
+  
+    uploadFormData.append('file', selecetdFile);
+    uploadFormData.append('size', '1'); 
+    
+
+    await this.httpClient 
+    .post(this.serverUrl+this.imagePort
+     ,uploadFormData,{ 
+        responseType:'text',       
+        reportProgress:true,   
+        observe: 'events', 
+      })
+    .subscribe(
+      (event)=>{
+        var imageId2;
+        if(event.type === HttpEventType.UploadProgress){
+          console.log('Upload Progress: '+ Math.round(event.loaded/event.total*100)+ '%');
+          
+        }else if (event.type === HttpEventType.Response){
+          const imageUrl = event.headers.get('location'); //gets the url returned by the POST
+          imageId2 =  parseInt(imageUrl.substring(imageUrl.lastIndexOf('/')+1,imageUrl.length)); //extract Id from the url
+          this.imageId.push(imageId2);
+          this.emitPostSubject();
+          console.log(this.imageId);
+        }
+       
+        
+    },(error) => {
+      console.log('Erreur  ! : '+ error);
+  
+    }
+  );
+    
+  }
+
   getPosts(){
     console.log('chargement en cours... ');
 
     this.httpClient
-    .get<any[]>('http://localhost:10080/ad')
+    .get<any[]>('http://pinfo2.unige.ch:15080/ad')
     .subscribe(
       (response) => {
         this.posts = response;
@@ -142,11 +197,17 @@ addPost(title:string, description:string,price:number){
         console.log('Erreur!:'+ error);
       }
     )
-    this.printPosts();
+    //this.printPosts();
+  }
+  getImage(imageId:number){
+    console.log('loading image from server..');
+    /*this.httpClient
+    .get<any[]>(this.serverUrl+this.imagePort)*/
+
   }
   searchPost(searchTerm:string) {
-   // console.log("searching on server for : " +searchTerm);
-    this.httpClient.get<any[]>('http://localhost:11080/search/ad?q='+searchTerm).
+    console.log("searching on server for : " +searchTerm);
+    this.httpClient.get<any[]>('http://pinfo2.unige.ch:11080/search/ad?q='+searchTerm).
     subscribe(
       (response)=>{
         //console.log("this is the response"+response);
@@ -156,14 +217,14 @@ addPost(title:string, description:string,price:number){
       (error)=>{
         console.log('Erreur!:'+ error);
       }
-
+      
     )
   }
   deletePosts(id:number){
 
     console.log('deleting all post of id: '+ id);
     this.httpClient
-    .delete('http://localhost:10080/ad/'+id,this.httpOptions)
+    .delete('http://pinfo2.unige.ch:10080/ad/'+id,this.httpOptions)
     .subscribe(
       () => {
         console.log('Tout a été supprimé')!
