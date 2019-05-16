@@ -13,7 +13,7 @@ export class PostComponent implements OnInit {
   @Input() date: string ;
   @Input() price:number;
   @Input() categoryId:number;
-  @Input() imageIds:number[];
+  @Input() imageIds=[];
   @Input() thumbnailUrl:string;
 
 
@@ -25,9 +25,9 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     //this.postService.getPosts();
-    this.thumbnailUrl='http://pinfo2.unige.ch:14080/image/'+this.imageIds.toString();
-    console.log("category: "+ this.categoryId);
-    console.log('imageId:'+ this.thumbnailUrl);
+    this.thumbnailUrl='http://pinfo2.unige.ch:14080/image/'+this.imageIds[0];
+    //console.log("category: "+ this.categoryId);
+    //console.log('imageId:'+ this.thumbnailUrl);
   }
 
 

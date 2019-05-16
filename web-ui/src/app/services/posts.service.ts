@@ -21,7 +21,7 @@ private serverUrl = 'http://pinfo2.unige.ch:';
 private imagePort='14080/image';
 private adPort='15080/ad';
 
-public imageId : number;
+public imageId =[];
 
 httpOptions = {
   headers: new HttpHeaders({
@@ -49,7 +49,7 @@ emitPostSubject(){
 
 getPostById(id:number){
   console.log('chargement postById... ');
-
+  /*
   this.httpClient
   .get<any[]>('http://pinfo2.unige.ch:15080/ad/'+id)
   .subscribe(
@@ -71,16 +71,16 @@ getPostById(id:number){
     (error)=>{
       console.log('Erreur!:'+ error);
     }
-  )
+  )*/
 
 
-  /*
+  
   const post  = this.posts.find(
     (s)=>{
       return s.id===id;
     }
   );
-  return post;*/
+  return post;
 }
 
 
@@ -116,7 +116,7 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
   postObject.categoryId=categoryId;
   postObject.imageIds=imageIds;
   postObject.userId=userId;
-  console.log('imagesIds: '+ imageIds);
+  //console.log('imagesIds: '+ imageIds);
 
 
   this.posts.push(postObject);
@@ -166,8 +166,9 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
         }else if (event.type === HttpEventType.Response){
           const imageUrl = event.headers.get('location'); //gets the url returned by the POST
           imageId2 =  parseInt(imageUrl.substring(imageUrl.lastIndexOf('/')+1,imageUrl.length)); //extract Id from the url
-          this.imageId = imageId2;
+          this.imageId.push(imageId2);
           this.emitPostSubject();
+          console.log(this.imageId);
         }
        
         
@@ -205,7 +206,7 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
 
   }
   searchPost(searchTerm:string) {
-   // console.log("searching on server for : " +searchTerm);
+    console.log("searching on server for : " +searchTerm);
     this.httpClient.get<any[]>('http://pinfo2.unige.ch:11080/search/ad?q='+searchTerm).
     subscribe(
       (response)=>{

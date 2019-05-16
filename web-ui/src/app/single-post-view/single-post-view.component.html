@@ -14,15 +14,22 @@
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-
-      <div class="carousel-item active">
-        <img [src]="imageUrl" class="d-block" alt="No Picture to show">
+      <ng-container *ngFor="let images of imageUrl"> 
+      <div *ngIf="images === imageUrl[0];else otherImages" class="carousel-item active">
+        <img src="http://pinfo2.unige.ch:14080/image/{{imageUrl[0]}}" class="d-block" alt="Game picture">
       </div>
+      <ng-template #otherImages>
+      <div  class="carousel-item " >
+        
+            <img src="http://pinfo2.unige.ch:14080/image/{{images}}" class="d-block" alt="No Picture to show">
+        
+      </div>
+    </ng-template>
+    
+    </ng-container>
+      
+      
       <!--
-      <div class="carousel-item">
-        <img src="assets/examples/game1.jpg" class="d-block" alt="Game picture">
-      </div>
-
       <div class="carousel-item">
         <img src="assets/examples/guitar1.jpg" class="d-block" alt="Flower picture">
       </div>
@@ -50,18 +57,19 @@
 <div class="post-description row border rounded p-3 mx-0">
   <div class="col-8 p-0 pr-3">
     <div class="post-description-text border rounded p-3">
-      <h3>{{title}}</h3>
-      <p>{{description}}</p>
+      <h3>{{monPost.title}} </h3>
+      
+      <p>{{monPost.description}}</p>
     </div>
   </div>
   <div class="col-4 border rounded p-3">
     <div class="text-center my-5">
-      <h1>{{price}}.-</h1>
+      <h1>{{monPost.price}}.-</h1>
     </div>
     <div class="d-inline-flex">
       <p>Category <span id="cat" class="border rounded px-auto py-0 my-3">something</span></p>
     </div>
-    <h6>Publication date {{date}}</h6>
+    <h6>Publication date {{monPost.date}}</h6>
     <button class="btn">Contact publisher</button>
   </div>
 </div>

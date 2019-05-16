@@ -11,7 +11,7 @@ import { PostComponent } from '../post/post.component';
 export class NewPostComponent implements OnInit {
   postForm : FormGroup;
   selecetdFile : File;
-  imageId:number;
+  imageId=[];
 
   constructor(private formBuilder: FormBuilder,
               private postsService:PostsService,
@@ -34,14 +34,13 @@ export class NewPostComponent implements OnInit {
     onSubmitForm() {
         const formValue = this.postForm.value;
         this.imageId= this.postsService.imageId;
-        console.log('onSumit imageid'+ this.imageId);
-        console.log('onSumit imageid on postService '+ this.postsService.imageId);
+
 
         this.postsService.addPost(formValue['title'],
                                   formValue['description'],
                                   formValue['price'],
                                   0,
-                                  [this.imageId],0
+                                  this.imageId,0
                                   );
    
 
@@ -53,8 +52,12 @@ export class NewPostComponent implements OnInit {
 
     async onUploadFiles(event){
       console.log("onUploadFiles");
-      this.selecetdFile = event.target.files[0];
-      await this.postsService.fileToServer(this.selecetdFile);
+      for(let i=0;i<event.target.files.length;i++){
+        console.log("number of files recieved:"+ i)
+        this.selecetdFile = event.target.files[i];
+        await this.postsService.fileToServer(this.selecetdFile);
+      }
+      
       console.log('postsService imagaeId '+ this.postsService.imageId);
       
     

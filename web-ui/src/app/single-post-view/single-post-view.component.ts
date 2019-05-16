@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { PostsService } from '../services/posts.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,35 +14,41 @@ export class SinglePostViewComponent implements OnInit {
   price:number;
   date:Date;
   categoryId=0;
-  imageIds=0;
-  imageUrl='';
+  imageIds=[];
+  imageUrl=[];
+  imageServer="";
+  monPost;
 
   constructor(private postService:PostsService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.params['id'];
-    this.postService.getPostById(+id);
-    console.log('onInit singlePost is : ' + this.postService.singlePost);
-    console.log(this.postService.posts);
-    let post = this.postService.posts;
-    //console.log("postTitle: "+ post);
+    const id = this.route.snapshot.params['id']-1;
+    this.monPost=this.postService.getPostById(+id+1);
+    //console.log('onInit singlePost is : ' + this.postService.singlePost);
+    //console.log(this.postService.posts);
+    //this.monPost = this.postService.posts;
+    this.postService.emitPostSubject();
+    console.log(this.monPost);
     //console.log(post[id].title);
     //console.log('id: '+ id);
-    
+    /*
     this.title = post[id].title;
     this.description = post[id].description;
     this.price = post[id].price;
     this.date= post[id].date;
-    
-    //for(let i=0;i<post[id].imageIds-1;i++){
+    */
+    for(let i=0;i<this.monPost.imageIds.length;i++){
       
-      this.imageIds= post[id].imageIds[0];
-      this.imageUrl='http://pinfo2.unige.ch:14080/image/'+this.imageIds.toString();
-      console.log("src= "+ this.imageUrl );
+      this.imageUrl.push(this.imageServer+this.monPost.imageIds[i]);
+      //this.imageIds= post[id].imageIds[i];
+      //this.imageUrl='http://pinfo2.unige.ch:14080/image/'+this.imageIds.toString();
+      
+     // console.log("src= "+ this.imageUrl );
      // console.log("imagesIDs: "+ this.imageIds);
-      //console.log("imageid[i]"+ this.imageIds[i] );
-    //}
+      //console.log("imageid[i]"+ this.imageIds[i]);
+   }
+   console.log(this.imageUrl);
     //console.log('imageIds: '+ this.imageIds);
     
   }
