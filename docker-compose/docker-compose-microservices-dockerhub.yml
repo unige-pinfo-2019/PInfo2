@@ -21,8 +21,8 @@ services:
       interval: 30s
       timeout: 15s
       retries: 15        
-#    volumes:
-#      - esdata1:/usr/share/elasticsearch/data      
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data      
     ports:
       - 9200:9200
       - 9300:9300      
