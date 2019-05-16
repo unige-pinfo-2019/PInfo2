@@ -247,12 +247,10 @@ services:
       - image-database
 
 volumes:
-    pgdata-ctgry:
-    pgdata-ad:
-    pgdata-usr:
-    pgdata-img:
-    
-volumes:
+  pgdata-ctgry:
+  pgdata-ad:
+  pgdata-usr:
+  pgdata-img:
   esdata1:
     driver: local
 
