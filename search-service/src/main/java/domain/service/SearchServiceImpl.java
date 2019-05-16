@@ -20,6 +20,7 @@ import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -147,28 +148,38 @@ public class SearchServiceImpl implements SearchService {
 		String descriptionField = "description";
 		String titleField = "title";
 		
-		String wildcardsQuery = "*" + query.toLowerCase() + "*";
+		String wildcardsQuery = query.toLowerCase();
 		QueryBuilder matchQueryBuilder = QueryBuilders.boolQuery()
-										    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery))
-										    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery));
+										    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery)
+										    		             .fuzziness(Fuzziness.AUTO))
+										    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery)
+										    		             .fuzziness(Fuzziness.AUTO));
 		
 		// TODO : find a way to remove those ugly if blocks
 		if (categoryId.isPresent() && userId.isPresent()) {
 			matchQueryBuilder = QueryBuilders.boolQuery()
 			.must(QueryBuilders.termQuery("categoryId", categoryId.get()))
 			.must(QueryBuilders.termQuery("userId", userId.get()))
-		    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery))
-		    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery));
+		    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery)
+		    		             .fuzziness(Fuzziness.AUTO))
+		    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery)
+		    		             .fuzziness(Fuzziness.AUTO));
 		} else if (categoryId.isPresent()) {
 			matchQueryBuilder = QueryBuilders.boolQuery()
 			.must(QueryBuilders.termQuery("categoryId", categoryId.get()))
-		    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery))
-		    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery));
+		    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery)
+		    		             .fuzziness(Fuzziness.AUTO))
+		    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery)
+		    		             .fuzziness(Fuzziness.AUTO));
 		} else if (userId.isPresent()) {
 			matchQueryBuilder = QueryBuilders.boolQuery()
 			.must(QueryBuilders.termQuery("userId", userId.get()))
-		    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery))
-		    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery));
+		    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery)
+		    		             .fuzziness(Fuzziness.AUTO))
+		    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery)
+		    		             .fuzziness(Fuzziness.AUTO));
+		} else if (query.isEmpty()) {
+			matchQueryBuilder = QueryBuilders.matchAllQuery();
 		}
 		
 		searchSourceBuilder.query(matchQueryBuilder);
