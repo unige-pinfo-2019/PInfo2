@@ -42,7 +42,7 @@ export class SinglePostViewComponent implements OnInit {
       
       this.imageUrl.push(this.imageServer+this.monPost.imageIds[i]);
       //this.imageIds= post[id].imageIds[i];
-      //this.imageUrl='http://pinfo2.unige.ch:14080/image/'+this.imageIds.toString();
+      //this.imageUrl='http://localhost:14080/image/'+this.imageIds.toString();
       
      // console.log("src= "+ this.imageUrl );
      // console.log("imagesIDs: "+ this.imageIds);

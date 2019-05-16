@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import{PostsService} from '../services/posts.service';
 import {Router} from '@angular/router';
 import { PostComponent } from '../post/post.component';
+import { CategoryService } from '../services/category.service';
 @Component({
   selector: 'app-new-post',
   templateUrl: './new-post.component.html',
@@ -12,13 +13,17 @@ export class NewPostComponent implements OnInit {
   postForm : FormGroup;
   selecetdFile : File;
   imageId=[];
+  categoryList=[];
 
   constructor(private formBuilder: FormBuilder,
               private postsService:PostsService,
-              private router: Router) { }
+              private router: Router,
+              private categoryService:CategoryService) { }
 
   ngOnInit() {
     this.initForm();
+    this.categoryService.getListCategory();
+    this.categoryList= this.categoryService.categoryList;
   }
   initForm(){
 

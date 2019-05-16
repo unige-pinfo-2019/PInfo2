@@ -25,7 +25,7 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     //this.postService.getPosts();
-    this.thumbnailUrl='http://pinfo2.unige.ch:14080/image/'+this.imageIds[0];
+    this.thumbnailUrl='http://localhost:14080/image/'+this.imageIds[0];
     //console.log("category: "+ this.categoryId);
     //console.log('imageId:'+ this.thumbnailUrl);
   }

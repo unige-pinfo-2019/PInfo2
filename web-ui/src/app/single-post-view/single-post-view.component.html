@@ -16,16 +16,16 @@
     <div class="carousel-inner">
       <ng-container *ngFor="let images of imageUrl"> 
       <div *ngIf="images === imageUrl[0];else otherImages" class="carousel-item active">
-        <img src="http://pinfo2.unige.ch:14080/image/{{imageUrl[0]}}" class="d-block" alt="Game picture">
+        <img src="http://localhost:14080/image/{{imageUrl[0]}}" class="d-block" alt="Game picture">
       </div>
       <ng-template #otherImages>
       <div  class="carousel-item " >
         
-            <img src="http://pinfo2.unige.ch:14080/image/{{images}}" class="d-block" alt="No Picture to show">
+            <img src="http://localhost:14080/image/{{images}}" class="d-block" alt="No Picture to show">
         
       </div>
     </ng-template>
-    
+
     </ng-container>
       
       
