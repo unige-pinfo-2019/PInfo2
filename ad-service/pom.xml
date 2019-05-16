@@ -70,7 +70,18 @@
 			<groupId>org.aerogear.kafka</groupId>
 			<artifactId>kafka-cdi-extension</artifactId>
 		</dependency>
-		
+		<dependency>
+    		<groupId>io.rest-assured</groupId>
+    		<artifactId>json-schema-validator</artifactId>
+    		<version>4.0.0</version>
+    		<scope>test</scope>
+		</dependency>
+		<dependency>
+      		<groupId>io.rest-assured</groupId>
+      		<artifactId>rest-assured</artifactId>
+      		<version>4.0.0</version>
+      		<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
@@ -96,7 +107,6 @@
 			<artifactId>mockito-junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
@@ -109,7 +119,6 @@
 			<version>5.0.10.Final</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>com.github.dadrus.jpa-unit</groupId>
 			<artifactId>jpa-unit5</artifactId>
@@ -120,6 +129,7 @@
 			<artifactId>jpa-unit-rdbms</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
     </dependencies>
 
 </project>
