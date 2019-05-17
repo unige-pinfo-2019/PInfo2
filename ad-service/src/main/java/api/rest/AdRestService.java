@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -22,6 +23,7 @@ import domain.service.AdService;
 
 @ApplicationScoped
 @Path("/ad")
+@Default // To be injected in the Test
 public class AdRestService {
 	
 	@Inject
@@ -48,7 +50,13 @@ public class AdRestService {
 	@GET
 	@Produces("application/json")
 	public List<Ad> getAll() {
-		return adService.getAll();
+		try {
+			return adService.getAll();
+		}
+		catch(NullPointerException e) {
+			return null;
+		}
+		
 	}
 	
 	@GET
