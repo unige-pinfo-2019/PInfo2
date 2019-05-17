@@ -21,8 +21,8 @@ services:
       interval: 30s
       timeout: 15s
       retries: 15        
-#    volumes:
-#      - esdata1:/usr/share/elasticsearch/data      
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data      
     ports:
       - 9200:9200
       - 9300:9300      
@@ -161,7 +161,7 @@ services:
     networks:
       - backend-network    
     ports:
-      - "10080:8080"
+      - "15080:8080"
     environment:
       THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
       THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
@@ -247,14 +247,12 @@ services:
       - image-database
 
 volumes:
-    pgdata-ctgry:
-    pgdata-ad:
-    pgdata-usr:
-    pgdata-img:
-    
-#volumes:
-#  esdata1:
-#    driver: local
+  pgdata-ctgry:
+  pgdata-ad:
+  pgdata-usr:
+  pgdata-img:
+  esdata1:
+    driver: local
 
 networks:
   backend-network:

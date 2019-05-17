@@ -21,8 +21,8 @@ services:
       interval: 30s
       timeout: 15s
       retries: 15        
-#    volumes:
-#      - esdata1:/usr/share/elasticsearch/data      
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data      
     ports:
       - 9200:9200
       - 9300:9300      
@@ -69,6 +69,90 @@ services:
     depends_on:
       - zookeeper
 
+  category-database:
+    image: postgres:10
+    container_name: category-database
+    hostname: category-database
+    networks:
+     - backend-network
+    environment:
+      POSTGRES_USER: ctgry
+      POSTGRES_PASSWORD: ctgry
+      POSTGRES_DB: category
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "ctgry", "-d", "category"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - pgdata-ctgry:/var/lib/postgresql/data
+    restart: on-failure
+    stdin_open: true
+    tty: true
+
+  ad-database:
+    image: postgres:10
+    container_name: ad-database
+    hostname: ad-database
+    networks:
+     - backend-network
+    environment:
+      POSTGRES_USER: ad
+      POSTGRES_PASSWORD: ad
+      POSTGRES_DB: ad
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "ad", "-d", "ad"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - pgdata-ad:/var/lib/postgresql/data
+    restart: on-failure
+    stdin_open: true
+    tty: true
+
+  user-database:
+    image: postgres:10
+    container_name: user-database
+    hostname: user-database
+    networks:
+     - backend-network
+    environment:
+      POSTGRES_USER: usr
+      POSTGRES_PASSWORD: usr
+      POSTGRES_DB: user
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "usr", "-d", "user"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - pgdata-usr:/var/lib/postgresql/data
+    restart: on-failure
+    stdin_open: true
+    tty: true
+
+  image-database:
+    image: postgres:10
+    container_name: image-database
+    hostname: image-database
+    networks:
+     - backend-network
+    environment:
+      POSTGRES_USER: img
+      POSTGRES_PASSWORD: img
+      POSTGRES_DB: image
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "img", "-d", "image"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    volumes:
+      - pgdata-img:/var/lib/postgresql/data
+    restart: on-failure
+    stdin_open: true
+    tty: true
+
   #Ad service
   ad-service:
     container_name: ad-service    
@@ -77,12 +161,17 @@ services:
     networks:
       - backend-network    
     ports:
-      - "10080:8080"
+      - "15080:8080"
     environment:
       THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
       THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_ADDS_CONNECTION_DASH_URL: "jdbc:postgresql://ad-database:5432/ad"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_ADDS_DRIVER_DASH_NAME: 'postgresql'   
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_ADDS_USER_DASH_NAME: 'ad'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_ADDS_PASSWORD: 'ad'
     depends_on:
       - kafka
+      - ad-database
 
   #Search service
   search-service:
@@ -112,8 +201,13 @@ services:
     environment:
       THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
       THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_CATEGORYDS_CONNECTION_DASH_URL: "jdbc:postgresql://category-database:5432/category"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_CATEGORYDS_DRIVER_DASH_NAME: 'postgresql'   
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_CATEGORYDS_USER_DASH_NAME: 'ctgry'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_CATEGORYDS_PASSWORD: 'ctgry'
     depends_on:
       - kafka
+      - category-database
       
   #User service
   user-service:
@@ -127,8 +221,13 @@ services:
     environment:
       THORNTAIL_KAFKA_DASH_CONFIGURATION_HOST: "kafka"
       THORNTAIL_KAFKA_DASH_CONFIGURATION_PORT: "9092"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_CONNECTION_DASH_URL: "jdbc:postgresql://user-database:5432/user"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_DRIVER_DASH_NAME: 'postgresql'   
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_USER_DASH_NAME: 'usr'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_USERDS_PASSWORD: 'usr'
     depends_on:
       - kafka
+      - user-database
 
   #Image service
   image-service:
@@ -139,10 +238,21 @@ services:
       - backend-network    
     ports:
       - "14080:8080"
+    environment:
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_IMAGEDS_CONNECTION_DASH_URL: "jdbc:postgresql://image-database:5432/image"
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_IMAGEDS_DRIVER_DASH_NAME: 'postgresql'   
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_IMAGEDS_USER_DASH_NAME: 'img'
+      THORNTAIL_DATASOURCES_DATA_DASH_SOURCES_IMAGEDS_PASSWORD: 'img'
+    depends_on:
+      - image-database
 
-#volumes:
-#  esdata1:
-#    driver: local
+volumes:
+  pgdata-ctgry:
+  pgdata-ad:
+  pgdata-usr:
+  pgdata-img:
+  esdata1:
+    driver: local
 
 networks:
   backend-network:
