@@ -29,6 +29,7 @@ export class NewUserViewComponent implements OnInit {
       email: ['',[Validators.required,Validators.email]]
     });
   }
+  
   onSubmitForm() {
     const formValue = this.userForm.value;
     const newUser = new User(

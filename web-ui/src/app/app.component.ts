@@ -10,24 +10,26 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
+
+  posts: any[];
+  search: string;
+  add: string;
 
   ngOnInit() {
 
   }
 
-  posts: any[];
-  search: string;
-  add:    string;
-
   constructor(private httpClient: HttpClient, private post: PostItemComponent) {
 
   }
 
+  // Useless ?
   onAdd(){
 
   }
 
+  // Useless ?
   onGet(){
 
   }

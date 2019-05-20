@@ -13,7 +13,7 @@ export class ConnectionViewComponent implements OnInit {
   constructor(private authService:AuthService, private router:Router) {
 
   }
-
+  
   ngOnInit() {
 
   }

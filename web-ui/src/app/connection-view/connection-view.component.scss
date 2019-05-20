@@ -2,10 +2,8 @@ form {
     width: 50%; // only fills 50% of page width
     margin: 0 auto; // automatic centering
 }
-a {
-  &:hover {
-    text-decoration: none; // no underline for links
-  }
+a:hover {
+  text-decoration: none; // no underline for links
 }
 .form-control:focus { // text input style when focused
   border-color: var(--color-primary-light); // border of the input space

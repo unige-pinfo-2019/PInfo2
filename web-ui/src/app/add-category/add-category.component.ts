@@ -13,10 +13,8 @@ import { Subscription, Observable, Subject } from 'rxjs';
 export class AddCategoryComponent implements OnInit , OnDestroy{
   postForm : FormGroup;
   deleteForm: FormGroup;
-
-  categoryList:any[];
-
-  listSubscription:Subscription;
+  categoryList: any[];
+  listSubscription: Subscription;
 
   constructor(private formBuilder: FormBuilder, private categoryService: CategoryService, private router: Router) {
 
@@ -53,7 +51,7 @@ export class AddCategoryComponent implements OnInit , OnDestroy{
     this.categoryService.addCategory(formValue['name'], formValue['parentId'],);
   }
 
-  onDelteCategory(){
+  onDeleteCategory(){
     const catToDelete = (<HTMLInputElement>document.getElementById('category')).value;
     const catId = this.categoryList.find(
       (c)=>{

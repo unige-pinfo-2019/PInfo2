@@ -20,6 +20,7 @@ export class PostsViewComponent implements OnInit {
 
   }
 
+  // Useless ?
   addToServer(){
 
   }
@@ -28,6 +29,7 @@ export class PostsViewComponent implements OnInit {
     this.postsService.getPosts();
   }
 
+  // Useless ?
   deleteFromServer(){
 
   }
