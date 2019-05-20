@@ -32,8 +32,8 @@
   <div class="form-group">
     <label for="category">Category</label>
     <select id="category" class="form-control" formControlName="category">
-      <option value="Livre">Books</option>
-      <option value="notes">Course notes</option>
+      <option *ngFor="let cat of categoryList" [value]="cat.name">{{cat.name}}</option>
+      
     </select>
   </div>
 

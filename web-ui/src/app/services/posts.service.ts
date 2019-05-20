@@ -8,6 +8,23 @@ import { UserService } from './user.service';
 /*Class regrouping all the services needed for posts*/
 @Injectable()
 export class PostsService{
+  searchCategory(catId: number) {
+    //todo: make a search byCategory
+    this.httpClient.get<any[]>('http://localhost:15080/ad')
+    .subscribe(
+      
+      (response)=>{
+      this.posts=response.filter(
+        post=>{
+          return post.categoryId === catId;
+        }
+      );
+      this.emitPostSubject()
+    },(error)=>{
+      console.log(error);
+    }
+    );
+  }
   
  postsSubject = new Subject<any[]>();
  //this array contains the posts availible on the ui

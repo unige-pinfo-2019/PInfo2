@@ -29,12 +29,14 @@ import { ConnexionComponent } from './connexion/connexion.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 import * as $ from "jquery";
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 const appRoutes: Routes = [
 
   {path: 'posts', component: PostViewComponent},
   {path: 'posts/:id', component: SinglePostViewComponent},
   {path: 'new-post', component: NewPostComponent },
+  {path: 'add-category', component: AddCategoryComponent },
   {path: 'connexion', component: ConnexionComponent },
   {path: 'new-user', component: NewUserComponent },
   {path: 'user-profile',canActivate:[AuthGuard], component: UserProfileComponent },
@@ -55,7 +57,8 @@ const appRoutes: Routes = [
     SinglePostViewComponent,
     CategoryMenuComponent,
     ConnexionComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AddCategoryComponent
   ],
   imports: [
     BrowserModule,

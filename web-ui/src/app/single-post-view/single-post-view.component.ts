@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PostsService } from '../services/posts.service';
 import { ActivatedRoute } from '@angular/router';
+import { CategoryService } from '../services/category.service';
 
 @Component({
   selector: 'app-single-post-view',
@@ -9,25 +10,22 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./single-post-view.component.scss']
 })
 export class SinglePostViewComponent implements OnInit {
-  title: string = '';
-  description: string = '';
-  price:number;
-  date:Date;
-  categoryId=0;
+  
+  categoryName="";
   imageIds=[];
   imageUrl=[];
   imageServer="";
   monPost;
 
   constructor(private postService:PostsService,
+              private categoryService: CategoryService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id']-1;
     this.monPost=this.postService.getPostById(+id+1);
-    //console.log('onInit singlePost is : ' + this.postService.singlePost);
-    //console.log(this.postService.posts);
-    //this.monPost = this.postService.posts;
+    this.categoryName = this.categoryService.getCategoryName(this.monPost.categoryId);
+    
     this.postService.emitPostSubject();
     console.log(this.monPost);
     //console.log(post[id].title);
@@ -48,7 +46,7 @@ export class SinglePostViewComponent implements OnInit {
      // console.log("imagesIDs: "+ this.imageIds);
       //console.log("imageid[i]"+ this.imageIds[i]);
    }
-   console.log(this.imageUrl);
+   //console.log(this.imageUrl);
     //console.log('imageIds: '+ this.imageIds);
     
   }

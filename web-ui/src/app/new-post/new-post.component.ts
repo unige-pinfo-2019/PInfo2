@@ -4,6 +4,7 @@ import{PostsService} from '../services/posts.service';
 import {Router} from '@angular/router';
 import { PostComponent } from '../post/post.component';
 import { CategoryService } from '../services/category.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-new-post',
   templateUrl: './new-post.component.html',
@@ -13,7 +14,8 @@ export class NewPostComponent implements OnInit {
   postForm : FormGroup;
   selecetdFile : File;
   imageId=[];
-  categoryList=[];
+  categoryList:any[];
+  categorySubscription:Subscription;
 
   constructor(private formBuilder: FormBuilder,
               private postsService:PostsService,
@@ -23,7 +25,12 @@ export class NewPostComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.categoryService.getListCategory();
-    this.categoryList= this.categoryService.categoryList;
+    this.categorySubscription = this.categoryService.categorySubject.subscribe(
+      (cat:any[])=>{
+        this.categoryList=cat;
+      }
+    )
+    //this.categoryList= this.categoryService.categoryList;
   }
   initForm(){
 
@@ -32,21 +39,22 @@ export class NewPostComponent implements OnInit {
         title: ['',Validators.required],
         description: ['',Validators.required],
         price:['',Validators.required],
-        category: ['',],
+        category: ['',Validators.required],
         photos: this.formBuilder.array([])
     });
     }
     onSubmitForm() {
         const formValue = this.postForm.value;
         this.imageId= this.postsService.imageId;
-
+        const catId = this.categoryService.getCategoryId(formValue['category'])
 
         this.postsService.addPost(formValue['title'],
                                   formValue['description'],
                                   formValue['price'],
-                                  0,
+                                  catId,
                                   this.imageId,0
                                   );
+        console.log("cat.id"+ this.categoryService.getCategoryId(formValue['category']));
    
 
         this.router.navigate(['/posts']);

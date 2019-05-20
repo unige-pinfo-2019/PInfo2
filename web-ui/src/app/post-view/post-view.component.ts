@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {synapseThrow } from 'src/assets/post-view.component.js';
 import { PostsService } from '../services/posts.service';
 import { Subscription } from 'rxjs';
+import { CategoryService } from '../services/category.service';
 
 //import {Http} from '@angular/http';
 @Component({
@@ -18,6 +19,7 @@ export class PostViewComponent implements OnInit {
 
   constructor(
     private postsService: PostsService,
+    private categoryService:CategoryService
     ){
 
     }
@@ -37,6 +39,9 @@ export class PostViewComponent implements OnInit {
     onSearch(){
       this.searchValue= document.getElementById("srch-term");
       this.postsService.searchPost( this.searchValue.value.toString());
+
+      //testing adding category with this button
+      this.categoryService.addCategory('Books',0);
     }
 
 
