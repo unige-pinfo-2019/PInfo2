@@ -1,27 +1,20 @@
-img {
-  margin: 0 auto;
-  height: 300px;
-  width: auto;
+img { // images of one post view
+  margin: 0 auto; // no margin but automatic -> centering
+  height: 300px; // TODO should be changed to em units
+  width: auto; // automatic width according to height
 }
 
-.carousel-control-next {
+.carousel-control-next { // "next" button inside carousel
   background: #AAAAAA;
 }
-.carousel-control-prev {
+.carousel-control-prev { // "previous" button inside carousel
   background: #AAAAAA;
 }
 
-.post-description {
-  min-height: 15em;
+.post-description { // description part of the post
+  min-height: 15em; // minimum height to avoid collapsing
 }
 
-.post-description-text {
+.post-description-text { // title and description of the post
   height: 100%;
-}
-
-#cat{
-  border-radius: 10px;
-  padding: 0.5em;
-  margin-bottom: 0;
-  border-color: var(--color-primary-middle);
 }

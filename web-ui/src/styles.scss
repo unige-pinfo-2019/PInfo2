@@ -37,3 +37,10 @@ section { // global settings of sections (body of the page)
     background: var(--color-primary-dark);
   }
 }
+
+.cat { // global settings of the category box
+  border-radius: 10px;
+  padding: 0.5em;
+  margin-bottom: 0;
+  border-color: var(--color-primary-middle);
+}

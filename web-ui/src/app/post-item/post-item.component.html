@@ -1,24 +1,39 @@
-<a [routerLink]="[id]">
+<a [routerLink]="[id]"><!-- TODO check if merge of a and li is possible-->
   <li class="mb-3" [ngClass]="{'list-group-item': true}">
+
+    <!-- 1st row : title, description and price -->
     <div class="row">
+
+      <!-- 1st column : image -->
       <div class="col-3 my-auto">
         <img [src]="thumbnailUrl" alt="Image not found" onerror="this.src='assets/nopicture.png';">
       </div>
+
+      <!-- 2nd column : title and description -->
       <div class="col-6 my-auto">
         <h4>{{ title }}</h4>
         <p>{{ description }}</p>
       </div>
+
+      <!-- 3rd column : price -->
       <div class="col-3 my-auto text-center">
         <h3 class="priceValue">{{ price }}.-</h3>
       </div>
     </div>
+
+    <!-- 2nd row : category and date -->
     <div class="row">
+
+      <!-- 1st column : category -->
       <div class="d-inline-flex col-3 my-auto px-3">
-        <p id="cat" class="border rounded px-auto py-0">{{ category }}</p>
+        <p class="cat" class="border rounded px-auto py-0">{{ category }}</p>
       </div>
+
+      <!-- 2nd column : date -->
       <div class="col-9 my-auto px-3">
         <p class="mb-0">Published on {{date}}</p>
       </div>
     </div>
+
   </li>
 </a>
