@@ -4,33 +4,30 @@ import { Subscription } from 'rxjs';
 import { PostsService } from '../services/posts.service';
 
 @Component({
-  selector: 'app-category-menu',
-  templateUrl: './category-menu.component.html',
-  styleUrls: ['./category-menu.component.scss']
+  selector: 'app-categories',
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.scss']
 })
-export class CategoryMenuComponent implements OnInit {
+
+export class CategoriesComponent implements OnInit {
   categoryList:any[];
   listSubscription:Subscription;
 
-  constructor(private categoryService: CategoryService,
-              private postService:PostsService) { }
+  constructor(private categoryService: CategoryService, private postService: PostsService) {
+
+  }
 
   ngOnInit() {
     this.categoryService.getListCategory();
-    //this.categoryService.emitCategorySubject();
     this.listSubscription= this.categoryService.categorySubject.subscribe(
       (catList:any[]) => {
         this.categoryList=catList;
       }
     );
-    //this.categoryService.emitCategorySubject();
-
-    //this.category = this.categoryService.categoryList;
-
   }
+
   onSelectCategory(catName:string){
     this.postService.searchCategory(this.categoryService.getCategoryId(catName));
     console.log("You selected the "+catName+" category!");
   }
-
 }

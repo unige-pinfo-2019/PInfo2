@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CategoryMenuComponent } from './category-menu.component';
+import { NewPostViewComponent } from './new-post-view.component';
 
-describe('CategoryMenuComponent', () => {
-  let component: CategoryMenuComponent;
-  let fixture: ComponentFixture<CategoryMenuComponent>;
+describe('NewPostViewComponent', () => {
+  let component: NewPostViewComponent;
+  let fixture: ComponentFixture<NewPostViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CategoryMenuComponent ]
+      declarations: [ NewPostViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CategoryMenuComponent);
+    fixture = TestBed.createComponent(NewPostViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

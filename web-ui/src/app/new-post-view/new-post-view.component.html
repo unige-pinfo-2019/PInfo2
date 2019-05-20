@@ -33,34 +33,21 @@
     <label for="category">Category</label>
     <select id="category" class="form-control" formControlName="category">
       <option *ngFor="let cat of categoryList" [value]="cat.name">{{cat.name}}</option>
-      
     </select>
   </div>
 
-  <!-- Ad pictures -->
-<!--
-  <div formArrayName="photos">
-    <p class="h5">Pictures</p>
-    <div class="form-group" *ngFor="let photosControl of getPhotos().controls; let i = index">
-      <input type="text" class="form-control" [formControlName]="i">
+  <form class="md-form" action="#">
+    <h3>Pictures</h3>
+    <div class="file-field">
+      <div class="btn btn-primary btn-sm float-left">
+        <span>Choose files</span>
+        <input type="file" multiple (change)="onUploadFiles($event)">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text" placeholder="Upload one or more pictures" >
+      </div>
     </div>
-    <button type="button" class="btn" (click)="onAddPhoto()">Add new picture</button>
-  </div>
--->
-<form class="md-form" action="#">
-  <h3>Pictures</h3>
-  <div class="file-field">
-    <div class="btn btn-primary btn-sm float-left">
-      <span>Choose files</span>
-      <input type="file" multiple (change)="onUploadFiles($event)">
-    </div>
-    <div class="file-path-wrapper">
-      <input class="file-path validate" type="text" placeholder="Upload one or more pictures" >
-    </div>
-  </div>
-</form>
-
-
+  </form>
 
   <!-- Submit the ad -->
   <div class="d-flex flex-row-reverse">

@@ -4,22 +4,23 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-connexion',
-  templateUrl: './connexion.component.html',
-  styleUrls: ['./connexion.component.scss']
+  templateUrl: './connection-view.component.html',
+  styleUrls: ['./connection-view.component.scss']
 })
-export class ConnexionComponent implements OnInit {
 
-  constructor(private authService:AuthService,
-              private router:Router) { }
+export class ConnectionViewComponent implements OnInit {
+
+  constructor(private authService:AuthService, private router:Router) {
+
+  }
 
   ngOnInit() {
-    
+
   }
+
   onSignIn(){
     console.log("Signing in");
-    
     this.authService.signIn();
     this.router.navigate(['/user-profile']);
   }
-
 }

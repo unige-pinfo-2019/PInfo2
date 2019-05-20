@@ -3,25 +3,25 @@ import { PostsService } from '../services/posts.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  selector: 'app-user-view',
+  templateUrl: './user-view.component.html',
+  styleUrls: ['./user-view.component.scss']
 })
-export class UserProfileComponent implements OnInit {
+
+export class UserViewComponent implements OnInit {
   posts: any[];
   postSubscription: Subscription;
+  
+  constructor(private postService: PostsService) {
 
-  constructor(private postService:PostsService) { }
+  }
 
   ngOnInit() {
-    //this.postService.getPosts();
     this.postSubscription= this.postService.postsSubject.subscribe(
       (posts: any[]) => {
         this.posts= posts;
-        //console.log(this.posts);
       }
     );
     this.postService.emitPostSubject();
   }
-
 }

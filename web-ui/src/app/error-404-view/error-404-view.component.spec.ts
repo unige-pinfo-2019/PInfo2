@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConnexionComponent } from './connexion.component';
+import { Error404ViewComponent } from './error-404-view.component';
 
-describe('ConnexionComponent', () => {
-  let component: ConnexionComponent;
-  let fixture: ComponentFixture<ConnexionComponent>;
+describe('Error404ViewComponent', () => {
+  let component: Error404ViewComponent;
+  let fixture: ComponentFixture<Error404ViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConnexionComponent ]
+      declarations: [ Error404ViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConnexionComponent);
+    fixture = TestBed.createComponent(Error404ViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

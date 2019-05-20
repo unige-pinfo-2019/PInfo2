@@ -11,12 +11,6 @@ img {
   background: #AAAAAA;
 }
 
-/*.carousel-control-next-icon:after {
-  content: '<';
-  font-size: 55px;
-  color: red;
-}*/
-
 .post-description {
   min-height: 15em;
 }
@@ -27,15 +21,7 @@ img {
 
 #cat{
   border-radius: 10px;
-  //color: white;
-  //width: 100%;
   padding: 0.5em;
   margin-bottom: 0;
-  //margin-top:5%;
-  //padding-left: 0.5em;
   border-color: var(--color-primary-middle);
-
-  &:hover {
-    //color: white;
-  }
 }

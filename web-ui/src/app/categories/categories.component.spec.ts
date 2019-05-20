@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FourOhFourComponent } from './four-oh-four.component';
+import { CategoriesComponent } from './categories.component';
 
-describe('FourOhFourComponent', () => {
-  let component: FourOhFourComponent;
-  let fixture: ComponentFixture<FourOhFourComponent>;
+describe('CategoryMenuComponent', () => {
+  let component: CategoriesComponent;
+  let fixture: ComponentFixture<CategoriesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FourOhFourComponent ]
+      declarations: [ CategoriesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FourOhFourComponent);
+    fixture = TestBed.createComponent(CategoriesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
- 
-import { PostViewComponent } from './post-view.component';
 
-describe('PostViewComponent', () => {
-  let component: PostViewComponent;
-  let fixture: ComponentFixture<PostViewComponent>;
+import { NewUserViewComponent } from './new-user-view.component';
+
+describe('NewUserViewComponent', () => {
+  let component: NewUserViewComponent;
+  let fixture: ComponentFixture<NewUserViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostViewComponent ]
+      declarations: [ NewUserViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PostViewComponent);
+    fixture = TestBed.createComponent(NewUserViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
