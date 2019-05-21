@@ -6,13 +6,19 @@
 	<groupId>ch.unige</groupId>
 	<artifactId>PInfo2</artifactId>
 	<version>0.2.0-SNAPSHOT</version>
-    <name>Parent Pom of the PInfo2</name> 
+	<name>Parent Pom of the PInfo2</name>
 
-    <packaging>pom</packaging>
+	<packaging>pom</packaging>
 
-    <properties>
-	    <version.thorntail>2.4.0.Final</version.thorntail>
-	    <version.h2>1.4.197</version.h2>
+	<!--<scm>
+		<url>https://github.com/hostettler/microservices</url>
+		<connection>scm:git:git@github.com/hostettler/microservices.git</connection>
+		<developerConnection>scm:git:git@github.com/hostettler/microservices</developerConnection>
+	</scm> -->
+
+	<properties>
+		<version.thorntail>2.3.0.Final</version.thorntail>
+		<version.h2>1.4.197</version.h2>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -21,9 +27,10 @@
 		<skip-docker-build>true</skip-docker-build>
 		<skip-docker-compose>false</skip-docker-compose>
 		<dockerHost>tcp://localhost:2375</dockerHost>
-    </properties>
+	</properties>
 
-    <modules>
+
+	<modules>
     	<module>image-service</module>
 		<module>stats-service</module>
 		<module>chat-service</module>
@@ -32,9 +39,10 @@
 		<module>user-service</module>
 		<module>search-service</module>
     	<module>api-gateway</module>
-    </modules>
-    
-    <dependencyManagement>
+	</modules>
+
+
+	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>io.thorntail</groupId>
@@ -43,6 +51,11 @@
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
+			<!--<dependency>
+				<groupId>org.aerogear.kafka</groupId>
+				<artifactId>kafka-cdi-extension</artifactId>
+				<version>0.1.0</version>
+			</dependency> -->
 			<dependency>
 				<groupId>com.github.dadrus.jpa-unit</groupId>
 				<artifactId>jpa-unit-bom</artifactId>
@@ -107,11 +120,6 @@
 				<artifactId>junit-platform-launcher</artifactId>
 				<version>1.3.2</version>
 				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.aerogear.kafka</groupId>
-				<artifactId>kafka-cdi-extension</artifactId>
-				<version>0.1.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.mockito</groupId>

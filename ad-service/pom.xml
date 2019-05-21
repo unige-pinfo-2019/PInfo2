@@ -16,12 +16,13 @@
     <properties>
 		<skip-docker-build>false</skip-docker-build>
 	</properties>
-    
-    <dependencies>
+
+	<dependencies>
 		<dependency>
 			<groupId>io.thorntail</groupId>
 			<artifactId>jaxrs</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>io.thorntail</groupId>
 			<artifactId>jpa</artifactId>
@@ -49,10 +50,6 @@
 		<dependency>
 			<groupId>io.thorntail</groupId>
 			<artifactId>datasources</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.aerogear.kafka</groupId>
-			<artifactId>kafka-cdi-extension</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>io.thorntail</groupId>
@@ -83,7 +80,10 @@
 			<version>5.0.10.Final</version>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.aerogear.kafka</groupId>
+			<artifactId>kafka-cdi-extension</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>com.github.dadrus.jpa-unit</groupId>
@@ -208,4 +208,3 @@
 		</plugins>
 	</build>
 </project>
-
