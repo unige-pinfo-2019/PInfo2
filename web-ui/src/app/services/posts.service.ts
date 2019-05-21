@@ -8,6 +8,23 @@ import { UserService } from './user.service';
 /*Class regrouping all the services needed for posts*/
 @Injectable()
 export class PostsService{
+  searchCategory(catId: number) {
+    //todo: make a search byCategory
+    this.httpClient.get<any[]>('http://localhost:15080/ad')
+    .subscribe(
+      
+      (response)=>{
+      this.posts=response.filter(
+        post=>{
+          return post.categoryId === catId;
+        }
+      );
+      this.emitPostSubject()
+    },(error)=>{
+      console.log(error);
+    }
+    );
+  }
   
  postsSubject = new Subject<any[]>();
  //this array contains the posts availible on the ui
@@ -15,7 +32,7 @@ public posts=[];
 public singlePost={  
   };
 private localUrl= 'http://localhost:';
-private serverUrl = 'http://pinfo2.unige.ch:';
+private serverUrl = 'http://localhost:';
 
 
 private imagePort='14080/image';
@@ -51,7 +68,7 @@ getPostById(id:number){
   console.log('chargement postById... ');
   /*
   this.httpClient
-  .get<any[]>('http://pinfo2.unige.ch:15080/ad/'+id)
+  .get<any[]>('http://localhost:15080/ad/'+id)
   .subscribe(
     (response) => {
      
@@ -184,7 +201,7 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
     console.log('chargement en cours... ');
 
     this.httpClient
-    .get<any[]>('http://pinfo2.unige.ch:15080/ad')
+    .get<any[]>('http://localhost:15080/ad')
     .subscribe(
       (response) => {
         this.posts = response;
@@ -207,7 +224,7 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
   }
   searchPost(searchTerm:string) {
     console.log("searching on server for : " +searchTerm);
-    this.httpClient.get<any[]>('http://pinfo2.unige.ch:11080/search/ad?q='+searchTerm).
+    this.httpClient.get<any[]>('http://localhost:11080/search/ad?q='+searchTerm).
     subscribe(
       (response)=>{
         //console.log("this is the response"+response);
@@ -224,7 +241,7 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
 
     console.log('deleting all post of id: '+ id);
     this.httpClient
-    .delete('http://pinfo2.unige.ch:10080/ad/'+id,this.httpOptions)
+    .delete('http://localhost:10080/ad/'+id,this.httpOptions)
     .subscribe(
       () => {
         console.log('Tout a été supprimé')!

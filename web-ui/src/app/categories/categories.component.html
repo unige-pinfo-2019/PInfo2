@@ -1,0 +1,3 @@
+<div class="list-group" *ngFor="let cat of categoryList">
+  <button type="button" class="list-group-item list-group-item-action rounded-0" (click)="onSelectCategory(cat.name)">{{ cat.name }}</button>
+</div>

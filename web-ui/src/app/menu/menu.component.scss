@@ -3,25 +3,24 @@ header {
   margin: 0; padding: 0; // fills whole space, no margins
   border-bottom: 0.3em solid var(--color-primary-dark); // add border at bottom of header
 }
+
 .navbar {
-  padding: 0;
-  margin: 0 auto;
+  padding: 0; // inside margin 0
+  margin: 0 auto; // outside margin is 0 by default but automatic -> centering
   img {
     height: 1.5em; // default size of images in navigation bar
   }
 }
 
-.navLogo { // logo of Agility in navigation bar
-  //margin-right: 1em; // offset to center middle part of navigation bar
-  img {
-    padding-right: 0.5em;
-  }
+.navLogo img { // logo of Agility in navigation bar
+  padding-right: 0.5em; // inside margin on right side
 }
+
 .nav-link { // links in the navigation bar
-  color: white;
-  text-transform: uppercase;
-  &:hover {
-    background: var(--color-primary-middle);
-    color: var(--color-text-focus);
+  color: var(--color-text-unfocus); // color of the text
+  text-transform: uppercase; // text is in uppercase
+  &:hover { // when hovering these texts
+    background: var(--color-primary-middle); // background color darker
+    color: var(--color-text-focus); // color of the text
   }
 }

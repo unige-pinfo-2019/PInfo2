@@ -4,6 +4,7 @@
   --color-primary-light: #00BB00;
   --color-primary-middle: #00AA00;
   --color-primary-dark: #009900;
+  --color-text-unfocus: #FFFFFF;
   --color-text-focus: #DDDDDD;
 }
 body, html {
@@ -35,4 +36,11 @@ section { // global settings of sections (body of the page)
     color: var(--color-text-focus);
     background: var(--color-primary-dark);
   }
+}
+
+.cat { // global settings of the category box
+  border-radius: 10px;
+  padding: 0.5em;
+  margin-bottom: 0;
+  border-color: var(--color-primary-middle);
 }

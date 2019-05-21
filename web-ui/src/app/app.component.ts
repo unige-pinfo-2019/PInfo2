@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { PostComponent } from './post/post.component';
+import { PostItemComponent } from './post-item/post-item.component';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,32 +9,28 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
-  ngOnInit() {
-    
-  }
-  
+
+export class AppComponent implements OnInit {
+
   posts: any[];
   search: string;
-  add:    string;
-  constructor(private httpClient:HttpClient,
-              private post:PostComponent){
+  add: string;
+
+  ngOnInit() {
 
   }
+
+  constructor(private httpClient: HttpClient, private post: PostItemComponent) {
+
+  }
+
+  // Useless ?
   onAdd(){
-  //this.post.addToServer();
 
   }
+
+  // Useless ?
   onGet(){
-    //this.post.getFromServer();
-    /*Url to be replaced*/
-/*
-    this.http.get('https://agility-acf42.firebaseio.com/').subscribe(response=>{
-      this.posts=response.json();
 
-    });
-    console.log('trying to search: '+this.search);
-
-  }*/
   }
 }

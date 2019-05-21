@@ -7,11 +7,14 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
+
 export class MenuComponent implements OnInit {
 
   appTitle: string = 'Agility';
-  
-  constructor(private authService:AuthService) { }
+
+  constructor(private authService: AuthService) {
+    
+  }
 
   ngOnInit() {
     if(this.authService.isAuth){
@@ -20,5 +23,4 @@ export class MenuComponent implements OnInit {
       connexionButton.style.color="black";
     }
   }
-
 }

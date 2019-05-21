@@ -9,53 +9,61 @@ import { KeycloakInterceptorService } from './services/keycloak/keycloak.interce
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PostComponent } from './post/post.component';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './services/auth-guard.service';
-
+// Services =======================================================================================
 import { AuthService } from './services/auth.service';
-import { PostsService } from './services/posts.service';
-import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
-import { PostViewComponent } from './post-view/post-view.component';
-import { NewPostComponent } from './new-post/new-post.component';
-import { MenuComponent } from './menu/menu.component';
-import { NewUserComponent } from './new-user/new-user.component';
-import { UserService } from './services/user.service';
-import { SinglePostViewComponent } from './single-post-view/single-post-view.component';
-import { CategoryMenuComponent } from './category-menu/category-menu.component';
 import { CategoryService } from './services/category.service';
-import { ConnexionComponent } from './connexion/connexion.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { PostsService } from './services/posts.service';
+import { UserService } from './services/user.service';
+// Component ======================================================================================
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { ConnectionViewComponent } from './connection-view/connection-view.component';
+import { Error404ViewComponent } from './error-404-view/error-404-view.component';
+import { MenuComponent } from './menu/menu.component';
+import { MinipostItemComponent } from './minipost-item/minipost-item.component';
+import { NewPostViewComponent } from './new-post-view/new-post-view.component';
+import { PostItemComponent } from './post-item/post-item.component';
+import { PasswordRecoveryViewComponent } from './password-recovery-view/password-recovery-view.component';
+import { NewUserViewComponent } from './new-user-view/new-user-view.component';
+import { PostsViewComponent } from './posts-view/posts-view.component';
+import { SinglePostViewComponent } from './single-post-view/single-post-view.component';
+import { UserViewComponent } from './user-view/user-view.component';
 
 import * as $ from "jquery";
 
 const appRoutes: Routes = [
 
-  {path: 'posts', component: PostViewComponent},
-  {path: 'posts/:id', component: SinglePostViewComponent},
-  {path: 'new-post', component: NewPostComponent },
-  {path: 'connexion', component: ConnexionComponent },
-  {path: 'new-user', component: NewUserComponent },
-  {path: 'user-profile',canActivate:[AuthGuard], component: UserProfileComponent },
-  {path: '', redirectTo: 'posts',pathMatch:'full'},
-  {path: 'not-found', component:FourOhFourComponent},
+  {path: 'posts-view', component: PostsViewComponent },
+  {path: 'posts/:id', component: SinglePostViewComponent },
+  {path: 'new-post-view', component: NewPostViewComponent },
+  {path: 'add-category', component: AddCategoryComponent },
+  {path: 'connection-view', component: ConnectionViewComponent },
+  {path: 'new-user-view', component: NewUserViewComponent },
+  {path: 'password-recovery-view', component: PasswordRecoveryViewComponent },
+  {path: 'user-view', canActivate: [AuthGuard], component: UserViewComponent },
+  {path: '', redirectTo: 'posts-view', pathMatch:'full'},
+  {path: 'not-found', component: Error404ViewComponent},
   {path: '**', redirectTo: 'not-found'}
 ];
 @NgModule({
   declarations: [
+    AddCategoryComponent,
     AppComponent,
-    PostComponent,
-    FourOhFourComponent,
-    PostComponent,
-    PostViewComponent,
-    NewPostComponent,
+    CategoriesComponent,
+    ConnectionViewComponent,
+    Error404ViewComponent,
     MenuComponent,
-    NewUserComponent,
+    MinipostItemComponent,
+    NewPostViewComponent,
+    NewUserViewComponent,
+    PasswordRecoveryViewComponent,
+    PostItemComponent,
+    PostsViewComponent,
     SinglePostViewComponent,
-    CategoryMenuComponent,
-    ConnexionComponent,
-    UserProfileComponent
+    UserViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +75,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
   ],
   providers: [
-    PostComponent,
+    PostItemComponent,
     AuthService,
     AuthGuard,
     PostsService,
