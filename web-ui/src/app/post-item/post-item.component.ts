@@ -24,7 +24,7 @@ export class PostItemComponent implements OnInit {
 
   ngOnInit() {
     this.thumbnailUrl = environment.images_url + this.imageIds[0];
-    console.log("thumbnail"+ this.thumbnailUrl);
+    //console.log("thumbnail"+ this.thumbnailUrl);
   }
 
   getPrice(){
