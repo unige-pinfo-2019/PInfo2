@@ -118,6 +118,7 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
   postObject,this.httpOptions).subscribe(
   ()=>{
     console.log('Enregistrement terminé ! ');
+    this.imageId=[];
   },(error) => {
     console.log('Erreur  ! : '+ error);
 
