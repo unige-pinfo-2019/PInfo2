@@ -41,6 +41,7 @@ export class PostsViewComponent implements OnInit {
         this.posts= posts;
       }
     );
+    
     this.postsService.emitPostSubject();
   }
 }

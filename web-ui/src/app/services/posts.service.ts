@@ -167,6 +167,7 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
     .get<any[]>(environment.ad_url)
     .subscribe(
       (response) => {
+        response.reverse();
         this.posts = response;
         this.emitPostSubject();
       console.log('chargement réussi');
