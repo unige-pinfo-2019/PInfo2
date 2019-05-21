@@ -56,7 +56,7 @@ export class NewPostViewComponent implements OnInit {
     );
 
     console.log("cat.id"+ this.categoryService.getCategoryId(formValue['category']));
-    this.router.navigate(['/posts']);
+    this.router.navigate(['/posts-view']);
   }
 
   getPhotos(): FormArray {
