@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { AddCategoryComponent } from '../add-category/add-category.component';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CategoryService{
@@ -14,34 +14,27 @@ export class CategoryService{
   httpOptions = {
     headers: new HttpHeaders({
         'Content-Type': 'application/json',
-  
-  
     }),
   };
-  
-  constructor(private httpClient: HttpClient,
-              ){
+
+  constructor(private httpClient: HttpClient) {
 
   }
+
   getListCategory(){
     this.loaded = false;
     console.log('Loading categories..');
-    this.httpClient.get<any[]>('http://localhost:12080/category')
+    this.httpClient.get<any[]>(environment.category_url)
     .subscribe(
       (response) => {
         this.categoryList=response;
         this.emitCategorySubject();
-        
-        
       },
       (error)=>{
         console.log('Couldnt load categoryList'+ error);
       }
-      
     )
-    
     console.log("load category finished!");
-    //this.emitCategorySubject();
   }
   emitCategorySubject() {
     this.categorySubject.next(this.categoryList.slice());
@@ -50,11 +43,10 @@ export class CategoryService{
     console.log('Adding Category...');
     const cat = {name:'',
                 parentId:0}
-
     cat.name=name;
     cat.parentId= parentId;
     this.categoryList.push(cat);
-    this.httpClient.post('http://localhost:12080/category',cat,this.httpOptions).subscribe(
+    this.httpClient.post(environment.category_url,cat,this.httpOptions).subscribe(
       ()=>{
         console.log('Enregistrement category réussi! ');
       },(error) => {
@@ -97,12 +89,4 @@ export class CategoryService{
       }
     ).name;
   }
-
-
-
- 
-
-
-
-
 }

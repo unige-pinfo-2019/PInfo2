@@ -32,7 +32,7 @@ java -jar {serviceFolder}/target/{serviceName}-service-0.2.0-SNAPSHOT-thorntail.
 
 If you have added or deleted a file put the `clean` keywoard after mvn otherwise simply run `mvn install -T 4`
 
-List of services ports :
+List of services ports:
 
 User service: `13080`
 Category service: `12080`
