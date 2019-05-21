@@ -37,7 +37,7 @@ import * as $ from "jquery";
 const appRoutes: Routes = [
 
   {path: 'posts-view', component: PostsViewComponent },
-  {path: 'posts/:id', component: SinglePostViewComponent },
+  {path: 'posts-view/:id', component: SinglePostViewComponent },
   {path: 'new-post-view', component: NewPostViewComponent },
   {path: 'add-category', component: AddCategoryComponent },
   {path: 'connection-view', component: ConnectionViewComponent },
