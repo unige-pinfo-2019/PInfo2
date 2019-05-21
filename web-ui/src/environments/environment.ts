@@ -2,7 +2,7 @@ export const environment = {
   production: false,
   api_url: 'http://pinfo2.unige.ch:',
   images_url: 'http://pinfo2.unige.ch:14080/image/',
-  search_url: 'http://pinfo2.unige.ch:11080/search',
+  search_url: 'http://pinfo2.unige.ch:11080/search/ad?q=',
   category_url: 'http://pinfo2.unige.ch:12080/category/',
   ad_url: 'http://pinfo2.unige.ch:15080/ad',
   user_url: 'http://pinfo2.unige.ch/user',

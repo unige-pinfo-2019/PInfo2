@@ -183,7 +183,7 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
   }
   searchPost(searchTerm:string) {
     console.log("searching on server for : " +searchTerm);
-    this.httpClient.get<any[]>('http://localhost:11080/search/ad?q='+searchTerm).
+    this.httpClient.get<any[]>(environment.search_url+searchTerm).
     subscribe(
       (response)=>{
         this.posts = response;
