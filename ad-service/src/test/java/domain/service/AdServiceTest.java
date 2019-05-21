@@ -87,6 +87,7 @@ public class AdServiceTest {
 		assertTrue(ad2.equals(i));
 	}
 	
+	
 	private List<Ad> getAds() {
 
 		List<Ad> ads = new ArrayList<>();
@@ -96,7 +97,7 @@ public class AdServiceTest {
 		}
 		return ads;
 	}
-	
+
 	private int initDataStore() {
 		int size = adServiceImpl.getAll().size();
 		List<Ad> ads = getAds();	
