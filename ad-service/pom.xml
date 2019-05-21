@@ -152,8 +152,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.22.1</version> <!--$NO-MVN-MAN-VER$-->
-				<!-- <version>3.0.0-M6</version> -->
+				<version>2.22.1</version>
 				<executions>
 					<execution>
 						<goals>
