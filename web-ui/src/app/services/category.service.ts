@@ -10,7 +10,8 @@ export class CategoryService{
   loaded=false;
   categorySubject = new Subject<any[]>();
   private categoryList:any[];
-
+  private localUrl= 'http://localhost:';
+  private serverUrl = 'http://pinfo2.unige.ch:';
   httpOptions = {
     headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -22,8 +23,8 @@ export class CategoryService{
   }
 
   getListCategory(){
+    
     this.loaded = false;
-    console.log('Loading categories..');
     this.httpClient.get<any[]>(environment.category_url)
     .subscribe(
       (response) => {
@@ -34,7 +35,7 @@ export class CategoryService{
         console.log('Couldnt load categoryList'+ error);
       }
     )
-    console.log("load category finished!");
+    
   }
   emitCategorySubject() {
     this.categorySubject.next(this.categoryList.slice());

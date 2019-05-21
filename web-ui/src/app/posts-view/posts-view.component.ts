@@ -20,24 +20,17 @@ export class PostsViewComponent implements OnInit {
 
   }
 
-  // Useless ?
-  addToServer(){
-
-  }
 
   getFromServer(){
     this.postsService.getPosts();
   }
 
-  // Useless ?
-  deleteFromServer(){
 
-  }
 
   onSearch(){
     this.searchValue = document.getElementById("srch-term");
     this.postsService.searchPost( this.searchValue.value.toString());
-    this.categoryService.addCategory('Books',0);
+    //this.categoryService.addCategory('Books',0);
   }
 
   ngOnInit() {

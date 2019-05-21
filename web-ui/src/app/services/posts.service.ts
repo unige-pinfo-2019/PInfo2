@@ -33,7 +33,7 @@ public posts=[];
 public singlePost={
   };
 private localUrl= 'http://localhost:';
-private serverUrl = 'http://localhost:';
+private serverUrl = 'http://pinfo2.unige.ch:';
 
 
 private imagePort='14080/image';
@@ -114,7 +114,7 @@ addPost(title:string, description:string,price:number,categoryId:number,imageIds
   console.log('Enregistrement en cours... ');
   console.log(postObject);
   this.httpClient
-  .post(this.serverUrl+this.adPort,
+  .post(environment.ad_url,
   postObject,this.httpOptions).subscribe(
   ()=>{
     console.log('Enregistrement terminé ! ');
