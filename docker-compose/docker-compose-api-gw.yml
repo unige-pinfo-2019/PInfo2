@@ -138,6 +138,6 @@ networks:
      driver: bridge     
   backend-network:
     external:
-       name: microservices_backend-network
+       name: pinfo2_backend-network
 
 
