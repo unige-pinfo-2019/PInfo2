@@ -15,14 +15,20 @@ body, html {
 body {
   font-family: 'Montserrat';
   font-size: 18px;
+  padding-bottom: 6em;
 }
 
 .navbar { // global settings of navigation bar
   width: 75%;
 }
 
+.footbar { // global settings of footer bar
+  width: 75%;
+}
+
 section { // global settings of sections (body of the page)
   width: 75%;
+  min-height: 75vh;
   margin: 0 auto;
   padding-top: 2em;
   padding-bottom: 2em;

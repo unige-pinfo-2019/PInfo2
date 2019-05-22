@@ -33,6 +33,7 @@ import { SinglePostViewComponent } from './single-post-view/single-post-view.com
 import { UserViewComponent } from './user-view/user-view.component';
 
 import * as $ from "jquery";
+import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
 
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
     CategoriesComponent,
     ConnectionViewComponent,
     Error404ViewComponent,
+    FooterComponent,
     MenuComponent,
     MinipostItemComponent,
     NewPostViewComponent,
