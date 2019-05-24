@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
 
-public class AdRestServiceTest {
+public class AdRestServiceTestIT {
 
 	@BeforeAll
 	public static void setup() {
