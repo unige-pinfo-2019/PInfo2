@@ -10,24 +10,36 @@ import { PostsService } from '../services/posts.service';
 })
 
 export class CategoriesComponent implements OnInit {
-  categoryList:any[];
+  categoryList=[[]];
+  subCategoryList:any[];
   listSubscription:Subscription;
-
+  subListSubscription:Subscription;
+  clicked =true;
   constructor(private categoryService: CategoryService, private postService: PostsService) {
 
   }
 
   ngOnInit() {
-    this.categoryService.getListCategory();
+    this.categoryService.getListParentCategory();
+
     this.listSubscription= this.categoryService.categorySubject.subscribe(
       (catList:any[]) => {
         this.categoryList=catList;
       }
     );
+
+    this.subListSubscription=this.categoryService.subCategorySubject.subscribe(
+      (subCat:any[])=>{
+        this.subCategoryList=subCat;
+      }
+    );
   }
 
-  onSelectCategory(catName:string){
-    this.postService.searchCategory(this.categoryService.getCategoryId(catName));
-    console.log("You selected the "+catName+" category!");
+  onSelectCategory(id:number){
+
+    this.categoryService.getListChildCategory(id);
+    console.log(this.subCategoryList);
+    console.log("You selected the "+id+" category!");
+    
   }
 }

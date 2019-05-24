@@ -1,6 +1,6 @@
 export class AuthService {
 
-  isAuth = false;
+  isAuth = true;//
 
   signIn() {
     this.isAuth=true;

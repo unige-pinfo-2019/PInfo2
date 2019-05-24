@@ -1,3 +1,14 @@
 <div class="list-group" *ngFor="let cat of categoryList">
-  <button type="button" class="list-group-item list-group-item-action rounded-0" (click)="onSelectCategory(cat.name)">{{ cat.name }}</button>
+  <button  type="button" class="list-group-item list-group-item-action rounded-0" (click)="onSelectCategory(cat.id)">{{ cat.name }}
+    <ng-container *ngIf="clicked" >
+    <div class="list-group" *ngFor="let subCat of subCategoryList; let last=last"  >
+      <button type="button" class="list-group-item list-group-item-action rounded-0" >{{ subCat.name }}
+           <ng-container *ngIf="last" ></ng-container>
+    
+      </button>
+    </div>
+  </ng-container>
+     
+
+  </button>
 </div>

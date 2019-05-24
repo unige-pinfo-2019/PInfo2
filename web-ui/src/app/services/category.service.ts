@@ -7,9 +7,13 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class CategoryService{
-  loaded=false;
+  
   categorySubject = new Subject<any[]>();
+  subCategorySubject = new Subject<any[]>();
+
   private categoryList:any[];
+  private subCategoryList:any[];
+
   private localUrl= 'http://localhost:';
   private serverUrl = 'http://pinfo2.unige.ch:';
   httpOptions = {
@@ -23,8 +27,8 @@ export class CategoryService{
   }
 
   getListCategory(){
+    console.log("regular category search");
     
-    this.loaded = false;
     this.httpClient.get<any[]>(environment.category_url)
     .subscribe(
       (response) => {
@@ -37,8 +41,53 @@ export class CategoryService{
     )
     
   }
+  getListParentCategory(){
+    console.log('searching parentid = null');
+    //todo: make a search byCategory
+    this.httpClient.get<any[]>(environment.category_url)
+    .subscribe(
+
+      (response)=>{
+      this.categoryList=response.filter(
+        cat=>{
+          return cat.parentId === null;
+        }
+      );
+      console.log("categoryParent success!");
+      this.emitCategorySubject()
+    },(error)=>{
+      console.log(error);
+    }
+    );
+
+  }
+  getListChildCategory(parentId:number){
+    //pinfo2.unige.ch:12080/category/1/childs
+    console.log('searching parentid = '+parentId);
+    //todo: make a search byCategory
+    this.httpClient.get<any[]>(environment.category_url+parentId+"/childs")
+    .subscribe(
+
+      (response)=>{
+        this.subCategoryList=response;
+        this.emitSubCategorySubject();
+
+      console.log("categoryChild success!");
+      this.emitSubCategorySubject();
+    },(error)=>{
+      console.log(error);
+      
+    }
+    
+    );
+    
+  }
   emitCategorySubject() {
     this.categorySubject.next(this.categoryList.slice());
+    
+  }
+  emitSubCategorySubject() {
+    this.subCategorySubject.next(this.subCategoryList.slice());
   }
   addCategory(name:string,parentId:number){
     console.log('Adding Category...');
