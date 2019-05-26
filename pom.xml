@@ -267,7 +267,7 @@
 											</inline>
 										</assembly>
 										<entryPoint>
-											<shell>java -Djava.net.preferIPv4Stack=true -jar \
+											<shell>java -Xmx512M -Djava.net.preferIPv4Stack=true -jar \
 												/opt/${project.build.finalName}-thorntail.jar</shell>
 										</entryPoint>
 									</build>
