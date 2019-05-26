@@ -33,7 +33,7 @@ public class CategoryRestService {
 	
 	
 	@GET
-	@Path("{id}/childs")
+	@Path("{id}/children")
 	@Produces("application/json")
 	public List<Category> getSubCategories(@PathParam("id") Long id) {
 		return categoryService.getSubCategories(categoryService.get(id));
