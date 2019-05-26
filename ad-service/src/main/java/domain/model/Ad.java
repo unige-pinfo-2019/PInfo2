@@ -51,7 +51,7 @@ public class Ad implements Serializable {
 	
 	@Column(name="USER_ID")
 	@NotNull
-	private Long userId;
+	private String userId;
 	
 	@Column(name="IMAGE_IDS")
 	@ElementCollection(fetch=FetchType.EAGER)

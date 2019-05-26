@@ -117,7 +117,7 @@ public class AdServiceTest {
 		Long randomDate = -946771200000L + (Math.abs(r.nextLong()) % (70L * 365 * 24 * 60 * 60 * 1000));
 		ad.setDate(new Date(randomDate));
 		
-		ad.setUserId(r.nextLong());
+		ad.setUserId(UUID.randomUUID().toString());
 		ad.setCategoryId(r.nextLong());
 
 		return ad;
