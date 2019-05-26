@@ -14,8 +14,6 @@ export class CategoryService{
   private categoryList:any[];
   private subCategoryList:any[];
 
-  private localUrl= 'http://localhost:';
-  private serverUrl = 'http://pinfo2.unige.ch:';
   httpOptions = {
     headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -28,7 +26,6 @@ export class CategoryService{
 
   getListCategory(){
     console.log("regular category search");
-    
     this.httpClient.get<any[]>(environment.category_url)
     .subscribe(
       (response) => {
@@ -46,7 +43,6 @@ export class CategoryService{
     //todo: make a search byCategory
     this.httpClient.get<any[]>(environment.category_url)
     .subscribe(
-
       (response)=>{
       this.categoryList=response.filter(
         cat=>{
@@ -55,17 +51,14 @@ export class CategoryService{
       );
       console.log("categoryParent success!");
       this.emitCategorySubject()
-    },(error)=>{
-      console.log(error);
-    }
+      },(error)=>{
+        console.log(error);
+      }
     );
 
   }
   getListChildCategory(parentId:number){
-    //pinfo2.unige.ch:12080/category/1/childs
-    console.log('searching parentid = '+parentId);
-    //todo: make a search byCategory
-    this.httpClient.get<any[]>(environment.category_url+parentId+"/childs")
+    this.httpClient.get<any[]>(environment.category_url+parentId+"/children")
     .subscribe(
 
       (response)=>{
@@ -74,11 +67,9 @@ export class CategoryService{
 
       console.log("categoryChild success!");
       this.emitSubCategorySubject();
-    },(error)=>{
-      console.log(error);
-      
-    }
-    
+      },(error)=>{
+        console.log(error);
+      }
     );
     
   }
@@ -116,12 +107,6 @@ export class CategoryService{
         console.log(error);
       }
     )
-    /*this.categoryList.splice(this.categoryList.find(
-      (c)=>{
-        return c.id===id;
-      }
-    ),1);
-  }*/
     this.categoryList.pop();
     this.emitCategorySubject();
   }
