@@ -53,7 +53,7 @@ services:
       KONG_PG_DATABASE: kongdb
       KONG_PLUGINS: "bundled,jwt"
     volumes:      
-      - ../web-ui/dist:/www/data:ro
+      - ../web-ui/dist/frontend:/www/data:ro
 #    Assuming we want to put our own certificates, we should put them in /usr/local/kong/ssl/certs
       - ./certs:/usr/local/kong/ssl/certs      
     ports:
