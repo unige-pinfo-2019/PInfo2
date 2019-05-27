@@ -156,7 +156,7 @@ services:
   #Ad service
   ad-service:
     container_name: ad-service    
-    image: unige/ad-service:latest
+    image: corentinbt/ad-service:latest
     hostname: ad-service
     networks:
       - backend-network    
@@ -176,7 +176,7 @@ services:
   #Search service
   search-service:
     container_name: search-service    
-    image: unige/search-service:latest
+    image: corentinbt/search-service:latest
     hostname: search-service
     networks:
       - backend-network    
@@ -192,7 +192,7 @@ services:
   #Category service
   category-service:
     container_name: category-service    
-    image: unige/category-service:latest
+    image: corentinbt/category-service:latest
     hostname: category-service
     networks:
       - backend-network    
@@ -212,7 +212,7 @@ services:
   #User service
   user-service:
     container_name: user-service    
-    image: unige/user-service:latest
+    image: corentinbt/user-service:latest
     hostname: user-service
     networks:
       - backend-network    
@@ -232,7 +232,7 @@ services:
   #Image service
   image-service:
     container_name: image-service    
-    image: unige/image-service:latest
+    image: corentinbt/image-service:latest
     hostname: image-service
     networks:
       - backend-network    
