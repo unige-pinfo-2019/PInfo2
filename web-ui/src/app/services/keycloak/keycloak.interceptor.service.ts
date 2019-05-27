@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { mergeMap, catchError } from 'rxjs/operators';
 import { KeycloakService } from './keycloak.service';
 
 @Injectable()
 export class KeycloakInterceptorService implements HttpInterceptor {
+
   constructor(
     private keycloakService: KeycloakService,
   ) {}
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.keycloakService.isLoggedIn()) {
       return this.getUserToken().pipe(
@@ -23,11 +25,26 @@ export class KeycloakInterceptorService implements HttpInterceptor {
           return next.handle(request);
         }));
     }
-    return next.handle(request);
+    
+    // Catch unauthorized http errors
+    return next.handle(request).pipe(
+      catchError(err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            console.log('this should print your error!', err.error);
+            this.keycloakService.login();
+          }
+        }
+        return new Observable<HttpEvent<any>>();
+      })
+    );
   }
+
   getUserToken() {
     const tokenPromise: Promise<string> = this.keycloakService.getToken();
     const tokenObservable: Observable<string> = from(tokenPromise);
     return tokenObservable;
   }
+
+  
 }
