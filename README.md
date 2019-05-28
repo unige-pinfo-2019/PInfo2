@@ -25,7 +25,7 @@ If a modification has been done on the frontend side, one should build all web-u
 
 ```
 cd web-ui
-ng build
+ng build --watch
 cd ..
 cd docker-compose
 docker-compose -f docker-compose-api-gw.yml up
