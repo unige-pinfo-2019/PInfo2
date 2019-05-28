@@ -4,9 +4,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { AddCategoryComponent } from '../add-category/add-category.component';
 import { environment } from '../../environments/environment';
+import { PostsService } from './posts.service';
 
 @Injectable()
 export class CategoryService{
+
+  
   
   categorySubject = new Subject<any[]>();
   subCategorySubject = new Subject<any[]>();
@@ -20,7 +23,8 @@ export class CategoryService{
     }),
   };
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,
+              private postService:PostsService) {
 
   }
 
@@ -37,6 +41,9 @@ export class CategoryService{
       }
     )
     
+  }
+  selectCategory(id: number) {
+    this.postService.searchCategory(id);
   }
   getListParentCategory(){
     console.log('searching parentid = null');
