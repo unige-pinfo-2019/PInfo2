@@ -1,14 +1,30 @@
-<div class="list-group" *ngFor="let cat of categoryList">
-  <button  type="button" class="list-group-item list-group-item-action rounded-0" (click)="onSelectCategory(cat.id)">{{ cat.name }}
-    <ng-container *ngIf="clicked" >
-    <div class="list-group" *ngFor="let subCat of subCategoryList; let last=last"  >
-      <button type="button" class="list-group-item list-group-item-action rounded-0" >{{ subCat.name }}
-           <ng-container *ngIf="last" ></ng-container>
-    
-      </button>
-    </div>
-  </ng-container>
-     
-
+<!-- <div class="list-group" *ngFor="let cat of categoryList">
+  <button  type="button" class="list-group-item list-group-item-action rounded-0" (click)="onSelectCategory(cat.id)">
+    {{ cat.name }}
+    <ng-container *ngIf="last" ></ng-container>
   </button>
-</div>
+  <ng-container *ngIf="clicked" >
+  <div class="list-group" *ngFor="let subCat of subCategoryList; let last=last"  >
+      <button type="button" class="list-group-item list-group-item-action rounded-0" >
+        {{ subCat.name }}
+      </button>
+  </div>
+  </ng-container>
+</div> -->
+
+<!-- <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+  <button type="button" class="btn btn-secondary">1</button>
+  <button type="button" class="btn btn-secondary">2</button> -->
+
+  <div class="btn-group-vertical" role="group">
+    <button type="button" class="btn btn-group-vertical dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngFor="let cat of categoryList">
+    <!-- data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+      {{cat.name}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a *ngFor="let subCat of subCategoryList">{{subCat.name}}</a>
+      <!-- <a class="dropdown-item" href="#">Dropdown link</a>
+      <a class="dropdown-item" href="#">Dropdown link</a> -->
+    </div>
+  </div>
+<!-- </div> -->

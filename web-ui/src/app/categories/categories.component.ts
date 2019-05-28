@@ -40,6 +40,6 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.getListChildCategory(id);
     console.log(this.subCategoryList);
     console.log("You selected the "+id+" category!");
-    
+
   }
 }
