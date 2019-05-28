@@ -14,23 +14,22 @@
  - Raphaël Lutz
  
  ## Instructions
- To run the microservices using Docker execute:
+ To compile all the microservices and their Docker images:
  
 ```
 mvn clean install
 mvn install -Ppackage-docker-image
-cd docker-compose/
-docker-compose -f docker-compose-microservices.yml up
 ```
 
-To avoid docker images compilation time, each microservice can be run independently 
+If a modification has been done on the frontend side, one should build all web-ui static files and start/restart the API gateway:
 
 ```
-mvn clean install -T 4
-java -jar {serviceFolder}/target/{serviceName}-service-0.2.0-SNAPSHOT-thorntail.jar
+cd web-ui
+ng build --watch
+cd ..
+cd docker-compose
+docker-compose -f docker-compose-api-gw.yml up
 ```
-
-If you have added or deleted a file put the `clean` keywoard after mvn otherwise simply run `mvn install -T 4`
 
 List of services ports:
 

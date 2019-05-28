@@ -36,8 +36,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   onSelectCategory(id:number){
-
-    this.categoryService.getListChildCategory(id);
+    this.categoryService.selectCategory(id);
+    this.categoryService.getListCategory();
     console.log(this.subCategoryList);
     console.log("You selected the "+id+" category!");
 

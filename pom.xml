@@ -244,7 +244,7 @@
 							<dockerHost>${dockerHost}</dockerHost>
 							<images>
 								<image>
-									<name>%g/%a:%l</name>
+									<name>corentinbt/%a:%l</name>
 									<run>
 										<ports>
 											<port>8080:8080</port>
@@ -267,7 +267,7 @@
 											</inline>
 										</assembly>
 										<entryPoint>
-											<shell>java -Djava.net.preferIPv4Stack=true -jar \
+											<shell>java -Xmx512M -Djava.net.preferIPv4Stack=true -jar \
 												/opt/${project.build.finalName}-thorntail.jar</shell>
 										</entryPoint>
 									</build>

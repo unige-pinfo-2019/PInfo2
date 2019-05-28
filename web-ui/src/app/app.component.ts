@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { PostItemComponent } from './post-item/post-item.component';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,21 +15,8 @@ export class AppComponent implements OnInit {
   search: string;
   add: string;
 
-  ngOnInit() {
+  constructor(private httpClient: HttpClient, 
+              private post: PostItemComponent) {}
 
-  }
-
-  constructor(private httpClient: HttpClient, private post: PostItemComponent) {
-
-  }
-
-  // Useless ?
-  onAdd(){
-
-  }
-
-  // Useless ?
-  onGet(){
-
-  }
+  ngOnInit() {}
 }

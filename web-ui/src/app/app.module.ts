@@ -32,12 +32,15 @@ import { PostsViewComponent } from './posts-view/posts-view.component';
 import { SinglePostViewComponent } from './single-post-view/single-post-view.component';
 import { UserViewComponent } from './user-view/user-view.component';
 
+import { APP_BASE_HREF } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import * as $ from "jquery";
 import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
 
-  {path: 'posts-view', component: PostsViewComponent },
+  {path: '', component: PostsViewComponent },
   {path: 'posts-view/:id', component: SinglePostViewComponent },
   {path: 'new-post-view', component: NewPostViewComponent },
   {path: 'add-category', component: AddCategoryComponent },
@@ -45,7 +48,7 @@ const appRoutes: Routes = [
   {path: 'new-user-view', component: NewUserViewComponent },
   {path: 'password-recovery-view', component: PasswordRecoveryViewComponent },
   {path: 'user-view', canActivate: [AuthGuard], component: UserViewComponent },
-  {path: '', redirectTo: 'posts-view', pathMatch:'full'},
+//  {path: '', redirectTo: 'posts-view', pathMatch:'full'},
   {path: 'not-found', component: Error404ViewComponent},
   {path: '**', redirectTo: 'not-found'}
 ];
@@ -84,6 +87,12 @@ const appRoutes: Routes = [
     UserService,
     CategoryService,
     KeycloakService,
+    { provide: APP_BASE_HREF, useValue: '/' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: KeycloakInterceptorService,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

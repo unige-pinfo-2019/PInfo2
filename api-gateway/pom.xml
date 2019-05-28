@@ -45,7 +45,7 @@
 							<dockerHost>${dockerHost}</dockerHost>						
 							<images>
 								<image>
-									<name>%g/%a:%l</name>
+									<name>corentinbt/%a:%l</name>
 									<build>										
 										<dockerFileDir>.</dockerFileDir>
 										<assembly>
