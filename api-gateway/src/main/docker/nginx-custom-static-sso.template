@@ -90,9 +90,10 @@ http {
 > for _, el in ipairs(nginx_proxy_directives) do
     $(el.name) $(el.value);
 > end
-	
+	    root /www/data;
+
 	    location / {
-			root /www/data;
+			try_files $uri $uri/ /index.html;
 		}
 	   
 	    
