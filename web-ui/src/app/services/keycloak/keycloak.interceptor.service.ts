@@ -27,7 +27,7 @@ export class KeycloakInterceptorService implements HttpInterceptor {
     }
     
     // Catch unauthorized http errors
-    return next.handle(request).pipe(
+    /*return next.handle(request).pipe(
       catchError(err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
@@ -37,7 +37,9 @@ export class KeycloakInterceptorService implements HttpInterceptor {
         }
         return new Observable<HttpEvent<any>>();
       })
-    );
+    );*/
+    
+    return next.handle(request);
   }
 
   getUserToken() {

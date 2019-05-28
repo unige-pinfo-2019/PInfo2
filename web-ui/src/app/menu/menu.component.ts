@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthGuard } from '../services/auth-guard.service';
+import { KeycloakService } from '../services/keycloak/keycloak.service';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -12,13 +12,10 @@ export class MenuComponent implements OnInit {
 
   appTitle: string = 'Agility';
 
-  constructor(private authService: AuthService) {
-    
-  }
+  constructor(private authService: KeycloakService) {}
 
   ngOnInit() {
-    if(this.authService.isAuth){
-      console.log("we're logged in!");
+    if(this.authService.isLoggedIn()){
       var connexionButton= document.getElementById("connexionButton");
       connexionButton.style.color="black";
     }
