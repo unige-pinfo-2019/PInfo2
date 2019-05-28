@@ -12,7 +12,7 @@ import domain.service.AdService;
 import lombok.extern.java.Log;
 
 @ApplicationScoped
-@KafkaConfig(bootstrapServers = "#{thorntail.kafka-configuration.host}:#{thorntail.kafka-configuration.port}")
+@KafkaConfig(bootstrapServers = "kafka:9092")
 @Log
 public class AdProducer {
 	

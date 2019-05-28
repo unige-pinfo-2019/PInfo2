@@ -1,0 +1,2 @@
+INSERT INTO ADS (title, description, price, date, categoryId, userId) VALUES ("Velo"  , "Ceci est un velo"  , 15.0, "01/01/1901 07:20", 1, 1)
+INSERT INTO ADS (title, description, price, date, categoryId, userId) VALUES ("Chaise", "Ceci est un chaise", 29.0, "01/05/1998 17:20", 2, 1)

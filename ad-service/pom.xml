@@ -190,7 +190,7 @@
 							<goal>start</goal>
 						</goals>
 						<configuration>
-						<!--<jvmArguments>${}</jvmArguments> -->
+						<jvmArguments>${}</jvmArguments>
 							<properties>
 								<thorntail.port.offset>20000</thorntail.port.offset>
 							</properties>
