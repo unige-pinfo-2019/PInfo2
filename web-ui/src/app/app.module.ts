@@ -35,7 +35,6 @@ import { UserViewComponent } from './user-view/user-view.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import * as $ from "jquery";
 import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
@@ -48,9 +47,9 @@ const appRoutes: Routes = [
   {path: 'new-user-view', component: NewUserViewComponent },
   {path: 'password-recovery-view', component: PasswordRecoveryViewComponent },
   {path: 'user-view', canActivate: [AuthGuard], component: UserViewComponent },
-//  {path: '', redirectTo: 'posts-view', pathMatch:'full'},
   {path: 'not-found', component: Error404ViewComponent},
   {path: '**', redirectTo: 'not-found'}
+  
 ];
 @NgModule({
   declarations: [
