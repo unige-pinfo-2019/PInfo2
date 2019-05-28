@@ -27,6 +27,7 @@
 		<skip-docker-build>true</skip-docker-build>
 		<skip-docker-compose>false</skip-docker-compose>
 		<dockerHost>tcp://localhost:2375</dockerHost>
+		<failsafe.runOrder>alphabetical</failsafe.runOrder>
 	</properties>
 
 
@@ -51,11 +52,6 @@
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
-			<!--<dependency>
-				<groupId>org.aerogear.kafka</groupId>
-				<artifactId>kafka-cdi-extension</artifactId>
-				<version>0.1.0</version>
-			</dependency> -->
 			<dependency>
 				<groupId>com.github.dadrus.jpa-unit</groupId>
 				<artifactId>jpa-unit-bom</artifactId>

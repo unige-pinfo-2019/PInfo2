@@ -27,7 +27,7 @@ public class Ad implements Serializable {
 	private static final long serialVersionUID = 7543806998039911375L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="AD_ID")
 	private Long id;
 	
