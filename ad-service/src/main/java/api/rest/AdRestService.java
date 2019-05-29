@@ -37,6 +37,7 @@ public class AdRestService {
 	@POST
 	@Consumes("application/json")
 	public Response create(Ad ad) {
+		System.out.println("ON VA POSTTTTTT UNE ADDDD");
 		Long newId = null;
 		try {
 			newId = adService.create(ad);
@@ -73,6 +74,7 @@ public class AdRestService {
 	@PUT
 	@Consumes("application/json")
 	public Response update(Ad ad) {
+		System.out.println("ON VA UPDATE UNE ADDDD");
 		try {
 			adService.update(ad);
 			adProducer.send(ad, "adsUpdate");
@@ -86,6 +88,7 @@ public class AdRestService {
 	@DELETE
 	@Path("{id}")
 	public Response delete(@PathParam("id") Long adId) {
+		System.out.println("ON VA DELETEEEEEE UNE ADDDD");
 		try {
 			adService.delete(adService.get(adId));
 			adProducer.send(adId, "adsDelete");

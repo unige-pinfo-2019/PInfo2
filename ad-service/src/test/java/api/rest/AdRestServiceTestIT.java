@@ -7,10 +7,7 @@ import static io.restassured.RestAssured.given;
 
 
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +23,9 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.parsing.Parser;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import io.restassured.specification.RequestSpecification;
 
 
@@ -35,6 +35,7 @@ public class AdRestServiceTestIT {
 	public static void setup() {
 		RestAssured.baseURI = "http://localhost:28080/ad";
 		RestAssured.port = 8080;
+		RestAssured.defaultParser = Parser.JSON;
 	}
 
 	@Test //GET
@@ -47,13 +48,16 @@ public class AdRestServiceTestIT {
 	    	and().
 			body(containsString("Velo"));
 		
+		// CHECK THE CONTENT OF A AD VIA GET
 		when().
 			get("/2").
 		then().
+			log().body().
 			assertThat().
 			statusCode(200).
 			and().
 			body(containsString("Chaise"));
+		
 	}
 	
 	@Test //GET
@@ -72,26 +76,61 @@ public class AdRestServiceTestIT {
 	@Test //PUT
 	public void step3testUpdate() {
 		
-		String new_description = "Ceci est une magnifique chaise";
+		Response response =
+	    when().
+	    	get("/2").
+	    then().
+	        contentType(ContentType.JSON).  
+	        extract().response(); 
 		
-		Map<String, Object>  new_chaise = new HashMap<>();
-		new_chaise.put("id", 2);
-		new_chaise.put("title", "Chaise");
-		new_chaise.put("description", new_description);
-		new_chaise.put("price", 29.0);
-		new_chaise.put("date", "23/01/1777 07:07");
-		new_chaise.put("categoryId", 2);
-		new_chaise.put("userId", 1);
-		new_chaise.put("imageIds",  new ArrayList<Long>());
+		JsonPath jsonResponse = response.jsonPath();
+		
+		String new_description = "Ceci est une magnifique chaise";
+		Map<String, Object>  new_chaise = new HashMap<>();		    				
+		
+		new_chaise.put("id", 			jsonResponse.get("id"));
+		new_chaise.put("title", 		jsonResponse.get("title"));
+		new_chaise.put("description", 	new_description);	
+		new_chaise.put("price", 		jsonResponse.get("price"));
+		new_chaise.put("date", 			jsonResponse.get("date"));
+		new_chaise.put("categoryId", 	jsonResponse.get("categoryId"));
+		new_chaise.put("userId", 		jsonResponse.get("userId"));
+		new_chaise.put("imageIds",  	jsonResponse.get("imageIds"));
 
-		given().
-			contentType(ContentType.JSON).
-		    body(new_chaise).
+		//System.out.println("NEW_CHAISE ==== : " + Arrays.toString(new_chaise.entrySet().toArray()));
+		
+		response = given()
+				.contentType(ContentType.JSON)
+				.accept(ContentType.JSON)
+				.body(new_chaise)
+				.when()
+				.put("/").  
+				then().
+		        extract().response(); 
+		
+		System.out.println("PUT Response\n" + response.jsonPath().toString());
+		// tests
+		response.then().body("description", is(new_description));
+
+//		given().
+//			contentType(ContentType.JSON).
+//		    body(new_chaise).
+//		when().
+//			put("/").
+//		then();
+//			//assertThat().
+//		    //statusCode(200);
+		
+		System.out.println("VERIFICATIOOOOOOOn");
 		when().
-			put().
+			get("/2").
 		then().
+			log().body().
 			assertThat().
-		    statusCode(200);
+			statusCode(200).
+			and().
+			body(containsString("Chaise"));
+		System.out.println("VERIFICATIOOOOOOOn");
 		
 	}
 	
