@@ -12,36 +12,36 @@
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.H2Dialect" />
 
-			<property name="hibernate.hbm2ddl.charset_name" value="UTF-8"/>	
+			<property name="hibernate.hbm2ddl.charset_name" value="UTF-8"/>
 			<property name="hibernate.connection.CharSet" value="UTF-8"/>
 			<property name="hibernate.connection.characterEncoding" value="UTF-8"/>
 			<property name="hibernate.connection.useUnicode" value="true"/>
-			
+
 			<!-- <property name="javax.persistence.sql-load-script-source" value="META-INF/load_sample.sql"/> -->
 
 		</properties>
 	</persistence-unit>
-	
+
 	<persistence-unit name="AdPUTest"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>domain.model.Ad</class>
 		<properties>
-			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" /> 
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
 			<property name="javax.persistence.jdbc.url"
 		    	value="jdbc:h2:mem:AdPUDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=TRUE" />
 			<property name="javax.persistence.jdbc.user" value="ad" />
 			<property name="javax.persistence.jdbc.password" value="ad" />
-								  		
+
 			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 			<property name="hibernate.id.new_generator_mappings" value="true" />
-			<property name="hibernate.hbm2ddl.charset_name" value="UTF-8"/>	
-			
+			<property name="hibernate.hbm2ddl.charset_name" value="UTF-8"/>
+
 			<property name="javax.persistence.sql-load-script-source" value="META-INF/load_sample.sql"/>
 		</properties>
 	</persistence-unit>
-	
+
 </persistence>
