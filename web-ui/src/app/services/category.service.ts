@@ -1,60 +1,100 @@
 import { Injectable } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
-
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { AddCategoryComponent } from '../add-category/add-category.component';
+import { environment } from '../../environments/environment';
+import { PostsService } from './posts.service';
 
 @Injectable()
 export class CategoryService{
-  loaded=false;
+
+  
+  
   categorySubject = new Subject<any[]>();
+  subCategorySubject = new Subject<any[]>();
+
   private categoryList:any[];
+  private subCategoryList:any[];
 
   httpOptions = {
     headers: new HttpHeaders({
         'Content-Type': 'application/json',
-  
-  
     }),
   };
-  
+
   constructor(private httpClient: HttpClient,
-              ){
+              private postService:PostsService) {
 
   }
+
   getListCategory(){
-    this.loaded = false;
-    console.log('Loading categories..');
-    this.httpClient.get<any[]>('http://localhost:12080/category')
+    console.log("regular category search");
+    this.httpClient.get<any[]>(environment.category_url)
     .subscribe(
       (response) => {
         this.categoryList=response;
         this.emitCategorySubject();
-        
-        
       },
       (error)=>{
         console.log('Couldnt load categoryList'+ error);
       }
-      
     )
     
-    console.log("load category finished!");
-    //this.emitCategorySubject();
+  }
+  selectCategory(id: number) {
+    this.postService.searchCategory(id);
+  }
+  getListParentCategory(){
+    console.log('searching parentid = null');
+    //todo: make a search byCategory
+    this.httpClient.get<any[]>(environment.category_url)
+    .subscribe(
+      (response)=>{
+      this.categoryList=response.filter(
+        cat=>{
+          return cat.parentId === null;
+        }
+      );
+      console.log("categoryParent success!");
+      this.emitCategorySubject()
+      },(error)=>{
+        console.log(error);
+      }
+    );
+
+  }
+  getListChildCategory(parentId:number){
+    this.httpClient.get<any[]>(environment.category_url+parentId+"/children")
+    .subscribe(
+
+      (response)=>{
+        this.subCategoryList=response;
+        this.emitSubCategorySubject();
+
+      console.log("categoryChild success!");
+      this.emitSubCategorySubject();
+      },(error)=>{
+        console.log(error);
+      }
+    );
+    
   }
   emitCategorySubject() {
     this.categorySubject.next(this.categoryList.slice());
+    
+  }
+  emitSubCategorySubject() {
+    this.subCategorySubject.next(this.subCategoryList.slice());
   }
   addCategory(name:string,parentId:number){
     console.log('Adding Category...');
     const cat = {name:'',
                 parentId:0}
-
     cat.name=name;
     cat.parentId= parentId;
     this.categoryList.push(cat);
-    this.httpClient.post('http://localhost:12080/category',cat,this.httpOptions).subscribe(
+    this.httpClient.post(environment.category_url,cat,this.httpOptions).subscribe(
       ()=>{
         console.log('Enregistrement category réussi! ');
       },(error) => {
@@ -74,12 +114,6 @@ export class CategoryService{
         console.log(error);
       }
     )
-    /*this.categoryList.splice(this.categoryList.find(
-      (c)=>{
-        return c.id===id;
-      }
-    ),1);
-  }*/
     this.categoryList.pop();
     this.emitCategorySubject();
   }
@@ -97,12 +131,4 @@ export class CategoryService{
       }
     ).name;
   }
-
-
-
- 
-
-
-
-
 }

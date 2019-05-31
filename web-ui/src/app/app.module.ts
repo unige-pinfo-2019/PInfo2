@@ -32,21 +32,24 @@ import { PostsViewComponent } from './posts-view/posts-view.component';
 import { SinglePostViewComponent } from './single-post-view/single-post-view.component';
 import { UserViewComponent } from './user-view/user-view.component';
 
-import * as $ from "jquery";
+import { APP_BASE_HREF } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { FooterComponent } from './footer/footer.component';
 
 const appRoutes: Routes = [
 
-  {path: 'posts-view', component: PostsViewComponent },
-  {path: 'posts/:id', component: SinglePostViewComponent },
+  {path: '', component: PostsViewComponent },
+  {path: 'posts-view/:id', component: SinglePostViewComponent },
   {path: 'new-post-view', component: NewPostViewComponent },
   {path: 'add-category', component: AddCategoryComponent },
   {path: 'connection-view', component: ConnectionViewComponent },
   {path: 'new-user-view', component: NewUserViewComponent },
   {path: 'password-recovery-view', component: PasswordRecoveryViewComponent },
   {path: 'user-view', canActivate: [AuthGuard], component: UserViewComponent },
-  {path: '', redirectTo: 'posts-view', pathMatch:'full'},
   {path: 'not-found', component: Error404ViewComponent},
   {path: '**', redirectTo: 'not-found'}
+  
 ];
 @NgModule({
   declarations: [
@@ -55,6 +58,7 @@ const appRoutes: Routes = [
     CategoriesComponent,
     ConnectionViewComponent,
     Error404ViewComponent,
+    FooterComponent,
     MenuComponent,
     MinipostItemComponent,
     NewPostViewComponent,
@@ -82,6 +86,12 @@ const appRoutes: Routes = [
     UserService,
     CategoryService,
     KeycloakService,
+    { provide: APP_BASE_HREF, useValue: '/' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: KeycloakInterceptorService,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

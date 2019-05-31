@@ -1,5 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { PostsService } from '../services/posts.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-post-item',
@@ -22,7 +23,8 @@ export class PostItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.thumbnailUrl='http://localhost:14080/image/'+this.imageIds[0];
+    this.thumbnailUrl = environment.images_url + this.imageIds[0];
+    //console.log("thumbnail"+ this.thumbnailUrl);
   }
 
   getPrice(){

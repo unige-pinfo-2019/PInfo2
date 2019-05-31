@@ -26,7 +26,6 @@ jobs:
         - mvn install -Ppackage-docker-image 
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
-        - docker tag unige/ad-service $DOCKER_ID_USER/ad-service
         - docker push $DOCKER_ID_USER/ad-service
 
     - stage: build 
@@ -41,7 +40,6 @@ jobs:
         - mvn install -Ppackage-docker-image 
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
-        - docker tag unige/search-service $DOCKER_ID_USER/search-service
         - docker push $DOCKER_ID_USER/search-service
 
     - stage: build
@@ -56,7 +54,6 @@ jobs:
         - mvn install -Ppackage-docker-image 
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
-        - docker tag unige/category-service $DOCKER_ID_USER/category-service
         - docker push $DOCKER_ID_USER/category-service
 
     - stage: build
@@ -71,7 +68,6 @@ jobs:
         - mvn install -Ppackage-docker-image 
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
-        - docker tag unige/user-service $DOCKER_ID_USER/user-service
         - docker push $DOCKER_ID_USER/user-service
 
     - stage: build
@@ -86,7 +82,6 @@ jobs:
         - mvn install -Ppackage-docker-image 
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
-        - docker tag unige/image-service $DOCKER_ID_USER/image-service
         - docker push $DOCKER_ID_USER/image-service
 
     - stage: build 
@@ -100,7 +95,6 @@ jobs:
         - mvn install -Ppackage-docker-image 
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
-        - docker tag unige/api-gateway $DOCKER_ID_USER/api-gateway
         - docker push $DOCKER_ID_USER/api-gateway
 
 

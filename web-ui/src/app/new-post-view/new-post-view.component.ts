@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { PostsService } from '../services/posts.service';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./new-post-view.component.scss']
 })
 
-export class NewPostViewComponent implements OnInit {
+export class NewPostViewComponent implements OnInit,OnDestroy {
   postForm : FormGroup;
   selecetdFile : File;
   imageId=[];
@@ -22,7 +22,9 @@ export class NewPostViewComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private postsService: PostsService, private router: Router, private categoryService: CategoryService) {
 
   }
-
+  ngOnDestroy(){
+    this.categorySubscription.unsubscribe();
+  }
   ngOnInit() {
     this.initForm();
     this.categoryService.getListCategory();
@@ -46,7 +48,7 @@ export class NewPostViewComponent implements OnInit {
   onSubmitForm() {
     const formValue = this.postForm.value;
     this.imageId= this.postsService.imageId;
-    const catId = this.categoryService.getCategoryId(formValue['category'])
+    const catId = this.categoryService.getCategoryId(formValue['category']);
 
     this.postsService.addPost(formValue['title'],
                               formValue['description'],
@@ -56,7 +58,7 @@ export class NewPostViewComponent implements OnInit {
     );
 
     console.log("cat.id"+ this.categoryService.getCategoryId(formValue['category']));
-    this.router.navigate(['/posts']);
+    this.router.navigate(['/posts-view']);
   }
 
   getPhotos(): FormArray {

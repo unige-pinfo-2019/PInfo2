@@ -23,7 +23,7 @@ public class Ad implements Searchable {
 	
 	private Long categoryId;
 	
-	private Long userId;
+	private String userId;
 	
 	private List<Long> imageIds;
 	
