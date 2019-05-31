@@ -42,8 +42,10 @@ public class AdRestService {
 		try {
 			newId = adService.create(ad);
 		} catch(IllegalArgumentException i) {
+			System.out.println("CA A PROC EXCEPTION POUR POST");
 			return Response.status(Status.BAD_REQUEST).build();
 		} catch(Exception e) {
+			System.out.println("CA A PROC EXCEPTION POUR POST");
 			return Response.status(Status.BAD_GATEWAY).build();
 		}
 		
@@ -79,6 +81,7 @@ public class AdRestService {
 			adService.update(ad);
 			adProducer.send(ad, "adsUpdate");
 		} catch(Exception e) {
+			System.out.println("CA A PROC EXCEPTION POUR UPDATE");
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 		
@@ -93,6 +96,7 @@ public class AdRestService {
 			adService.delete(adService.get(adId));
 			adProducer.send(adId, "adsDelete");
 		} catch(Exception e) {
+			System.out.println("CA A PROC EXCEPTION POUR DELETE");
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
 		
