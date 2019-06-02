@@ -86,12 +86,11 @@ public class CategoryRestServiceTestIT {
 			assertThat().
 			statusCode(200);
 	}
-	@Test //GET after DELETE (Exception)
+	@Test //GET something that doesn't exist 
 	public void step6testGetafterDelete() {
 		when().
 			get("/10").
 		then().
-			log().body().
 			assertThat().
 	    	statusCode(204); //No content
 	}
