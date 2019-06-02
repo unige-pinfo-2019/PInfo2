@@ -31,14 +31,6 @@ public class CategoryRestServiceTestIT {
 	    	statusCode(200).
 	    	and().
 			body(containsString("Vehicule"));
-		
-		when().
-			get("/2").
-		then().
-			assertThat().
-			statusCode(200).
-			and().
-			body(containsString("Velo"));
 	}
 	
 	@Test //GET
@@ -89,12 +81,20 @@ public class CategoryRestServiceTestIT {
 	@Test //DELETE
 	public void step5testDelete() {
 		when().
-			delete("/1/children").
+			delete("/1").
 		then().
 			assertThat().
 			statusCode(200);
 	}
-
+	@Test //GET after DELETE (Exception)
+	public void step6testGetafterDelete() {
+		when().
+			get("/10").
+		then().
+			log().body().
+			assertThat().
+	    	statusCode(204); //No content
+	}
 	
 
 }
