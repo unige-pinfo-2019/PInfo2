@@ -213,6 +213,15 @@
 					<execution>
 						<id>stop</id>
 						<phase>post-integration-test</phase>
+						<configuration>
+		                <target>
+		                    <exec executable="cmd.exe"
+		                          spawn="true">
+		                        <arg value="/c"/>
+		                        <arg value="../scriptDeleteJavaPostIT.bat"/>
+		                    </exec>
+		                </target>
+		            	</configuration>
 						<goals>
 							<goal>stop</goal>
 						</goals>

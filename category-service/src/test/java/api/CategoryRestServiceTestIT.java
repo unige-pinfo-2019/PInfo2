@@ -59,24 +59,24 @@ public class CategoryRestServiceTestIT {
 			body(containsString("Voiture"));
 	}
 	
-	@Test //POST
-	public void step4testCreate() {
-		JSONObject jsonObj = new JSONObject()
-		                             .put("id",4)
-		                             .put("name","Train")
-		                             .put("parentId",1);
-		     
-		given().
-			log().all().
-			contentType("application/json\r\n").
-        	body(jsonObj.toString()).
-        when().
-        	post("/").
-        then().
-        	log().all().
-        	assertThat().
-        	statusCode(200);
-	}
+//	@Test //POST
+//	public void step4testCreate() {
+//		JSONObject jsonObj = new JSONObject()
+//		                             .put("id",4)
+//		                             .put("name","Train")
+//		                             .put("parentId",1);
+//		     
+//		given().
+//			log().all().
+//			contentType("application/json\r\n").
+//        	body(jsonObj.toString()).
+//        when().
+//        	post("/").
+//        then().
+//        	log().all().
+//        	assertThat().
+//        	statusCode(200);
+//	}
 	
 	@Test //DELETE
 	public void step5testDelete() {
