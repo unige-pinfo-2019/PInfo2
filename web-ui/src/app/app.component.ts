@@ -25,5 +25,6 @@ export class AppComponent implements OnInit {
       console.log("connecter");
       console.log(this.keycloakAuth);
     }
+    this.userService.populate(); 
   }                                               
 }
