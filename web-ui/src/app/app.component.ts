@@ -19,11 +19,6 @@ export class AppComponent implements OnInit {
     this.keycloakAuth = this.keycloak.getKeycloakAuth();
     if (this.keycloak.isLoggedIn() === false) {
       this.keycloak.login();
-      console.log("connexion essaye")
-    }
-    if (this.keycloak.isLoggedIn() == true) {
-      console.log("connecter");
-      console.log(this.keycloakAuth);
     }
     this.userService.populate(); 
   }                                               
