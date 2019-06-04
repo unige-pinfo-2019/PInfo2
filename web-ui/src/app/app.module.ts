@@ -27,11 +27,8 @@ import { CoreModule } from './core/core.module'
     SharedModule,
     CoreModule,
     FormsModule,
-    
-
 //    AuthModule,
     ReactiveFormsModule,
-    
   ],
   providers: [],
   bootstrap: [AppComponent]

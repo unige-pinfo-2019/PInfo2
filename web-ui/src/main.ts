@@ -9,5 +9,6 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+KeycloakService.init()
+  .then(() => platformBrowserDynamic().bootstrapModule(AppModule))
   .catch(e => window.location.reload());
