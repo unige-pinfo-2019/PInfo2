@@ -13,7 +13,10 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-      this.authService.login();
-      this.router.navigateByUrl('/');
+      if (!this.authService.isLoggedIn()) {
+        this.authService.login();
+      } else {
+        this.router.navigateByUrl('/');
+      }
     }
 }
