@@ -13,6 +13,7 @@ export class KeycloakService {
      * init KeycloakService with client-id
      * @type {Keycloak.KeycloakInstance}
      */
+    console.log("keyclock");
     const keycloakAuth: Keycloak.KeycloakInstance = Keycloak({
       url: environment.keycloak.url,
       realm: environment.keycloak.realm,
