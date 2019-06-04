@@ -40,7 +40,7 @@ export class KeycloakService {
       () => {
         KeycloakService.auth.loggedIn = true;
       },
-    );
+    );  
   }
 
   getToken(): Promise<string> {

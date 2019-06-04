@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   api_url: 'https://localhost/api/v1',
   keycloak: {
-    url: 'https://localhost/auth/',
+    url: 'https://localhost/auth',
     realm: 'apigw',
     clientId: 'web-sso',
     checkLoginIframe: false,
