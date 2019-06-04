@@ -1,0 +1,67 @@
+<header>
+    <div class="navbar navbar-expand-sm">
+        <div class="container">
+
+            <!-- Left side : logo -->
+            <div class="navbar-brand">
+                <a class="nav-link active" routerLinkActive="active" routerLink="/">
+                    <img src="assets/logo_white.png" alt="">
+                    UniShare
+                </a>
+            </div>
+
+            <!-- Show this for logged out users -->
+            <ul *appShowAuthed="false" class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/register" routerLinkActive="active">
+                        Sign in
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                        Sign up
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Show this for logged in users -->
+            <ul *appShowAuthed="true" class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/editor" routerLinkActive="active">
+                        Create Ad
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                        My ads
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/logout" routerLinkActive="active">
+                        Sign out
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Middle side : Create ad + My ads -->
+            <!-- <div class="d-flex flex-grow-1 justify-content-center">
+                <div class="bd-highlight" *appShowAuthed="false"><a class="nav-link active" routerLinkActive="active"
+                        routerLink="new-post-view">Create ad</a></div>
+                <div class="bd-highlight"><a class="nav-link active" routerLinkActive="active" routerLink="">My
+                        ads</a>
+                </div>
+            </div> -->
+
+            <!-- Right side : Messages + Profile || Login -->
+            <!-- <div class="d-flex">
+                <div class="bd-highlight"><a class="nav-link active" routerLinkActive="active" routerLink=""><img
+                            src="assets/bubble.png" alt="Messages icon"></a></div>
+                <div class="bd-highlight"><a class="nav-link active" routerLinkActive="active"
+                        routerLink="connection-view">Login</a></div>
+                <div class="bd-highlight"><a class="nav-link active" routerLinkActive="active"
+                        routerLink="connection-view">Sign In</a>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</header>

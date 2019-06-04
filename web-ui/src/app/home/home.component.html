@@ -1,0 +1,91 @@
+<div class="container">
+  <!-- Top part : Highlights -->
+  <div class="border rounded p-2 mb-3">
+    <div class="row py-4">
+
+      <!-- Title -->
+      <div class="col-3">
+        <p class="h4">Highlights</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Middle part : search body -->
+  <div class="border rounded p-2 mb-3">
+
+    <!-- First row : title and bar -->
+    <div class="row justify-content-center py-3">
+
+      <!-- Search bar -->
+      <div class="col-5 searchContainer">
+        <form class="navbar-form" role="search">
+          <div class="input-group add-on">
+            <!-- Input -->
+            <input type="search" class="form-control" placeholder="Search an article" [formControl]="searchField">
+          </div>
+        </form>
+      </div>
+
+      <!-- Category collapse -->
+      <div class="col-3 categoryContainer">
+        <div class="btn-group">
+          <button type="button" class="btn category-btn dropdown-toggle" data-toggle="dropdown">
+            {{ selectedCategory }}
+          </button>
+          <div class="dropdown-menu multi-level">
+            <li class="dropdown-submenu" *ngFor="let parent of categoryMap | keyvalue">
+              <a href="#" class="dropdown-item" data-toggle="dropdown">
+                {{ parent.key }}
+              </a>
+              <ul class="dropdown-menu">
+                <li *ngFor="let subCat of categoryMap.get(parent.key)">
+                  <a class="dropdown-item" href="#" (click)="onClickCategory(subCat)">
+                    {{ subCat.name }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search logo -->
+      <div class=" col-1 buttonContainer">
+        <button class=" btn btn-default" (click)="onSearch()">
+          <img src="assets/search.png" alt="Search icon">
+        </button>
+      </div>
+    </div>
+
+    <!-- 2nd row : categories and search results -->
+    <div class="row justify-content-center py-3">
+
+      <!-- Categories -->
+      <!-- <div class=" col-md-3">
+      <div class="list-group" *ngFor="let parent of categoryMap | keyvalue">
+        <button type="button" class="list-group-item dropdown-toggle" data-toggle="dropdown">
+          <span class="glyphicon glyphicon-camera"></span> {{ parent.key }} <b class="caret"></b>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li *ngFor="let subCat of categoryMap.get(parent.key)">
+            <button type="button" (click)="onSearchByCategory(subCat)"
+              class="list-group-item list-group-item-action rounded-0">{{ subCat.name }}
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div> -->
+
+      <!-- Search results -->
+      <div class="col-9 ">
+        <ul class="list-group">
+          <app-ad-list [limit]="10" [config]="listConfig">
+          </app-ad-list>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>

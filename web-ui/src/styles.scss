@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 :root {
-  --color-primary-light: #00BB00;
-  --color-primary-middle: #00AA00;
-  --color-primary-dark: #009900;
+  --color-primary-light: #318063;
+  --color-primary-middle: #2e745a;
+  --color-primary-dark: #25614b;
   --color-text-unfocus: #FFFFFF;
   --color-text-focus: #DDDDDD;
 }
@@ -19,11 +19,11 @@ body {
 }
 
 .navbar { // global settings of navigation bar
-  width: 75%;
+  width: 100%;
 }
 
 .footbar { // global settings of footer bar
-  width: 75%;
+  width: 100%;
 }
 
 section { // global settings of sections (body of the page)
@@ -50,3 +50,4 @@ section { // global settings of sections (body of the page)
   margin-bottom: 0;
   border-color: var(--color-primary-middle);
 }
+

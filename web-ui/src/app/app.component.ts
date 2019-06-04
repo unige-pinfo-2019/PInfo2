@@ -1,22 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-import { PostItemComponent } from './post-item/post-item.component';
+import { UserService } from './core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './app.component.html'
 })
-
 export class AppComponent implements OnInit {
+  constructor(
+    private userService: UserService
+  ) {}
 
-  posts: any[];
-  search: string;
-  add: string;
-
-  constructor(private httpClient: HttpClient, 
-              private post: PostItemComponent) {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.userService.populate();
+  }                                               
 }

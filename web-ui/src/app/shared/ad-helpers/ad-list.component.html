@@ -1,0 +1,23 @@
+<app-ad-preview *ngFor="let ad of results" [ad]="ad">
+</app-ad-preview>
+
+<div class="app-ad-preview" [hidden]="!loading">
+  Loading ads...
+</div>
+
+<div class="app-ad-preview" [hidden]="loading || results.length">
+  No ads are here... yet.
+</div>
+
+<nav [hidden]="loading || totalPages.length <= 1">
+  <ul class="pagination">
+
+    <li class="page-item" [ngClass]="{'active': pageNumber === currentPage}" *ngFor="let pageNumber of totalPages"
+      (click)="setPageTo(pageNumber)">
+
+      <a class="page-link">{{ pageNumber }}</a>
+
+    </li>
+
+  </ul>
+</nav>
