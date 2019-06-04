@@ -25,8 +25,10 @@ export class UserService {
                 data => this.setUser(data)
             );
         } else {
-            // Remove any potential remnants of previous auth states
-            this.purgeUser();
+            // Set current user to an empty object
+            this.currentUserSubject.next({} as User);
+            // Set auth status to false
+            this.isAuthenticatedSubject.next(false);
         }
     }
 

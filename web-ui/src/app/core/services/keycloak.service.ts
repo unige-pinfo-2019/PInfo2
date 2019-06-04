@@ -13,7 +13,7 @@ export class KeycloakService {
      * init KeycloakService with client-id
      * @type {Keycloak.KeycloakInstance}
      */
-    console.log("keyclock");
+
     const keycloakAuth: Keycloak.KeycloakInstance = Keycloak({
       url: environment.keycloak.url,
       realm: environment.keycloak.realm,
@@ -37,11 +37,8 @@ export class KeycloakService {
   }
 
   login(): void {
-    KeycloakService.auth.authz.login().success(
-      () => {
-        KeycloakService.auth.loggedIn = true;
-      },
-    );  
+    KeycloakService.auth.authz.login();
+    KeycloakService.auth.loggedIn = true;
   }
 
   getToken(): Promise<string> {

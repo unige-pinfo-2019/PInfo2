@@ -12,7 +12,7 @@ import {
 } from './shared';
 import { HomeComponent } from './home/home.component';
 import { CoreModule } from './core/core.module'
-//import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { CoreModule } from './core/core.module'
     SharedModule,
     CoreModule,
     FormsModule,
-//    AuthModule,
+    AuthModule,
     ReactiveFormsModule,
   ],
   providers: [],

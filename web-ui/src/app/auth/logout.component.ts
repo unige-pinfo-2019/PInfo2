@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../core';
 import { Router } from '@angular/router';
 
-@Component({})
+@Component({
+    template: ''
+})
 export class LogoutComponent implements OnInit {
 
     constructor(

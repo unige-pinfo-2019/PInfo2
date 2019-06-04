@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from '../core';
 import { Router } from '@angular/router';
 
-@Component({})
+@Component({
+  template: ''
+})
 export class LoginComponent implements OnInit {
 
     constructor(

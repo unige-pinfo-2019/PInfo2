@@ -8,7 +8,6 @@ import { KeycloakInstance } from 'keycloak-js';
 })
 export class AppComponent implements OnInit {
   title = 'web-ui';
-  public keycloakAuth: KeycloakInstance;
 
   constructor(
     private userService: UserService,
@@ -16,10 +15,10 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.keycloakAuth = this.keycloak.getKeycloakAuth();
-    if (this.keycloak.isLoggedIn() === false) {
-      this.keycloak.login();
-    }
-    this.userService.populate(); 
+    this.keycloak.getKeycloakAuth();
+    // if (this.keycloak.isLoggedIn() === false) {
+    //   this.keycloak.login();
+    // }
+    this.userService.populate();
   }                                               
 }
