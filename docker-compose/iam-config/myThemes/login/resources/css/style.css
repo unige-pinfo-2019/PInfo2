@@ -24,14 +24,14 @@
 } */
 
 
-.login-pf body {
+ body {
   background: none;
   background-color: #fff;
   background-position: center center;
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  margin-top: 13%;
+  margin-top: 17%;
   border: 1px solid gray;
   border-radius: 5px;
   margin-left: 23%;
@@ -41,6 +41,11 @@
   font-family: sans-serif;
 }
 
+.login-pf {
+  background-image: url('../img/test.jpg');
+    background-size: cover;
+}
+
 .login-pf-page .login-pf-header h1 {
 
     font-size: 25px;
@@ -48,7 +53,7 @@
     margin-bottom: 40px;
     font-family: Arial;
     color: #586b58;
-    margin-top : 0%;
+    margin-top : 10%;
 
 }
 
@@ -129,7 +134,7 @@ input[type=submit] {
     margin-left: 25%;
     margin-right: 25%;
     margin-top : 5%;
-    margin-bottom: 14%;
+    margin-bottom: 10%;
 }
 
 
@@ -138,7 +143,6 @@ input[type="submit"]:not(:disabled) {
 }
 
 .btn-primary:hover {
- //color: #baffba;
  background-color: #006700;
  box-shadow: 0 2px 3px rgba(3, 3, 3, 0.1);
 }
@@ -152,14 +156,4 @@ input[type="submit"]:not(:disabled) {
 
 div.kc-logo-text span {
     display: none;
-}
-
-
-#kc-header-wrapper {
-    font-size: 29px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    line-height: 1.2em;
-    padding: 62px 10px 20px;
-    white-space: normal;
 }
