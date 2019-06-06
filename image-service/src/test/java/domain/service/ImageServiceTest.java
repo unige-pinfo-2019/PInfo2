@@ -78,7 +78,6 @@ public class ImageServiceTest {
 		
 		Image randomImage = new Image();
 		randomImage.setData(randomBytes);
-		randomImage.setSize((long) randomBytes.length);
 		
 		return randomImage;
 	}

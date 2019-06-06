@@ -1,98 +1,36 @@
-import { CommonModule } from '@angular/common';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { KeycloakService } from './services/keycloak/keycloak.service';
-import { KeycloakInterceptorService } from './services/keycloak/keycloak.interceptor.service';
+import { ReactiveFormsModule, ControlContainer } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Routes } from '@angular/router';
-import { RouterModule } from '@angular/router';
-import { AuthGuard } from './services/auth-guard.service';
-// Services =======================================================================================
-import { AuthService } from './services/auth.service';
-import { CategoryService } from './services/category.service';
-import { PostsService } from './services/posts.service';
-import { UserService } from './services/user.service';
-// Component ======================================================================================
-import { AddCategoryComponent } from './add-category/add-category.component';
-import { CategoriesComponent } from './categories/categories.component';
-import { ConnectionViewComponent } from './connection-view/connection-view.component';
-import { Error404ViewComponent } from './error-404-view/error-404-view.component';
-import { MenuComponent } from './menu/menu.component';
-import { MinipostItemComponent } from './minipost-item/minipost-item.component';
-import { NewPostViewComponent } from './new-post-view/new-post-view.component';
-import { PostItemComponent } from './post-item/post-item.component';
-import { PasswordRecoveryViewComponent } from './password-recovery-view/password-recovery-view.component';
-import { NewUserViewComponent } from './new-user-view/new-user-view.component';
-import { PostsViewComponent } from './posts-view/posts-view.component';
-import { SinglePostViewComponent } from './single-post-view/single-post-view.component';
-import { UserViewComponent } from './user-view/user-view.component';
+import { FormsModule } from '@angular/forms';
+import {
+  FooterComponent,
+  HeaderComponent,
+  SharedModule
+} from './shared';
+import { HomeComponent } from './home/home.component';
+import { CoreModule } from './core/core.module'
+import { AuthModule } from './auth/auth.module';
 
-import { APP_BASE_HREF } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { FooterComponent } from './footer/footer.component';
-
-const appRoutes: Routes = [
-
-  {path: '', component: PostsViewComponent },
-  {path: 'posts-view/:id', component: SinglePostViewComponent },
-  {path: 'new-post-view', component: NewPostViewComponent },
-  {path: 'add-category', component: AddCategoryComponent },
-  {path: 'connection-view', component: ConnectionViewComponent },
-  {path: 'new-user-view', component: NewUserViewComponent },
-  {path: 'password-recovery-view', component: PasswordRecoveryViewComponent },
-  {path: 'user-view', canActivate: [AuthGuard], component: UserViewComponent },
-  {path: 'not-found', component: Error404ViewComponent},
-  {path: '**', redirectTo: 'not-found'}
-  
-];
 @NgModule({
   declarations: [
-    AddCategoryComponent,
     AppComponent,
-    CategoriesComponent,
-    ConnectionViewComponent,
-    Error404ViewComponent,
     FooterComponent,
-    MenuComponent,
-    MinipostItemComponent,
-    NewPostViewComponent,
-    NewUserViewComponent,
-    PasswordRecoveryViewComponent,
-    PostItemComponent,
-    PostsViewComponent,
-    SinglePostViewComponent,
-    UserViewComponent,
+    HeaderComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CommonModule,
+    SharedModule,
+    CoreModule,
     FormsModule,
+    AuthModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule.forRoot(appRoutes),
   ],
-  providers: [
-    PostItemComponent,
-    AuthService,
-    AuthGuard,
-    PostsService,
-    UserService,
-    CategoryService,
-    KeycloakService,
-    { provide: APP_BASE_HREF, useValue: '/' },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: KeycloakInterceptorService,
-      multi: true,
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -39,10 +39,6 @@ public class ImageRestService {
 		    return Response.status(Status.BAD_REQUEST).build();
 		} 
 		
-		if (image.getSize() > MAX_FILE_SIZE_MB * 1024 * 1024) {
-			return Response.status(Status.NOT_ACCEPTABLE).build();
-		}
-		
 		try {
 			imageId = imageService.create(image);
 		} catch(Exception e) {

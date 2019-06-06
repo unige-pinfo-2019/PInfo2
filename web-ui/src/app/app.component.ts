@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-import { PostItemComponent } from './post-item/post-item.component';
+import { UserService, KeycloakService } from './core';
+import { KeycloakInstance } from 'keycloak-js';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './app.component.html'
 })
-
 export class AppComponent implements OnInit {
+  title = 'web-ui';
 
-  posts: any[];
-  search: string;
-  add: string;
+  constructor(
+    private userService: UserService,
+    public keycloak: KeycloakService
+  ) {}
 
-  constructor(private httpClient: HttpClient, 
-              private post: PostItemComponent) {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.keycloak.getKeycloakAuth();
+    // if (this.keycloak.isLoggedIn() === false) {
+    //   this.keycloak.login();
+    // }
+    this.userService.populate();
+  }                                               
 }
