@@ -11,7 +11,7 @@ jobs:
         sonarcloud:
           organization: "unige-pinfo-2019" 
       script:
-        - mvn clean package --log-file log.txt
+        - mvn verify
         - mvn sonar:sonar -Dsonar.projectKey=unige-pinfo-2019_PInfo2 -Dsonar.organization=unige-pinfo-2019 -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=6a52b61ec8bac75693325785b5dd8214362acae7
 
     - stage: build
@@ -23,7 +23,7 @@ jobs:
         - cd ad-service
       script:
         - mvn clean package --log-file log.txt
-        - mvn install -Ppackage-docker-image 
+        - mvn verify 
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
         - docker push $DOCKER_ID_USER/ad-service
@@ -37,7 +37,7 @@ jobs:
         - cd search-service
       script:
         - mvn clean package --log-file log.txt
-        - mvn install -Ppackage-docker-image 
+        - mvn verify
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
         - docker push $DOCKER_ID_USER/search-service
@@ -51,7 +51,7 @@ jobs:
         - cd category-service
       script:
         - mvn clean package --log-file log.txt
-        - mvn install -Ppackage-docker-image 
+        - mvn verify
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
         - docker push $DOCKER_ID_USER/category-service
@@ -65,7 +65,7 @@ jobs:
         - cd user-service
       script:
         - mvn clean package --log-file log.txt
-        - mvn install -Ppackage-docker-image 
+        - mvn verify
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
         - docker push $DOCKER_ID_USER/user-service
@@ -79,7 +79,7 @@ jobs:
         - cd image-service
       script:
         - mvn clean package --log-file log.txt
-        - mvn install -Ppackage-docker-image 
+        - mvn verify 
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
         - docker push $DOCKER_ID_USER/image-service
@@ -92,7 +92,7 @@ jobs:
         - cd api-gateway
       script:
         - mvn clean package --log-file log.txt
-        - mvn install -Ppackage-docker-image 
+        - mvn verify 
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
         - docker push $DOCKER_ID_USER/api-gateway
