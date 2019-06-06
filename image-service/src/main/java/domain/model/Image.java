@@ -31,10 +31,5 @@ public class Image implements Serializable {
 	@Lob
 	@FormParam("file")
 	private byte[] data;
-	
-	@Column(name="IMAGE_SIZE")
-	@NotNull
-	@FormParam("size")
-	private Long size;
 
 }
