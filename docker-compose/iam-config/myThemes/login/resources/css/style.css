@@ -31,19 +31,20 @@
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  margin-top: 17%;
+  margin-top: 10%;
   border: 1px solid gray;
   border-radius: 5px;
-  margin-left: 23%;
-  margin-right: 23%;
+  margin-left: 35%;
+  margin-right: 35%;
 
   color: #000;
   font-family: sans-serif;
 }
 
 .login-pf {
-  background-image: url('../img/test.jpg');
+    background-image: url('../img/yes.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .login-pf-page .login-pf-header h1 {
@@ -58,23 +59,22 @@
 }
 
 .alert-error {
-    background-color: #ffffff;
+    background: url('../img/error2.png') left;
+    margin-left: 15%;
+    height: auto;
+    width: auto;
+    background-repeat: no-repeat;
     border-color: #cc0000;
-    color: #333333;
+    color: red;
+    margin-bottom: 30px;
 }
 
 .alert {
-    border-width: 1px;
-    padding-left: 10%;
-    padding-right: 14px;
     position: relative;
     word-wrap: break-word;
-    border: 1px solid red;
-    width: 57%;
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-bottom: 30px;
-    font-size: 13px;
+    padding-left: 5%;
+    margin-right: 20%;
+    font-size: 14px;
 
 }
 
@@ -130,7 +130,7 @@ input[type=submit] {
     font-size: 13px;
     color: white;
     text-transform: uppercase;
-    padding: 10px 120px;
+    padding: 2% 21%;
     margin-left: 25%;
     margin-right: 25%;
     margin-top : 5%;
