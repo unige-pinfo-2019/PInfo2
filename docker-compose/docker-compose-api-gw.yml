@@ -22,7 +22,7 @@ services:
     restart: on-failure
     stdin_open: true
     tty: true
-            
+
    api-gateway:
     image: corentinbt/api-gateway
     container_name:  api-gateway
@@ -32,16 +32,16 @@ services:
      - gateway-network
      - backend-network
     command: >
-       sh -c "kong migrations bootstrap && kong migrations up && kong migrations finish && sh /docker-entrypoint.sh kong docker-start --v --nginx-conf /usr/local/kong/template/nginx-custom-static-sso.template"       
+       sh -c "kong migrations bootstrap && kong migrations up && kong migrations finish && sh /docker-entrypoint.sh kong docker-start --v --nginx-conf /usr/local/kong/template/nginx-custom-static-sso.template"
     healthcheck:
       test: ["CMD", "curl", "-X", "GET", "http://localhost:8001"]
       interval: 30s
       timeout: 15s
-      retries: 15        
+      retries: 15
     environment:
       KONG_DATABASE: postgres
       KONG_PG_HOST: kong-database
-      KONG_LOG_LEVEL: info      
+      KONG_LOG_LEVEL: info
       KONG_PROXY_ACCESS_LOG: "/dev/stdout"
       KONG_ADMIN_ACCESS_LOG: "/dev/stdout"
       KONG_PROXY_ERROR_LOG: "/dev/stderr"
@@ -55,7 +55,7 @@ services:
     volumes:      
       - ../web-ui/dist/web-ui:/www/data:ro
 #    Assuming we want to put our own certificates, we should put them in /usr/local/kong/ssl/certs
-      - ./certs:/usr/local/kong/ssl/certs      
+      - ./certs:/usr/local/kong/ssl/certs
     ports:
      - 80:80
      - 443:443
@@ -73,7 +73,7 @@ services:
      - gateway-network
      - backend-network
     command: >
-       sh -c "cd /usr/local/config-kong/ && ./config-kong.sh" 
+       sh -c "cd /usr/local/config-kong/ && ./config-kong.sh"
     volumes:
      - pgconfig-kong:/usr/local/config-kong
     depends_on:
@@ -85,7 +85,7 @@ services:
     container_name: iam-db
     hostname: iam-db
     networks:
-     - backend-network        
+     - backend-network
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: password
@@ -97,23 +97,25 @@ services:
       retries: 3
     restart: on-failure
     stdin_open: true
-    tty: true      
+    tty: true
     volumes:
       - pgdata-iam:/var/lib/postgresql/data
- 
-  
+
+
    iam:
      image: jboss/keycloak:4.8.3.Final
      container_name: iam
      hostname: iam
      networks:
       - gateway-network
-      - backend-network       
+      - backend-network
      restart: on-failure
      ports:
        - 8080:8080
-     volumes:      
+     volumes:
        - ./iam-config/:/tmp/iam-config
+       - ./iam-config/myThemes:/opt/jboss/keycloak/themes/myThemes
+       - ./iam-config/standalone.xml:/opt/jboss/keycloak/standalone/configuration/standalone.xml
      environment:
        - KEYCLOAK_USER=admin
        - KEYCLOAK_PASSWORD=password
@@ -128,19 +130,17 @@ services:
      depends_on:
         iam-db :
           condition: service_healthy
-         
+
 volumes:
    pgdata-kong:
    pgconfig-kong:
    pgdata-iam:
-   
+
 networks:
   frontend-network:
-     driver: bridge 
+     driver: bridge
   gateway-network:
-     driver: bridge     
+     driver: bridge
   backend-network:
     external:
        name: pinfo2_backend-network
-
-
