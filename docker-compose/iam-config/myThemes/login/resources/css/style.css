@@ -59,21 +59,22 @@
 }
 
 .alert-error {
-    background-color: #ffffff;
+    background: url('../img/error2.png') left;
+    margin-left: 15%;
+    height: auto;
+    width: auto;
+    background-repeat: no-repeat;
     border-color: #cc0000;
     color: red;
+    margin-bottom: 30px;
 }
 
 .alert {
     position: relative;
     word-wrap: break-word;
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-bottom: 30px;
-    font-style: italic;
-    font-size: 13px;
-    text-decoration: underline;
-    text-decoration-color: red;
+    padding-left: 5%;
+    margin-right: 20%;
+    font-size: 14px;
 
 }
 
