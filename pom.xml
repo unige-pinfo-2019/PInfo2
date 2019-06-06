@@ -141,6 +141,11 @@
 				<version>2.3.1</version>
 				<scope>test</scope>
 			</dependency>
+			<dependency>
+		    	<groupId>io.fabric8</groupId>
+    			<artifactId>docker-maven-plugin</artifactId>
+    			<version>0.30.0</version>
+    		</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -169,6 +174,7 @@
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -219,6 +225,11 @@
 					<groupId>io.fabric8</groupId>
 					<artifactId>fabric8-maven-plugin</artifactId>
 					<version>4.0.0-M2</version>
+				</plugin>
+				<plugin>
+					<groupId>io.fabric8</groupId>
+    				<artifactId>docker-maven-plugin</artifactId>
+    			    <version>0.30.0</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
