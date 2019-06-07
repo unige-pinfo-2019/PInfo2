@@ -332,7 +332,7 @@
 											</inline>
 										</assembly>
 										<entryPoint>
-											<shell>java -Djava.net.preferIPv4Stack=true -jar \
+											<shell>java -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true -jar \
 												/opt/${project.build.finalName}-thorntail.jar</shell>
 										</entryPoint>
 									</build>
