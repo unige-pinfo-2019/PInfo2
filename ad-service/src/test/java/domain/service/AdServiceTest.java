@@ -88,6 +88,7 @@ public class AdServiceTest {
 	}
 	
 	
+	
 	private List<Ad> getAds() {
 
 		List<Ad> ads = new ArrayList<>();

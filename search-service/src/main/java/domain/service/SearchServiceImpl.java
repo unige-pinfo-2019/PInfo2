@@ -142,6 +142,7 @@ public class SearchServiceImpl implements SearchService {
 		return matchedList;
 	}
 	
+	
 	public SearchSourceBuilder adQueryBuilder(String query, Optional<Long> categoryId, Optional<Long> userId) {
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		
@@ -155,7 +156,6 @@ public class SearchServiceImpl implements SearchService {
 										    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery)
 										    		             .fuzziness(Fuzziness.AUTO));
 		
-		// TODO : find a way to remove those ugly if blocks
 		if (categoryId.isPresent() && userId.isPresent()) {
 			matchQueryBuilder = QueryBuilders.boolQuery()
 			.must(QueryBuilders.termQuery("categoryId", categoryId.get()))

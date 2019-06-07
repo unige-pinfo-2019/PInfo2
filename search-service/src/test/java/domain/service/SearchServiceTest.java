@@ -115,12 +115,35 @@ public class SearchServiceTest {
 					  .expectResponse(200, "", ContentType.APPLICATION_JSON)
 					  .build();
 		
-		try {
+		try { //(categoryId.isPresent() && userId.isPresent())
 			searchServiceImpl.createItem(ad);
 			searchServiceImpl.matchAd(ad.getTitle(), Optional.of((long)1), Optional.of((long)1));
 		} catch(Exception e) {
 			fail("Should not have thrown any exception " + e);
 		}
+		
+		
+		try { //(userId.isPresent())
+			searchServiceImpl.createItem(ad);
+			searchServiceImpl.matchAd(ad.getTitle(), Optional.empty(), Optional.of((long)1));
+		} catch(Exception e) {
+			fail("Should not have thrown any exception " + e);
+		}
+		
+		
+		try { //(categoryId.isPresent())
+			searchServiceImpl.createItem(ad);
+			searchServiceImpl.matchAd(ad.getTitle(), Optional.of((long)1), Optional.empty());
+		} catch(Exception e) {
+			fail("Should not have thrown any exception " + e);
+		}
+		
+		try { //query.isEmpty()
+			searchServiceImpl.matchAd("", Optional.empty(), Optional.empty());
+		} catch(Exception e) {
+			fail("Should not have thrown any exception " + e);
+		}
+		
 	}
 	
 	private Ad getRandomAd() {
