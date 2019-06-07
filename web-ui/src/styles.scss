@@ -26,12 +26,12 @@ body {
   width: 100%;
 }
 
-section { // global settings of sections (body of the page)
-  width: 75%;
-  min-height: 75vh;
-  margin: 0 auto;
-  padding-top: 2em;
-  padding-bottom: 2em;
+.section { // global settings of sections (body of the page)
+  //width: 75%;
+  //min-height: 75vh;
+  //margin: 0 auto;
+  padding-top: 1em;
+  //padding-bottom: 2em;
 }
 
 .btn { // global settings of buttons
@@ -50,4 +50,3 @@ section { // global settings of sections (body of the page)
   margin-bottom: 0;
   border-color: var(--color-primary-middle);
 }
-
