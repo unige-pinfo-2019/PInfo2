@@ -29,24 +29,11 @@
 
       <!-- Category collapse -->
       <div class="col-3 categoryContainer">
-        <div class="btn-group">
-          <button type="button" class="btn category-btn dropdown-toggle" data-toggle="dropdown">
-            {{ selectedCategory }}
-          </button>
-          <div class="dropdown-menu multi-level">
-            <li class="dropdown-submenu" *ngFor="let parent of categoryMap | keyvalue">
-              <a href="#" class="dropdown-item" data-toggle="dropdown">
-                {{ parent.key }}
-              </a>
-              <ul class="dropdown-menu">
-                <li *ngFor="let subCat of categoryMap.get(parent.key)">
-                  <a class="dropdown-item" href="#" (click)="onClickCategory(subCat)">
-                    {{ subCat.name }}
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </div>
+        <div class="category-btn">
+          <ngx-dropdown-list (selectionChange)="onClickCategory($event)" [items]="formatedCategories"
+            [multiSelection]="false" [placeHolder]="'Select a category'" [(selectedValue)]="selectedCategory"
+            [filterBox]="true">
+          </ngx-dropdown-list>
         </div>
       </div>
 
@@ -60,22 +47,6 @@
 
     <!-- 2nd row : categories and search results -->
     <div class="row justify-content-center py-3">
-
-      <!-- Categories -->
-      <!-- <div class=" col-md-3">
-      <div class="list-group" *ngFor="let parent of categoryMap | keyvalue">
-        <button type="button" class="list-group-item dropdown-toggle" data-toggle="dropdown">
-          <span class="glyphicon glyphicon-camera"></span> {{ parent.key }} <b class="caret"></b>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-right">
-          <li *ngFor="let subCat of categoryMap.get(parent.key)">
-            <button type="button" (click)="onSearchByCategory(subCat)"
-              class="list-group-item list-group-item-action rounded-0">{{ subCat.name }}
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div> -->
 
       <!-- Search results -->
       <div class="col-9 ">

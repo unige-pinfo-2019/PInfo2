@@ -51,6 +51,10 @@ export class UserService {
         return this.currentUserSubject.value;
     }
 
+    getCurrentUserId(): string {
+        return this.authService.getKeycloakAuth().subject;
+    }
+
     // // Update the user on the server 
     // update(user): Observable<User> {
     //     return this.apiService

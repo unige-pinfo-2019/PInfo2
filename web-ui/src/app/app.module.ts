@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, ControlContainer } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,8 @@ import {
 import { HomeComponent } from './home/home.component';
 import { CoreModule } from './core/core.module'
 import { AuthModule } from './auth/auth.module';
+
+import { DropdownListModule } from 'ngx-dropdown-list';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { AuthModule } from './auth/auth.module';
     FormsModule,
     AuthModule,
     ReactiveFormsModule,
+    DropdownListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

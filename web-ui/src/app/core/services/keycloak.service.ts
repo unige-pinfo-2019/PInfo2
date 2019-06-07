@@ -36,8 +36,8 @@ export class KeycloakService {
     });
   }
 
-  login(): void {
-    KeycloakService.auth.authz.login();
+  login(options?: any): void {
+    KeycloakService.auth.authz.login(options);
     KeycloakService.auth.loggedIn = true;
   }
 
