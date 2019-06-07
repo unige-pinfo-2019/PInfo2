@@ -24,10 +24,10 @@ jobs:
         - cd ad-service
       script:
         - mvn clean package --log-file log.txt
-        - mvn install -Ppackage-docker-image 
+        - mvn install -Ppackage-docker-image -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
-        - docker push $DOCKER_ID_USER/ad-service
+        - docker push $DOCKER_ID_USER/ad-service 
 
     - stage: build 
       language: java
@@ -52,7 +52,7 @@ jobs:
         - cd category-service
       script:
         - mvn clean package --log-file log.txt
-        - mvn install -Ppackage-docker-image 
+        - mvn install -Ppackage-docker-image -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
         - docker push $DOCKER_ID_USER/category-service
