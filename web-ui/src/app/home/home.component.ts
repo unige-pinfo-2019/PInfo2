@@ -31,11 +31,14 @@ export class HomeComponent implements OnInit {
   }
 
   setListTo(query: string = '', filters: Object = {}) {
-    this.listConfig = {query: query, filters: filters};
+    this.listConfig = {query: query ? query : '', filters: filters};
   }
 
   onClickCategory(event){
-    this.setListTo(this.searchField.value, { categoryId: event });
+    if (event)
+      this.setListTo(this.searchField.value, { categoryId: event });
+    else
+      this.setListTo(this.searchField.value);
   }
 
 

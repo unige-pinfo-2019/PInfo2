@@ -47,6 +47,7 @@ export class UserService {
         this.isAuthenticatedSubject.next(false);
     }
 
+
     getCurrentUser(): User {
         return this.currentUserSubject.value;
     }
