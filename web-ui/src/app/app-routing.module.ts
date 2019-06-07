@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'ad',
     loadChildren: './ad/ad.module#AdModule'
+  },
+  {
+    path: 'editor',
+    loadChildren: './editor/editor.module#EditorModule'
   }
 ];
 

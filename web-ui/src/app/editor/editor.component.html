@@ -1,0 +1,73 @@
+<div class="editor-page">
+    <div class="container page">
+        <div class="row">
+            <div class="col-md-10 offset-md-1 col-xs-12">
+
+                <div class="row">
+                    <app-list-errors [errors]="errors"></app-list-errors>
+                </div>
+
+                <form [formGroup]="adForm">
+                    <fieldset [disabled]="isSubmitting">
+
+                        <fieldset class="form-group">
+                            <input class="form-control form-control-lg" formControlName="title" type="text"
+                                placeholder="Ad title" />
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <textarea class="form-control" formControlName="description" rows="8"
+                                placeholder="What's this ad about? (max 2500 characters)">
+                            </textarea>
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <div class="category-btn">
+                                <ngx-dropdown-list (selectionChange)="onClickCategory($event)"
+                                    [items]="formatedCategories" [multiSelection]="false"
+                                    [placeHolder]="'Select a category'" [(selectedValue)]="selectedCategory"
+                                    [filterBox]="true">
+                                </ngx-dropdown-list>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <div class="row justify-content-center">
+                                <div class="col-3">
+                                    <ngx-image-uploader [options]="options" (upload)="onUpload($event)">
+                                    </ngx-image-uploader>
+                                </div>
+                                <div class="col-3">
+                                    <ngx-image-uploader [options]="options" (upload)="onUpload($event)">
+                                    </ngx-image-uploader>
+                                </div>
+                                <div class="col-3">
+                                    <ngx-image-uploader [options]="options" (upload)="onUpload($event)">
+                                    </ngx-image-uploader>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <div class="input-group">
+                                <input type="text" id="price" class="form-control" formControlName="price"
+                                    placeholder="Price">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">CHF</span>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="row justify-content-center">
+                            <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+                                Publish Ad
+                            </button>
+                        </div>
+
+                    </fieldset>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,7 +4,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { KeycloakInterceptorService } from './interceptors/keycloak.interceptor.service'
 
-import { ApiService, AdService, CategoryService, KeycloakService, UserService } from './services';
+import { ApiService, AdService, CategoryService, KeycloakService, UserService, AuthGuard } from './services';
 
 @NgModule({
   declarations: [],
@@ -17,6 +17,7 @@ import { ApiService, AdService, CategoryService, KeycloakService, UserService } 
     UserService,
     CategoryService,
     KeycloakService,
+    AuthGuard,
     { 
       provide: HTTP_INTERCEPTORS, 
       useClass: KeycloakInterceptorService, 

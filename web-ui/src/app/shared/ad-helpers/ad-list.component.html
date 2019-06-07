@@ -2,7 +2,11 @@
 </app-ad-preview>
 
 <div class="app-ad-preview" [hidden]="!loading">
-  Loading ads...
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border text-success" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
 </div>
 
 <div class="app-ad-preview" [hidden]="loading || results.length">

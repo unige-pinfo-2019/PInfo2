@@ -13,23 +13,16 @@ export class HomeComponent implements OnInit {
     private categoryService: CategoryService
   ) { }
 
-  categoryMap = new Map<string, Category[]>();
-  subCategoryList: Category[];
+  formatedCategories : any[];
   searchField: FormControl = new FormControl();
   listConfig: AdQuery = {
     query: '',
     filters: {}
   }
-  selectedCategory = "Categories";
 
   ngOnInit() {
-    this.categoryService.getAll().subscribe(
-      data => {
-        let parents = data.filter(elem => elem.parentId === null);
-        for(let parent of parents) {
-          this.categoryMap.set(parent.name, data.filter(elem => elem.parentId == parent.id));
-        }
-      }
+    this.categoryService.getFormatedCategories().subscribe(
+      data => this.formatedCategories = data
     );
   }
 
@@ -41,9 +34,8 @@ export class HomeComponent implements OnInit {
     this.listConfig = {query: query, filters: filters};
   }
 
-  onClickCategory(category: Category){
-    this.selectedCategory = category.name;
-    this.setListTo(this.searchField.value, {categoryId: category.id});
+  onClickCategory(event){
+    this.setListTo(this.searchField.value, { categoryId: event });
   }
 
 

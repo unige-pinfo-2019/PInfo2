@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiService } from './api.service';
 import { Ad, AdQuery } from '../models';
-import { map } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable()
 export class AdService {
     constructor(
-        private apiService: ApiService
+        private apiService: ApiService,
+        private userService: UserService
     ) { }
 
     query(config: AdQuery): Observable<Ad[]> {
@@ -36,14 +37,16 @@ export class AdService {
     }
 
     save(ad): Observable<Ad> {
+        let headers =  new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
         // If we're updating an existing ad
         if (ad.id) {
-            return this.apiService.put('/ad/' + ad.id, { ad: ad })
-                .pipe(map(data => data.ad));
+            return this.apiService.put('/ad/' + ad.id, ad, headers);
         // Otherwise, create a new ad
         } else {
-            return this.apiService.post('/ad/', { ad: ad })
-                .pipe(map(data => data.ad));
+            ad.userId = this.userService.getCurrentUserId();
+            return this.apiService.post('/ad/', ad, headers);
         }
     }
 

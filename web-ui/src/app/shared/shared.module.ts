@@ -7,12 +7,14 @@ import { AdPreviewComponent } from './ad-helpers/ad-preview.component';
 
 import { RouterModule } from '@angular/router';
 import { ShowAuthedDirective } from './show-authed.directive';
+import { ListErrorsComponent } from './list-errors.component';
 
 @NgModule({
   declarations: [
     AdListComponent, 
     AdPreviewComponent,
-    ShowAuthedDirective
+    ShowAuthedDirective,
+    ListErrorsComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { ShowAuthedDirective } from './show-authed.directive';
   exports: [
     AdListComponent,
     AdPreviewComponent,
-    ShowAuthedDirective
+    ShowAuthedDirective,
+    ListErrorsComponent
   ]
 })
 
