@@ -5,15 +5,16 @@ header {
 }
 
 .navbar {
-  height: 43px;
+  height: 54px;
   padding: 0; // inside margin 0
+  padding-top: 9px;
   margin: 0 auto; // outside margin is 0 by default but automatic -> centering
   img {
     height: 1.5em; // default size of images in navigation bar
   }
 }
 .navbar-brand {
-  height: 43px;
+  height: 54px;
   padding-top: 0;
   padding-bottom: 0;
 }
@@ -22,7 +23,7 @@ header {
 }
 
 .nav-link { // links in the navigation bar
-  height: 43px;
+  height: 54px;
   //padding-top: 0;
   //padding-bottom: 0;
   color: var(--color-text-unfocus); // color of the text
