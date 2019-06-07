@@ -56,6 +56,13 @@ public class AdServiceTest {
 		Ad ad = getRandomAd();
 		adServiceImpl.create(ad);
 		
+		try {
+			adServiceImpl.create(ad);
+		} 
+		catch (Exception IllegalArgumentException) {
+		}
+		
+		
 		Ad i = em.find(Ad.class, ad.getId());
 		
 		assertTrue(ad.equals(i));
@@ -67,6 +74,11 @@ public class AdServiceTest {
 		Ad ad = getRandomAd();
 		adServiceImpl.create(ad);
 		adServiceImpl.delete(ad);
+		
+		try {
+			adServiceImpl.delete(ad);
+		}
+		catch (Exception e) {}
 		
 		Ad i = em.find(Ad.class, ad.getId());
 		
@@ -82,6 +94,11 @@ public class AdServiceTest {
 		ad2.setId(ad1.getId());
 		
 		adServiceImpl.update(ad2);
+		
+		try {
+			adServiceImpl.update(null);
+		}
+		catch (Exception e) {}
 		
 		Ad i = em.find(Ad.class, ad1.getId());
 		assertTrue(ad2.equals(i));
