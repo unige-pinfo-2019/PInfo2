@@ -133,7 +133,7 @@
 
 	</dependencies>
 
-
+	<!-- 
 	<build>
 		<plugins>
 
@@ -252,6 +252,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>
+	</build>  -->
 	
 </project>
