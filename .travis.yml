@@ -18,13 +18,14 @@ jobs:
     - stage: build
       language: java
       jdk: openjdk11
+      install: true
       services:
         - docker
       before_script:
         - cd ad-service
       script:
         - mvn clean package --log-file log.txt
-        - mvn -DskipTests=true install -Ppackage-docker-image
+        - mvn clean install -DskipTests=true -Ppackage-docker-image
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
         - docker push $DOCKER_ID_USER/ad-service 
@@ -46,13 +47,14 @@ jobs:
     - stage: build
       language: java
       jdk: openjdk11
+      install: true
       services:
         - docker
       before_script:
         - cd category-service
       script:
         - mvn clean package --log-file log.txt
-        - mvn -DskipTests=true install -Ppackage-docker-image
+        - mvn clean install -DskipTests=true -Ppackage-docker-image
       after_success:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID_USER" --password-stdin
         - docker push $DOCKER_ID_USER/category-service
