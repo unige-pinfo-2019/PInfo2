@@ -120,6 +120,9 @@ public class SearchServiceImpl implements SearchService {
 		SearchRequest searchRequest = new SearchRequest();
 		
 		log.info("Query created : " + searchSourceBuilder.toString());
+		// TODO : generalized this not only for ads
+		searchRequest.indices("ads");
+		searchRequest.types("ad");
 		searchRequest.source(searchSourceBuilder);
 		
 		SearchHit[] searchHits = {};
