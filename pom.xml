@@ -238,10 +238,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
-					<skipTests>true</skipTests>
+					<skipTests>false</skipTests>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!--  <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
 				<executions>
@@ -253,6 +253,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			-->
 			<plugin>
 				<groupId>io.thorntail</groupId>
 				<artifactId>thorntail-maven-plugin</artifactId>
@@ -291,6 +292,8 @@
 				<dockerHost>unix:///var/run/docker.sock</dockerHost>
 			</properties>
 		</profile>
+		
+		
 		<profile>
 			<id>package-docker-image</id>
 			<activation>
@@ -302,14 +305,14 @@
 				<plugins>
 					<plugin>
 						<groupId>io.fabric8</groupId>
-						<artifactId>fabric8-maven-plugin</artifactId>
+						<artifactId>docker-maven-plugin</artifactId>
 						<configuration>
 							<skip>${skip-docker-build}</skip>
 							<useColor>true</useColor>
 							<dockerHost>${dockerHost}</dockerHost>
 							<images>
 								<image>
-									<name>%g/%a:%l</name>
+									<name>corentinbt/%a:%l</name>
 									<run>
 										<ports>
 											<port>8080:8080</port>
@@ -332,7 +335,7 @@
 											</inline>
 										</assembly>
 										<entryPoint>
-											<shell>java -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv4Addresses=true -jar \
+											<shell>java -Xmx512M -Djava.net.preferIPv4Stack=true -jar \
 												/opt/${project.build.finalName}-thorntail.jar</shell>
 										</entryPoint>
 									</build>
@@ -350,7 +353,7 @@
 					</plugin>
 				</plugins>
 			</build>
-		</profile>
+	</profile>
 	</profiles>
 
 </project>

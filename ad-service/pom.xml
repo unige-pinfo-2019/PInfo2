@@ -131,7 +131,7 @@
 
 
 
-	<build>
+	<!-- <build>
 		<plugins>
 
 
@@ -248,6 +248,6 @@
 					</execution>
 				</executions>
 			</plugin>
-		</plugins>
-	</build>
+		</plugins>  
+	</build>  -->
 </project>
