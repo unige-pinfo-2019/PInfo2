@@ -1,28 +1,3 @@
-/* .login-pf body {
-  background: none;
-  background-color: #36ff33;
-} */
-
-/*title banner size and colour*/
-
-/* Change content to change the title of the page*/
-/* div#kc-header::after {
-    content: 'FeedHenry Work Force Management';
-    font-size: 40px;
-    line-height: 50px;
-    margin-bottom: 15px;
-} */
-
-/*title banner size and colour*/
-/* div#kc-header {
-    width:100%;
-    background-color: rgb(40,53,147);
-    padding-top: 2.5em;
-    padding-bottom: 2.5em;
-    padding-right: 2em;
-    padding-left: 3em;
-} */
-
 
  body {
   background: none;
@@ -31,7 +6,7 @@
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  margin-top: 5%;
+  margin-top: 3%;
   border: 1px solid gray;
   border-radius: 5px;
   margin-left: 35%;
