@@ -117,7 +117,7 @@ public class SearchServiceTest {
 		
 		try {
 			searchServiceImpl.createItem(ad);
-			searchServiceImpl.matchAd(ad.getTitle(), Optional.of((long)1), Optional.of((long)1));
+			searchServiceImpl.matchAd(ad.getTitle(), Optional.of((long)1), Optional.of("1"));
 		} catch(Exception e) {
 			fail("Should not have thrown any exception " + e);
 		}

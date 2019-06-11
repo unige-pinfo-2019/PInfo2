@@ -110,7 +110,7 @@ public class SearchServiceImpl implements SearchService {
 	}
 	
 	@Override
-	public List<Ad> matchAd(String query, Optional<Long> categoryId, Optional<Long> userId) {
+	public List<Ad> matchAd(String query, Optional<Long> categoryId, Optional<String> userId) {
 		return match(adQueryBuilder(query, categoryId, userId), Ad.class);
 	}
 	
@@ -145,7 +145,7 @@ public class SearchServiceImpl implements SearchService {
 		return matchedList;
 	}
 	
-	public SearchSourceBuilder adQueryBuilder(String query, Optional<Long> categoryId, Optional<Long> userId) {
+	public SearchSourceBuilder adQueryBuilder(String query, Optional<Long> categoryId, Optional<String> userId) {
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		
 		String descriptionField = "description";
