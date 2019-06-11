@@ -1,10 +1,13 @@
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, Observable } from 'rxjs';
 
 import { User } from '../models';
+import { environment } from '../../../environments/environment';
+
 import { distinctUntilChanged } from 'rxjs/operators';
 import { KeycloakService } from './keycloak.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
@@ -16,7 +19,8 @@ export class UserService {
     public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
     constructor(
-        private authService: KeycloakService
+        private authService: KeycloakService,
+        private http: HttpClient
     ) {}
 
     populate() {
@@ -47,7 +51,6 @@ export class UserService {
         this.isAuthenticatedSubject.next(false);
     }
 
-
     getCurrentUser(): User {
         return this.currentUserSubject.value;
     }
@@ -56,15 +59,8 @@ export class UserService {
         return this.authService.getKeycloakAuth().subject;
     }
 
-    // // Update the user on the server 
-    // update(user): Observable<User> {
-    //     return this.apiService
-    //         .put('/user', { user })
-    //         .pipe(map(data => {
-    //             // Update the currentUser observable
-    //             this.currentUserSubject.next(data.user);
-    //             return data.user;
-    //         }));
-    // }
+    getUser(id: string): Observable<User> {
+        return this.http.get<User>(`${environment.keycloak.url}/admin/realms/${environment.keycloak.realm}/users/${id}`);
+    }
 
 }

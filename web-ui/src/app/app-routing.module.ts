@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'editor',
     loadChildren: './editor/editor.module#EditorModule'
+  },
+  {
+    path: 'profile',
+    loadChildren: './profile/profile.module#ProfileModule'
   }
 ];
 
