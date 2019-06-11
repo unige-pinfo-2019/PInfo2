@@ -7,7 +7,7 @@ import { ProfileComponent } from './profile.component';
 
 const routes: Routes = [
     {
-        path: ':id',
+        path: ':username',
         component: ProfileComponent,
         resolve: {
             profile: ProfileResolver

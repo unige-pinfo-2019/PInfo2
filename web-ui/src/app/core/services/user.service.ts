@@ -5,7 +5,7 @@ import { BehaviorSubject, ReplaySubject, Observable } from 'rxjs';
 import { User } from '../models';
 import { environment } from '../../../environments/environment';
 
-import { distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { KeycloakService } from './keycloak.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -59,7 +59,14 @@ export class UserService {
         return this.authService.getKeycloakAuth().subject;
     }
 
-    getUser(id: string): Observable<User> {
+    getUser(username: string): Observable<User> {
+        return this.http.get<User>(`${environment.keycloak.url}/admin/realms/${environment.keycloak.realm}/users`, 
+            { params: {'username' : username }}).pipe(
+                map(data => data[0])
+            );
+    }
+
+    getUserById(id: string): Observable<User> {
         return this.http.get<User>(`${environment.keycloak.url}/admin/realms/${environment.keycloak.realm}/users/${id}`);
     }
 

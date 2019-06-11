@@ -5,4 +5,6 @@ export interface User {
     firstName: string;
     lastName: string;
     username: string;
+    createdTimestamp: number;
+    mobile: string;
 }

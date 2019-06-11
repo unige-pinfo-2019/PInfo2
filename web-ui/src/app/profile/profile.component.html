@@ -1,39 +1,40 @@
-<div class="profile-page">
-    <div class="user-info">
-        <div class="container">
-            <div class="row">
+<div class="container">
+    <!-- Profile block -->
+    <div class="border rounded p-5 mb-3">
 
-                <div class="col-xs-12 col-md-10 offset-md-1">
-                    <!-- <img [src]="profile.image" class="user-img" /> -->
-                    <h4>{{ profile.username }}</h4>
-                    <a [routerLink]="['/settings']" [hidden]="!isUser"
-                        class="btn btn-sm btn-outline-secondary action-btn">
-                        <i class="ion-gear-a"></i> Edit Profile Settings
-                    </a>
-                </div>
-
-            </div>
+        <!-- Profile title -->
+        <div class="text-center">
+            <p class="h3 mb-5">{{ profile.username }}</p>
         </div>
-    </div>
 
-    <div class="container">
+        <!-- Profile informations -->
         <div class="row">
 
-            <div class="col-xs-12 col-md-10 offset-md-1">
-                <div class="articles-toggle">
-                    <ul class="nav nav-pills outline-active">
-                        <li class="nav-item">
-                            <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                                [routerLink]="['/profile', profile.id]">
-                                My Ads
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <router-outlet></router-outlet>
+            <!-- Personnal informations -->
+            <div class="col-9">
+                <p *ngIf="profile.firstname">First name : {{ profile.firstname }}</p>
+                <p *ngIf="profile.lastname">Last name : {{ profile.lastname }}</p>
+                <p *ngIf="profile.email">Email : {{ profile.email }}</p>
+                <p *ngIf="profile.phone">Phone number : {{ profile.mobile }}</p>
+                <p>Member since : {{ profile.createdTimestamp | date: 'medium' }}</p>
             </div>
 
+            <!-- Picture -->
+            <div class="col-3 center-block text-center">
+                <img src="assets/nopicture.png" alt="Profile picture">
+                <button class="btn btn-success mx-auto">Change picture</button>
+            </div>
         </div>
     </div>
+
+    <!-- Ads block -->
+    <div class="border rounded p-5">
+
+        <!-- Ads title -->
+        <div class="text-center">
+            <p class="h3 mb-5">Created ads</p>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+
 </div>
