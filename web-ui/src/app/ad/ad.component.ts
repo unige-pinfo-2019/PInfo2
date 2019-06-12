@@ -21,7 +21,6 @@ export class AdComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.imagesUrl);
     // Retreive the prefetched article
     this.route.data.subscribe(
       data => {
