@@ -1,0 +1,40 @@
+<div class="container">
+    <!-- Profile block -->
+    <div class="border rounded p-5 mb-3">
+
+        <!-- Profile title -->
+        <div class="text-center">
+            <p class="h3 mb-5">{{ profile.username }}</p>
+        </div>
+
+        <!-- Profile informations -->
+        <div class="row">
+
+            <!-- Personnal informations -->
+            <div class="col-9">
+                <p *ngIf="profile.firstname">First name : {{ profile.firstname }}</p>
+                <p *ngIf="profile.lastname">Last name : {{ profile.lastname }}</p>
+                <p *ngIf="profile.email">Email : {{ profile.email }}</p>
+                <p *ngIf="profile.phone">Phone number : {{ profile.mobile }}</p>
+                <p>Member since : {{ profile.createdTimestamp | date: 'medium' }}</p>
+            </div>
+
+            <!-- Picture -->
+            <div class="col-3 center-block text-center">
+                <img src="assets/nopicture.png" alt="Profile picture">
+                <button class="btn btn-success mx-auto">Change picture</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ads block -->
+    <div class="border rounded p-5">
+
+        <!-- Ads title -->
+        <div class="text-center">
+            <p class="h3 mb-5">Created ads</p>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

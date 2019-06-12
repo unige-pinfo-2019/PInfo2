@@ -41,92 +41,92 @@ import lombok.extern.java.Log;
 @Default
 @Log
 public class SearchServiceImpl implements SearchService {
-	
+
 	@Inject
 	public SearchServiceImpl(@ConfigProperty(name = "ELASTICSEARCH_HOST", defaultValue = "localhost")
 							 String searchHostname,
 							 @ConfigProperty(name = "ELASTICSEARCH_SERVICE_PORT", defaultValue = "9200")
 							 int searchPort) {
-		
+
 		this.client = new RestHighLevelClient(RestClient.builder(
 		        					new HttpHost(searchHostname, searchPort, "http")));
 	}
 
 	private RestHighLevelClient client;
-	
+
 	@Override
 	public void createItem(Searchable item) {
-		
+
 		IndexRequest request = new IndexRequest(
-		        item.getIndex(), 
-		        item.getType(),  
+		        item.getIndex(),
+		        item.getType(),
 		        item.getId().toString());
-		
+
 		request.source(item.toJson(), XContentType.JSON);
-		
+
 		try {
 			client.index(request, RequestOptions.DEFAULT);
 		} catch (IOException e) {
 			log.throwing(this.getClass().getName(), "createItem", e);
 		}
-		
+
 		log.info("Item created : " + item);
 	}
-	
+
 	@Override
 	public void deleteItem(Searchable item) {
-		
+
 		DeleteRequest deleteRequest = new DeleteRequest(
-		        item.getIndex(), 
-		        item.getType(),  
-		        item.getId().toString());	
-		
+		        item.getIndex(),
+		        item.getType(),
+		        item.getId().toString());
+
 		try {
 			client.delete(deleteRequest, RequestOptions.DEFAULT);
 		} catch (IOException e) {
 			log.throwing(this.getClass().getName(), "deleteItem", e);
 		}
-		
+
 		log.info("Item deleted : " + item);
 	}
-	
+
 	@Override
 	public void updateItem(Searchable item) {
-		
+
 		UpdateRequest updateRequest = new UpdateRequest(
-		        item.getIndex(), 
-		        item.getType(),  
+		        item.getIndex(),
+		        item.getType(),
 		        item.getId().toString());
-		
+
 		updateRequest.doc(item.toJson(), XContentType.JSON);
-		
+
 		try {
 			client.update(updateRequest, RequestOptions.DEFAULT);
 		} catch (IOException e) {
 			log.throwing(this.getClass().getName(), "updateItem", e);
 		}
-		
+
 		log.info("Item updated : " + item);
 	}
-	
+
 	@Override
-	public List<Ad> matchAd(String query, Optional<Long> categoryId, Optional<Long> userId) {
+	public List<Ad> matchAd(String query, Optional<Long> categoryId, Optional<String> userId) {
 		return match(adQueryBuilder(query, categoryId, userId), Ad.class);
 	}
-	
-	
+
+
 	public <T extends Searchable> List<T> match(SearchSourceBuilder searchSourceBuilder, Class<T> type) {
-		
+
 		SearchRequest searchRequest = new SearchRequest();
-		
+
 		log.info("Query created : " + searchSourceBuilder.toString());
 		// TODO : generalized this not only for ads
 		searchRequest.indices("ads");
 		searchRequest.types("ad");
 		searchRequest.source(searchSourceBuilder);
-		
+
 		SearchHit[] searchHits = {};
-		
+
 		try {
 			SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 			SearchHits hits = searchResponse.getHits();
@@ -141,24 +141,23 @@ public class SearchServiceImpl implements SearchService {
 			T item = gson.fromJson(hit.getSourceAsString(), type);
 			matchedList.add(item);
 		}
-		
+
 		return matchedList;
 	}
-	
-	
-	public SearchSourceBuilder adQueryBuilder(String query, Optional<Long> categoryId, Optional<Long> userId) {
+
+	public SearchSourceBuilder adQueryBuilder(String query, Optional<Long> categoryId, Optional<String> userId) {
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-		
+
 		String descriptionField = "description";
 		String titleField = "title";
-		
+
 		String wildcardsQuery = query.toLowerCase();
 		QueryBuilder matchQueryBuilder = QueryBuilders.boolQuery()
 										    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery)
 										    		             .fuzziness(Fuzziness.AUTO))
 										    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery)
 										    		             .fuzziness(Fuzziness.AUTO));
-		
+
 		if (categoryId.isPresent() && userId.isPresent()) {
 			matchQueryBuilder = QueryBuilders.boolQuery()
 			.must(QueryBuilders.termQuery("categoryId", categoryId.get()))
@@ -176,7 +175,7 @@ public class SearchServiceImpl implements SearchService {
 		    		             .fuzziness(Fuzziness.AUTO));
 		} else if (userId.isPresent()) {
 			matchQueryBuilder = QueryBuilders.boolQuery()
-			.must(QueryBuilders.termQuery("userId", userId.get()))
+			.must(QueryBuilders.matchQuery("userId", userId.get()))
 		    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery)
 		    		             .fuzziness(Fuzziness.AUTO))
 		    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery)
@@ -184,14 +183,14 @@ public class SearchServiceImpl implements SearchService {
 		} else if (query.isEmpty()) {
 			matchQueryBuilder = QueryBuilders.matchAllQuery();
 		}
-		
+
 		searchSourceBuilder.query(matchQueryBuilder);
-		searchSourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC)); 
+		searchSourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC));
 		searchSourceBuilder.sort(new FieldSortBuilder("_id").order(SortOrder.DESC));
-		
-		return searchSourceBuilder;	
+
+		return searchSourceBuilder;
 	}
-	
+
 	@PreDestroy
     public void cleanup() {
         try {
@@ -201,6 +200,6 @@ public class SearchServiceImpl implements SearchService {
             log.throwing(this.getClass().getName(), "cleanup", e);
         }
     }
-	
-	
+
+
 }

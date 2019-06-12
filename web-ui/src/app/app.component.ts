@@ -13,6 +13,5 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.userService.populate();
-    setTimeout(() => console.log(this.userService.getCurrentUserId()), 2000);
   }                                               
 }

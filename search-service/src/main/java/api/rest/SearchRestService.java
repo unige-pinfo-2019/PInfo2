@@ -25,7 +25,7 @@ public class SearchRestService {
 	@Produces("application/json")
 	public List<Ad> searchAd(@QueryParam("q") String query, 
 							 @QueryParam("categoryId") Long categoryId, 
-							 @QueryParam("userId") Long userId) {
+							 @QueryParam("userId") String userId) {
 		
 		return searchService.matchAd(query, Optional.ofNullable(categoryId), Optional.ofNullable(userId));
 	}

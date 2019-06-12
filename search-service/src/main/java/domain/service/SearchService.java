@@ -14,6 +14,6 @@ public interface SearchService {
 	
 	public void updateItem(Searchable item);
 	
-	public List<Ad> matchAd(String query, Optional<Long> categoryId, Optional<Long> userId);
+	public List<Ad> matchAd(String query, Optional<Long> categoryId, Optional<String> userId);
 	
 }
