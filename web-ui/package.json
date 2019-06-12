@@ -26,6 +26,7 @@
     "jquery": "^3.4.1",
     "keycloak-js": "^6.0.1",
     "ng-rn": "^1.0.0",
+    "ngx": "^2.4.0",
     "ngx-dropdown-list": "^1.1.1",
     "ngx-image-uploader": "^6.0.0-beta.1",
     "rxjs": "~6.3.3",
