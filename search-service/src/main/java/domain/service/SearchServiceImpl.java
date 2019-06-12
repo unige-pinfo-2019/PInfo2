@@ -176,7 +176,7 @@ public class SearchServiceImpl implements SearchService {
 		    		             .fuzziness(Fuzziness.AUTO));
 		} else if (userId.isPresent()) {
 			matchQueryBuilder = QueryBuilders.boolQuery()
-			.must(QueryBuilders.termQuery("userId", userId.get()))
+			.must(QueryBuilders.matchQuery("userId", userId.get()))
 		    .should(QueryBuilders.matchQuery(titleField, wildcardsQuery)
 		    		             .fuzziness(Fuzziness.AUTO))
 		    .should(QueryBuilders.matchQuery(descriptionField, wildcardsQuery)
