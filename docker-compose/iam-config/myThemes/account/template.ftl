@@ -47,7 +47,7 @@
 			<li><a class="nav-link active" routerlink="/" routerlinkactive="active" ng-reflect-router-link="/" ng-reflect-router-link-active="active" href="/"/>			
 			Unishare
 			</li>
-                        <li><a href="${url.logoutUrl}">${msg("doSignOut")}</a></li>
+                        <li><a href="/logout">${msg("doSignOut")}</a></li>
                     </ul>
                 </div>
             </div>
