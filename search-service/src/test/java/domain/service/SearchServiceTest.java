@@ -125,7 +125,7 @@ public class SearchServiceTest {
 		
 		try { //(userId.isPresent())
 			searchServiceImpl.createItem(ad);
-			searchServiceImpl.matchAd(ad.getTitle(), Optional.empty(), Optional.of((long)1));
+			searchServiceImpl.matchAd(ad.getTitle(), Optional.empty(), Optional.of("1"));
 		} catch(Exception e) {
 			fail("Should not have thrown any exception " + e);
 		}
