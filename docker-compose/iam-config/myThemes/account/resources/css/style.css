@@ -15,37 +15,52 @@ nav.navbar {
     border-bottom: 0.35em solid #056e37;
 }
 
+
 div.navbar-header {
   height: 2px;
 }
 
-.navbar-title {
-    //background-image: url('../img/favicon-32x32.png');
-    background-color: #049848;
-    height: 20%;
-    //background-repeat: no-repeat;
-    width: 123px;
-    margin: 0 10px 5px;
-    text-indent: -99999px;
+div.navbar-brand {
+  margin-left: 25%;
 }
 
+li {
+  display: inline;
+}
+.navbar-pf .navbar-utility > li > a.nav-link.active {
+  text-decoration: none;
+  font-family: arial;
+  font-size: 22px;
+  color: white;
+  background-image: url('../img/logo_white.resized.png');
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 35px;
+  padding-bottom: 15px;
+  margin-left: 22%;
+}
+
+
 .navbar-pf .navbar-utility {
-  margin-left: 70%;
+  list-style-type:none;
   color: #049848;
 }
 
 .navbar-pf .navbar-utility > li > a:hover {
-  background-color: black;
+  background-color: #056e37;
 }
 
 .navbar-pf .navbar-utility > li > a {
+  background-image: none;
+  margin-left: 17%;
   text-decoration: none;
   text-transform: uppercase;
   font-family: arial;
   font-size: 20px;
   color: #fff !important;
-  padding-bottom: 12px;
-  padding-top: 11px;
+  padding-top: 25px;
+  padding-bottom: 13px;
+  padding-left: 0px;
   border-left: medium none;
 }
 
@@ -135,7 +150,7 @@ body.admin-console.user.totp {
 }
 
 .required {
-    color: #CB2915;
+    display: none;
 }
 
 
@@ -159,12 +174,20 @@ body.admin-console.user.totp {
     text-align: left;
 }
 .alert.alert-success {
-    background-color: #E4F1E1;
-    border-color: #4B9E39;
+    color: #067d85;
+    background-image: url('../img/blueicon.png');
+    background-size: 17px;
+    background-repeat: no-repeat;
+    font-family: sans-serif;
+    padding-left: 30px;
 }
 .alert.alert-error {
-    background-color: #F8E7E7;
-    border-color: #B91415;
+  color: red;
+  background-image: url('../img/error2.png');
+  background-size: 21px;
+  background-repeat: no-repeat;
+  font-family: sans-serif;
+  padding-left: 30px;
 }
 .alert.alert-warning {
     background-color: #FEF1E9;
@@ -220,7 +243,7 @@ input#username.form-control {
     top: 0;
 }
 
-button.btn {
+button.btn.btn-primary {
   border: 1px solid #056e37;
   border-radius: 2px;
   width: 8em;
@@ -229,13 +252,31 @@ button.btn {
   color: white;
 }
 
-button.btn:hover {
+button.btn.btn-primary:hover {
   border: 1px solid #056e37;
   border-radius: 2px;
   width: 8em;
   height: 30px;
   background-color: #036832;
   color: white;
+  cursor: pointer;
+}
+
+button.btn.btn-default {
+  border: 1px solid #056e37;
+  border-radius: 2px;
+  width: 8em;
+  height: 30px;
+  color: #056e37;
+}
+
+button.btn.btn-default:hover {
+  border: 1px solid #0a4900;
+  border-radius: 2px;
+  width: 8em;
+  height: 30px;
+  background-color: #bcc2bb;
+  color: #0a4900;
   cursor: pointer;
 }
 

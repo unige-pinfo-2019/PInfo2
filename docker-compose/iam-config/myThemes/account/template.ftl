@@ -25,7 +25,7 @@
         <nav class="navbar" role="navigation">
             <div class="navbar-header">
                 <div class="container">
-                    <h1 class="navbar-title">Keycloak</h1>
+
                 </div>
             </div>
             <div class="navbar-collapse navbar-collapse-1">
@@ -44,6 +44,9 @@
                             <li>
                         </#if>
                         <#if referrer?has_content && referrer.url?has_content><li><a href="${referrer.url}" id="referrer">${msg("backTo",referrer.name)}</a></li></#if>
+			<li><a class="nav-link active" routerlink="/" routerlinkactive="active" ng-reflect-router-link="/" ng-reflect-router-link-active="active" href="/"/>			
+			Unishare
+			</li>
                         <li><a href="${url.logoutUrl}">${msg("doSignOut")}</a></li>
                     </ul>
                 </div>
