@@ -12,10 +12,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 
 import domain.model.Ad;
+import lombok.extern.java.Log;
 
 @ApplicationScoped
 @Transactional
 @Default
+@Log
 public class AdServiceImpl implements AdService {
 	
 	@PersistenceContext(unitName = "AdPU")
@@ -61,6 +63,7 @@ public class AdServiceImpl implements AdService {
 
 	@Override
 	public Ad get(Long adId) {
+		log.info("Ad with id: '" + adId + "' selected");
 		return em.find(Ad.class, adId);
 	}
 
