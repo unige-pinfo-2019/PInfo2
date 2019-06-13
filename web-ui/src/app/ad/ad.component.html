@@ -78,8 +78,10 @@
                 </button>
               </div>
               <div class="modal-body">
-                <p *ngIf="author.email">Email : {{ author.email }}</p>
-                <p *ngIf="author.mobile">Phone number : {{ author.mobile }}</p>
+                <div *ngIf="author">
+                  <p *ngIf="author.email">Email : {{ author.email }}</p>
+                  <p *ngIf="author.mobile">Phone number : {{ author.mobile }}</p>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

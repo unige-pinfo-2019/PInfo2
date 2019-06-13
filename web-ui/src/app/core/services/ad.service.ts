@@ -36,7 +36,7 @@ export class AdService {
         return this.apiService.delete('/ad/' + id);
     }
 
-    save(ad): Observable<Ad> {
+    save(ad): Observable<any> {
         let headers =  new HttpHeaders({
             'Content-Type': 'application/json',
         });
