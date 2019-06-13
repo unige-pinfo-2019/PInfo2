@@ -53,40 +53,47 @@
         <a class="author" *ngIf="author" [routerLink]="['/profile', author.username]" routerLinkActive="active">
           {{ author.username }}
         </a>
-        <div *ngIf="!author">
-          You must be logged in!
-        </div>
       </h5>
       <div class="d-inline-flex">
         <p>Category <span class="cat" class="border rounded px-auto py-0 my-3">{{ categoryName }}</span></p>
       </div>
       <h6>Publication date {{ ad.date }}</h6>
 
-      <!-- Contact button -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Contact publisher
-      </button>
+      <!-- Show this for logged in users -->
+      <div *appShowAuthed="true">
+        <!-- Contact button -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+          Contact publisher
+        </button>
 
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Publisher informations</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p *ngIf="author.email">Email : {{ author.email }}</p>
-              <p *ngIf="author.mobile">Phone number : {{ author.mobile }}</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Publisher informations</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div *ngIf="author">
+                  <p *ngIf="author.email">Email : {{ author.email }}</p>
+                  <p *ngIf="author.mobile">Phone number : {{ author.mobile }}</p>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Show this for logged out users -->
+      <div *appShowAuthed="false">
+        <h6>You need to be logged in to see user informations</h6>
       </div>
 
     </div>

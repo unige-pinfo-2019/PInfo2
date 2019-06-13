@@ -118,7 +118,7 @@ export class EditorComponent implements OnInit {
 
         // post the changes
         this.adService.save(this.ad).subscribe(
-            ad => this.router.navigateByUrl('/ad/' + this.ad.id),
+            (ad: Response) => this.router.navigateByUrl('/ad/' + ad.headers.get('Location').split("/").slice(-1)[0]),
             err => {
                 this.errors = err;
                 this.isSubmitting = false;
