@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
         this.route.data.pipe(
             concatMap(data => {
                 this.profile = data.profile;
+                this.profile.mobile = data.profile.attributes.mobile;
                 // Load the current user's data.
                 return this.userService.currentUser.pipe(tap(
                     (userData: User) => {

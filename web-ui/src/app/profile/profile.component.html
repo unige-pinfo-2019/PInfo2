@@ -12,10 +12,10 @@
 
             <!-- Personnal informations -->
             <div class="col-9">
-                <p *ngIf="profile.firstname">First name : {{ profile.firstname }}</p>
-                <p *ngIf="profile.lastname">Last name : {{ profile.lastname }}</p>
+                <p *ngIf="profile.firstName">First name : {{ profile.firstName }}</p>
+                <p *ngIf="profile.lastName">Last name : {{ profile.lastName }}</p>
                 <p *ngIf="profile.email">Email : {{ profile.email }}</p>
-                <p *ngIf="profile.phone">Phone number : {{ profile.mobile }}</p>
+                <p *ngIf="profile.mobile">Phone number : {{ profile.mobile }}</p>
                 <p>Member since : {{ profile.createdTimestamp | date: 'medium' }}</p>
             </div>
 
