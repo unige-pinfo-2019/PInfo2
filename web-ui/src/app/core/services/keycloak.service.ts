@@ -84,4 +84,8 @@ export class KeycloakService {
       KeycloakService.auth.authz = null;
     });
   }
+
+  settingsPage(): void {
+    KeycloakService.auth.authz.accountManagement();
+  }
 }

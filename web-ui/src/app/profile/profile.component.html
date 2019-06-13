@@ -11,18 +11,22 @@
         <div class="row">
 
             <!-- Personnal informations -->
-            <div class="col-9">
+            <div class="col-8">
                 <p *ngIf="profile.firstName">First name : {{ profile.firstName }}</p>
                 <p *ngIf="profile.lastName">Last name : {{ profile.lastName }}</p>
                 <p *ngIf="profile.email">Email : {{ profile.email }}</p>
                 <p *ngIf="profile.mobile">Phone number : {{ profile.mobile }}</p>
                 <p>Member since : {{ profile.createdTimestamp | date: 'medium' }}</p>
+                <button (click)="onClickSettings()" [hidden]="!isUser"
+                    class="btn btn-sm btn-outline-secondary action-btn">
+                    Edit Profile Settings
+                </button>
             </div>
 
             <!-- Picture -->
-            <div class="col-3 center-block text-center">
+            <div class="col-3 text-center">
                 <img src="assets/nopicture.png" alt="Profile picture">
-                <button class="btn btn-success mx-auto">Change picture</button>
+                <!-- <button class="btn btn-success mx-auto">Change picture</button> -->
             </div>
         </div>
     </div>

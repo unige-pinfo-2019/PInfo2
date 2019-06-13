@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { User, UserService } from '../core';
+import { User, UserService, KeycloakService } from '../core';
 import { concatMap, tap } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +11,8 @@ import { concatMap, tap } from 'rxjs/operators';
 export class ProfileComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
-        private userService: UserService
+        private userService: UserService,
+        private authService: KeycloakService
     ) { }
 
     profile: User;
@@ -32,6 +33,10 @@ export class ProfileComponent implements OnInit {
                 ));
             })
         ).subscribe();
+    }
+
+    onClickSettings() {
+        this.authService.settingsPage();
     }
 
 }
