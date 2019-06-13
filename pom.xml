@@ -23,7 +23,6 @@
 		<dockerHost>tcp://localhost:2375</dockerHost>
 		<failsafe.runOrder>alphabetical</failsafe.runOrder>
         <main.basedir>${project.basedir}</main.basedir>
-    	<!-- <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/jacoco.exec</sonar.coverage.jacoco.xmlReportPaths>  -->
     </properties>
 
 	<modules>
@@ -33,13 +32,6 @@
 		<module>api-gateway</module>
 		<module>search-service</module>
 	</modules>
-	<!-- <modules>
-		
-		
-		<module>stats-service</module>
-		<module>chat-service</module>	
-		<module>user-service</module>	
-	</modules>  -->
 
 
 	<dependencyManagement>
@@ -271,30 +263,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
-			<!-- 
-			<plugin>
-	            <groupId>org.jacoco</groupId>
-	            <artifactId>jacoco-maven-plugin</artifactId>
-	            <configuration>
-			        <destFile>${sonar.jacoco.reportPath}</destFile>
-			        <append>true</append>
-			    </configuration>
-	            <executions>
-	                <execution>
-	                    <id>prepare-agent</id>
-	                    <goals>
-	                        <goal>prepare-agent</goal>
-	                    </goals>
-	                </execution>
-	                <execution>
-	                    <id>report</id>
-	                    <goals>
-	                        <goal>report</goal>
-	                    </goals>
-	                </execution>
-	            </executions>
-            </plugin>   -->      
+			   
             
             
 		</plugins>

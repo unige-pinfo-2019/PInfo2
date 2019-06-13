@@ -1,17 +1,14 @@
 package api.rest;
 
 import static io.restassured.RestAssured.when;
-import static io.restassured.RestAssured.given;
 
 import static org.hamcrest.Matchers.containsString;
 
-import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 
 
@@ -58,7 +55,7 @@ public class AdRestServiceTestIT {
 
 	
 	@Test
-	public void step5testDelete() {
+	public void step3testDelete() {
 		when().
 			delete("/1").
 		then().
