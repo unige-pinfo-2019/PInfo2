@@ -15,7 +15,7 @@
     
     <properties>
 		<skip-docker-build>false</skip-docker-build>
-		<!-- <main.basedir>${project.parent.basedir}</main.basedir>  -->
+		<!-- <main.basedir>${project.parent.basedir}</main.basedir> -->
 	</properties>
 
 	<dependencies>
