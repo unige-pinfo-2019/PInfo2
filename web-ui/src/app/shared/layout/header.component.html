@@ -31,37 +31,25 @@
                         Create Ad
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/" routerLinkActive="active">
-                        My ads
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ currentUser.username }}
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="/logout" routerLinkActive="active">
-                        Sign out
-                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" [routerLink]="['/profile', currentUser.username]">
+                            Profile
+                        </a>
+                        <a class="dropdown-item" routerLink="/" (click)="onClickSettings()">
+                            Settings
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" routerLink="/logout">
+                            Sign out
+                        </a>
+                    </div>
                 </li>
             </ul>
-
-            <!-- Middle side : Create ad + My ads -->
-            <!-- <div class="d-flex flex-grow-1 justify-content-center">
-                <div class="bd-highlight" *appShowAuthed="false"><a class="nav-link active" routerLinkActive="active"
-                        routerLink="new-post-view">Create ad</a></div>
-                <div class="bd-highlight"><a class="nav-link active" routerLinkActive="active" routerLink="">My
-                        ads</a>
-                </div>
-            </div> -->
-
-            <!-- Right side : Messages + Profile || Login -->
-            <!-- <div class="d-flex">
-                <div class="bd-highlight"><a class="nav-link active" routerLinkActive="active" routerLink=""><img
-                            src="assets/bubble.png" alt="Messages icon"></a></div>
-                <div class="bd-highlight"><a class="nav-link active" routerLinkActive="active"
-                        routerLink="connection-view">Login</a></div>
-                <div class="bd-highlight"><a class="nav-link active" routerLinkActive="active"
-                        routerLink="connection-view">Sign In</a>
-                </div>
-            </div> -->
         </div>
     </div>
 </header>

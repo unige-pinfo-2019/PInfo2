@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService, User, KeycloakService } from 'src/app/core';
 
 @Component({
   selector: 'app-layout-header',
@@ -6,5 +7,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 
-export class HeaderComponent {}
+export class HeaderComponent implements OnInit {
+  constructor(
+    private userService: UserService,
+    private authService: KeycloakService
+  ) {}
+  
+  currentUser: User;
+
+  ngOnInit() {
+    this.userService.currentUser.subscribe(
+      (userData) => {
+        this.currentUser = userData;
+      }
+    );
+  }
+
+  onClickSettings() {
+    this.authService.settingsPage();
+  }
+}
 

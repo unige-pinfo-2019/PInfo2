@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ad, CategoryService, User, UserService } from '../core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from '../../environments/environment'
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-ad-item',
