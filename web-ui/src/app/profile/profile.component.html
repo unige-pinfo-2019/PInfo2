@@ -15,7 +15,7 @@
                 <p *ngIf="profile.firstName">First name : {{ profile.firstName }}</p>
                 <p *ngIf="profile.lastName">Last name : {{ profile.lastName }}</p>
                 <p *ngIf="profile.email">Email : {{ profile.email }}</p>
-                <p *ngIf="profile.mobile">Phone number : {{ profile.mobile }}</p>
+                <p *ngIf="profile.mobile">Phone number : {{ profile.attributes.mobile[0] }}</p>
                 <p>Member since : {{ profile.createdTimestamp | date: 'medium' }}</p>
                 <button (click)="onClickSettings()" [hidden]="!isUser"
                     class="btn btn-sm btn-outline-secondary action-btn">

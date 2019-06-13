@@ -30,7 +30,7 @@ export class AdComponent implements OnInit {
           val => {
             if (val) {
               this.userService.getUserById(this.ad.userId).subscribe(
-                author => this.author = author
+                data => this.author = data
               );
             }
           }
