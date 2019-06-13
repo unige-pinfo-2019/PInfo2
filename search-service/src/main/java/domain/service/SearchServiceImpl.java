@@ -185,8 +185,8 @@ public class SearchServiceImpl implements SearchService {
 		}
 
 		searchSourceBuilder.query(matchQueryBuilder);
-		searchSourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC));
-		searchSourceBuilder.sort(new FieldSortBuilder("_id").order(SortOrder.DESC));
+		//searchSourceBuilder.sort(new ScoreSortBuilder().order(SortOrder.DESC));
+		searchSourceBuilder.sort(new FieldSortBuilder("id").order(SortOrder.DESC));
 
 		return searchSourceBuilder;
 	}

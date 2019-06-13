@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { Ad, AdQuery, AdService } from 'src/app/core/';
 
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-ad-list',
@@ -13,6 +14,8 @@ export class AdListComponent {
   constructor(
     private adService: AdService
   ) { }
+
+  imagesUrl = `${environment.api_url}/image/`;
 
   @Input() limit: number;
   @Input()

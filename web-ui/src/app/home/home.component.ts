@@ -24,6 +24,13 @@ export class HomeComponent implements OnInit {
     this.categoryService.getFormatedCategories().subscribe(
       data => this.formatedCategories = data
     );
+    //this.onChanges();
+  }
+
+  onChanges() {
+    this.searchField.valueChanges.subscribe(
+      val => this.setListTo(val)
+    );
   }
 
   onSearch() {
@@ -40,6 +47,5 @@ export class HomeComponent implements OnInit {
     else
       this.setListTo(this.searchField.value);
   }
-
 
 }

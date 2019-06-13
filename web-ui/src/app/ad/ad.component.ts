@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Ad, CategoryService, User, UserService } from '../core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from '../../environments/environment'
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-ad-item',
@@ -26,8 +26,14 @@ export class AdComponent implements OnInit {
       data => {
         this.ad = data.ad;
         // Retreive the author
-        this.userService.getUserById(this.ad.userId).subscribe(
-          author => this.author = author
+        this.userService.isAuthenticated.subscribe(
+          val => {
+            if (val) {
+              this.userService.getUserById(this.ad.userId).subscribe(
+                author => this.author = author
+              );
+            }
+          }
         );
       }
     );

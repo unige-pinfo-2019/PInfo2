@@ -15,6 +15,7 @@
     
     <properties>
 		<skip-docker-build>false</skip-docker-build>
+		<main.basedir>${project.parent.basedir}</main.basedir>
 	</properties>
 
 	<dependencies>
@@ -135,7 +136,7 @@
 
 	<profiles>
         <profile>
-			<id>coverage</id>
+			<id>coverage</id>  
 			<!--  all build was commented -->
 			<build>
 				<plugins>
@@ -144,6 +145,7 @@
 					<plugin>
 						<groupId>org.jacoco</groupId>
 						<artifactId>jacoco-maven-plugin</artifactId>
+					
 						<executions>
 							<execution>
 								<id>unit-tests</id>
@@ -158,9 +160,9 @@
 									<goal>prepare-agent</goal>
 								</goals>
 								<configuration>
-									<append>false</append>
+									<append>true</append>
 									<propertyName>jacoco.it.tests</propertyName>
-									<destFile>${project.build.directory}/jacoco-it.exec</destFile>
+									<destFile>${project.parent.basedir}/jacoco-it.exec</destFile>
 									<address>localhost</address>
 									<output>tcpserver</output>
 									<port>10001</port>
@@ -175,9 +177,9 @@
 									<goal>dump</goal>
 								</goals>
 								<configuration>
-									<append>false</append>
+									<append>true</append>
 									<propertyName>jacoco.it.tests</propertyName>
-									<destFile>${project.build.directory}/jacoco-it.exec</destFile>
+									<destFile>${project.parent.basedir}/jacoco-it.exec</destFile>
 									<address>localhost</address>
 									<output>tcpserver</output>
 									<port>10001</port>
@@ -192,10 +194,11 @@
 									<goal>merge</goal>
 								</goals>
 								<configuration>
-									<destFile>${project.build.directory}/coverage-merged.exec</destFile>
+									<destFile>${project.parent.basedir}/coverage-merged.exec</destFile>
+									<append>true</append>
 									<fileSets>
 										<fileSet>
-											<directory>${project.build.directory}</directory>
+											<directory>${project.parent.basedir}</directory>
 											<includes>
 												<include>*.exec</include>
 											</includes>
@@ -210,7 +213,7 @@
 									<goal>report</goal>
 								</goals>
 								<configuration>
-									<dataFile>${project.build.directory}/coverage-merged.exec</dataFile>
+									<dataFile>${project.parent.basedir}/coverage-merged.exec</dataFile>
 								</configuration>
 							</execution>
 						</executions>
@@ -257,6 +260,6 @@
 				</plugins>  
 			</build>  
 	 	</profile>
-	</profiles>
+	</profiles> 
 	
 </project>

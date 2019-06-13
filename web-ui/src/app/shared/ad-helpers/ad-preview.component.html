@@ -1,4 +1,4 @@
-<a routerLink="ad/{{ad.id}}">
+<a [routerLink]="['/ad', ad.id]">
   <!-- TODO check if merge of a and li is possible-->
   <li class="mb-3" [ngClass]="{'list-group-item': true}">
 
@@ -8,7 +8,7 @@
       <!-- 1st column : image -->
 
       <div *ngIf="ad.imageIds[0];else noImage" class="col-3 my-auto">
-        <img src="https://localhost/api/v1/image/{{ad.imageIds[0]}}">
+        <img src="{{imagesUrl}}{{ad.imageIds[0]}}">
       </div>
       <ng-template #noImage>
         <div class="col-3 my-auto">
