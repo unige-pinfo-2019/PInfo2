@@ -29,16 +29,16 @@
 	<modules>
 		<module>ad-service</module>
 		<module>category-service</module>
+		<module>image-service</module>
+		<module>api-gateway</module>
+		<module>search-service</module>
 	</modules>
 	<!-- <modules>
-    	<module>image-service</module>
-		<module>stats-service</module>
-		<module>chat-service</module>
-		<module>ad-service</module>
 		
-		<module>user-service</module>
-		<module>search-service</module>
-    	<module>api-gateway</module>
+		
+		<module>stats-service</module>
+		<module>chat-service</module>	
+		<module>user-service</module>	
 	</modules>  -->
 
 
