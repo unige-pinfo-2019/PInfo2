@@ -14,7 +14,13 @@ img { // image of the search results
 
 .category-btn {
     width:250px;
+    //height: 38px;
+    padding-top: 2px;
     border-color: var(--color-text-focus);
+}
+.btn {
+  width: 85%;
+  margin-left: 15%;
 }
 
 .just-padding {
