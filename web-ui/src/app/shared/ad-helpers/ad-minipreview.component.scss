@@ -1,0 +1,37 @@
+p { // default settings of plain text
+  // these lines hide text if too big to be inside the parent area
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+a {
+  color: black; // links stay written in black
+  &:hover { // when hovering links
+    color: var(--color-primary-dark); // color of the text
+    text-shadow: var(--color-primary-middle) 1px 0 250px; // shadow behind box
+    text-decoration: none; // no decoration for the text
+  }
+}
+
+img {
+  // images size should be automatic ...
+  height: auto;
+  width: auto;
+  // ... but limited by max size
+  max-width: 100px; // TODO should be changed to em units
+  max-height: 100px; // TODO should be changed to em units
+  //margin-left: 30px; // TODO should be changed to em units
+  height: 80px;
+  margin: auto;
+  display: block;
+}
+li {
+  float: left;
+  width: 20%;
+  height: 170px;
+  margin-right: 2.8em;
+  box-shadow: 2px 3px 3px #666666;
+  border-radius: 2px;
+  border-left: 0.3em solid var(--color-primary-dark); // add border at bottom of header
+}

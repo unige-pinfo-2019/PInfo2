@@ -1,0 +1,14 @@
+<app-ad-minipreview *ngFor="let ad of results" [ad]="ad">
+</app-ad-minipreview>
+
+<div class="app-ad-minipreview" [hidden]="!loading">
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border text-success" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
+
+<div class="app-ad-minipreview" [hidden]="loading || results.length">
+  No ads are here... yet.
+</div>

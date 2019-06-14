@@ -1,14 +1,19 @@
 <div class="container section">
   <!-- Top part : Highlights -->
   <div class="border rounded p-2 mb-3">
-    <div class="row py-4">
+
+    <div class="row py-2">
 
       <!-- Title -->
-      <div class="col-3">
-        <p class="h4">Highlights</p>
+      <div class="col-12">
+        <ul class="list-group">
+          <app-ad-minilist [limit]="10000" [config]="listConfig">
+          </app-ad-minilist>
+        </ul>
       </div>
 
     </div>
+
   </div>
 
   <!-- Middle part : search body -->

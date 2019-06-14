@@ -1,0 +1,31 @@
+<a [routerLink]="['/ad', ad.id]">
+  <!-- TODO check if merge of a and li is possible-->
+  <li class="mb-3" [ngClass]="{'list-group-item': true}">
+
+    <!-- 1st row : title, description and price -->
+    <div class="row">
+      <div class="col-12 center-block">
+        <!-- 1st column : image -->
+        <div *ngIf="ad.imageIds[0];else noImage">
+          <img src="{{imagesUrl}}{{ad.imageIds[0]}}">
+        </div>
+        <ng-template #noImage>
+          <img src="assets/nopicture.png" class="d-block" alt="No Picture to show">
+        </ng-template>
+      </div>
+    </div>
+
+      <!-- 2nd column : title and price -->
+      <div class="row mt-2">
+        <div class="col-12 text-center">
+          <h5>{{ ad.title }}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-center">
+          <p>{{ ad.price }}.-</p>
+        </div>
+      </div>
+
+  </li>
+</a>
