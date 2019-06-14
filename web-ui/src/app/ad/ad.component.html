@@ -48,7 +48,7 @@
       <div class="text-center my-5">
         <h1>{{ ad.price }}.-</h1>
       </div>
-      <h5>
+      <h5 *appShowAuthed="true">
         Published by
         <a class="author" *ngIf="author" [routerLink]="['/profile', author.username]" routerLinkActive="active">
           {{ author.username }}

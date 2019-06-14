@@ -44,7 +44,6 @@ export class AdComponent implements OnInit {
         this.categoryName = data.name;
       }
     );
-
   }
 }
 
