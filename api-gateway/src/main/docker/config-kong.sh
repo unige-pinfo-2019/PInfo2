@@ -4,10 +4,10 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     echo "-- First container startup --"
 
     # Services
-    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=category-service" --data-urlencode "url=http://category-service:12080/category"
-    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=ad-service" --data-urlencode "url=http://ad-service:15080/ad"
-    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=search-service" --data-urlencode "url=http://search-service:11080/search"
-    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=image-service" --data-urlencode "url=http://image-service:14080/image"
+    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=category-service" --data-urlencode "url=http://localhost:12080/category"
+    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=ad-service" --data-urlencode "url=http://localhost:15080/ad"
+    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=search-service" --data-urlencode "url=http://localhost:11080/search"
+    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=image-service" --data-urlencode "url=http://localhost:14080/image"
     
     # Routes
     # Category service
