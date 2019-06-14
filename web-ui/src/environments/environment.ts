@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  api_url: 'https://localhost/api/v1',
+  api_url: 'https://pinfo2.unige.ch/api/v1',
   keycloak: {
-    url: 'https://localhost/auth',
+    url: 'https://pinfo2.unige.ch/auth',
     realm: 'apigw',
     clientId: 'web-sso',
     checkLoginIframe: false,

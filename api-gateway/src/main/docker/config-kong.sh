@@ -4,10 +4,10 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
     echo "-- First container startup --"
 
     # Services
-    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=category-service" --data-urlencode "url=http://pinfo2.unige.ch:12080/category"
-    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=ad-service" --data-urlencode "url=http://pinfo2.unige.ch:15080/ad"
-    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=search-service" --data-urlencode "url=http://pinfo2.unige.ch:11080/search"
-    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=image-service" --data-urlencode "url=http://pinfo2.unige.ch:14080/image"
+    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=category-service" --data-urlencode "url=http://category-service:12080/category"
+    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=ad-service" --data-urlencode "url=http://ad-service:15080/ad"
+    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=search-service" --data-urlencode "url=http://search-service:11080/search"
+    curl -S -s -i -X POST --url http://api-gateway:8001/services --data "name=image-service" --data-urlencode "url=http://image-service:14080/image"
     
     # Routes
     # Category service
@@ -29,7 +29,7 @@ if [ ! -e $CONTAINER_ALREADY_STARTED ]; then
 
     # Consumers
     curl -S -s -i -X POST --url http://api-gateway:8001/consumers  --data "username=api-sso-proxied"   --data "custom_id=api-sso-proxied"
-    curl -S -s -i -X POST --url http://api-gateway:8001/consumers/api-sso-proxied/jwt   -F "algorithm=RS256"  -F "rsa_public_key=@/tmp/keycloak_rsa_provider-key-pub.pem" -F "key=https://localhost/auth/realms/apigw"
+    curl -S -s -i -X POST --url http://api-gateway:8001/consumers/api-sso-proxied/jwt   -F "algorithm=RS256"  -F "rsa_public_key=@/tmp/keycloak_rsa_provider-key-pub.pem" -F "key=https://pinfo2.unige.ch/auth/realms/apigw"
     curl -S -s -i -X POST --url http://api-gateway:8001/consumers  --data "username=api-sso-not-proxied"   --data "custom_id=api-sso-not-proxied"
     curl -S -s -i -X POST --url http://api-gateway:8001/consumers/api-sso-not-proxied/jwt   -F "algorithm=RS256"  -F "rsa_public_key=@/tmp/keycloak_rsa_provider-key-pub.pem" -F "key=http://iam:8080/auth/realms/apigw"
 
