@@ -48,7 +48,7 @@
       <div class="text-center my-5">
         <h1>{{ ad.price }}.-</h1>
       </div>
-      <h5>
+      <h5 *appShowAuthed="true">
         Published by
         <a class="author" *ngIf="author" [routerLink]="['/profile', author.username]" routerLinkActive="active">
           {{ author.username }}
@@ -80,7 +80,7 @@
               <div class="modal-body">
                 <div *ngIf="author">
                   <p *ngIf="author.email">Email : {{ author.email }}</p>
-                  <p *ngIf="author.mobile">Phone number : {{ author.mobile }}</p>
+                  <p *ngIf="author.attributes.mobile">Phone number : {{ author.attributes.mobile[0] }}</p>
                 </div>
               </div>
               <div class="modal-footer">

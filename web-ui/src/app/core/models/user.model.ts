@@ -6,5 +6,7 @@ export interface User {
     lastName: string;
     username: string;
     createdTimestamp: number;
-    mobile: string;
+    attributes : {
+        mobile: string;
+    }
 }
