@@ -23,7 +23,7 @@
     "@ngtools/webpack": "^1.10.2",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.7",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "keycloak-js": "^6.0.1",
     "ng-rn": "^1.0.0",
     "ngx": "^2.4.0",
